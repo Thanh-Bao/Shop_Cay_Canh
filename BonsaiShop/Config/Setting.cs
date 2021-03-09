@@ -7,13 +7,13 @@ namespace BonsaiShop.Config
 {
     public class CofigJWT
     {
-        public static readonly string audience = "ForUserLogined";
+        public static readonly string AUDIENCE = "ForUserLogined";
 
-        public static readonly string Issuer = "BaoBaoShop.live";
+        public static readonly string ISSUER = "BaoBaoShop.live";
 
-        public static readonly string serectKey = "snfnsdoiff67fsdfFTFGihuhdHGt878hfBY";
+        public static readonly string SECRECTKEY = "snfnsdoiff67fsdfFTFGihuhdHGt878hfBY";
 
-        public static readonly double timeExpired = 1;
+        public static readonly double TIMEEXPIRED = 1;
     }
 
     

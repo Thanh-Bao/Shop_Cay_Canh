@@ -1,4 +1,5 @@
-﻿using BonsaiShop.Utility;
+﻿using BonsaiShop.DB;
+using BonsaiShop.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,14 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         public int fsdsdf()
         {
+            
             return 6667;
         }
 
         [HttpGet]
         public string fsdsdf123()
         {
-            return JWT.GenerateJwtToken("0943417917", false);
+            return Security.GenerateJwtToken("0943417917", false);
         }
 
     }

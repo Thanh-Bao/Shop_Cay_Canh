@@ -1,5 +1,12 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using BonsaiShop.Config;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+
 
 namespace BonsaiShop.Utility
 {
@@ -20,5 +27,30 @@ namespace BonsaiShop.Utility
             }
             return sb.ToString();
         }
+
+        public static string GenerateJwtToken(string numberPhone, bool rememberMe)
+        {
+            var securiryKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CofigJWT.SECRECTKEY));
+            var credentials = new SigningCredentials(securiryKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Email,numberPhone),
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: CofigJWT.ISSUER,
+                audience: CofigJWT.AUDIENCE,
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(rememberMe ? 9999999 : CofigJWT.TIMEEXPIRED),
+                signingCredentials: credentials
+            );
+            var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return encodedToken;
+        }
+
+
+
     }
 }

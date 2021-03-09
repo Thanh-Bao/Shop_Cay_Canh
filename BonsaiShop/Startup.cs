@@ -1,8 +1,10 @@
 ﻿using BonsaiShop.Config;
+using BonsaiShop.DB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +32,9 @@ namespace BonsaiShop
             });
             services.AddControllersWithViews();
 
+            // For Entity Framework  
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+
             // JWT Bearer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -40,9 +45,9 @@ namespace BonsaiShop
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = CofigJWT.Issuer,
-                        ValidAudience = CofigJWT.audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CofigJWT.serectKey))
+                        ValidIssuer = CofigJWT.ISSUER,
+                        ValidAudience = CofigJWT.AUDIENCE,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CofigJWT.SECRECTKEY))
 
                     };
                 });
