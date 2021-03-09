@@ -23,7 +23,7 @@ namespace BonsaiShop.Controllers
         [HttpGet]
         public string fsdsdf123()
         {
-            return JWT.GenerateJwtToken("0943417917");
+            return JWT.GenerateJwtToken("0943417917", false);
         }
 
     }
