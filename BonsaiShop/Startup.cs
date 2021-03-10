@@ -1,4 +1,5 @@
 ﻿using BonsaiShop.Config;
+using BonsaiShop.Controllers;
 using BonsaiShop.DB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +31,7 @@ namespace BonsaiShop
                 options.AddPolicy("CrosPolicy", builder => builder.AllowAnyOrigin()
                  .AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
             });
-            services.AddControllersWithViews();
+            services.AddControllers();
 
             // For Entity Framework  
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
@@ -52,7 +53,9 @@ namespace BonsaiShop
                     };
                 });
 
-            services.AddMvc();
+
+
+            
 
 
             // In production, the React files will be served from this directory

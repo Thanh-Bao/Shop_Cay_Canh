@@ -3,9 +3,11 @@ using BonsaiShop.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BonsaiShop.Controllers
@@ -14,13 +16,22 @@ namespace BonsaiShop.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [Authorize]
+        
         [HttpPost]
-        public int fsdsdf()
+        public string fsdsdf()
         {
-            
-            return 6667;
+            return getPhoneNumber();
         }
+
+
+        [AdministratorAuthorization]
+        [HttpGet]
+        [Route("xxx")]
+        public string sdnsosonfifsofnofn()
+        {
+            return "ahihi do ngoc";
+        }
+
 
         [HttpGet]
         public string fsdsdf123()
@@ -28,5 +39,17 @@ namespace BonsaiShop.Controllers
             return Security.GenerateJwtToken("0943417917", false);
         }
 
+         public string getPhoneNumber()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claim = identity.Claims.ToList();
+            var phoneNumber = claim[0].Value;
+            return phoneNumber;
+        }
+
     }
+
+
+   
+
 }

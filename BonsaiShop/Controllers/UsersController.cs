@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BonsaiShop.DB;
 using BonsaiShop.Model;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BonsaiShop.Controllers
 {
@@ -29,6 +30,7 @@ namespace BonsaiShop.Controllers
         {
             return await _context.Users.ToListAsync();
         }
+
 
         // GET: api/Users/5
         [HttpGet("{id}")]
@@ -106,5 +108,23 @@ namespace BonsaiShop.Controllers
         {
             return _context.Users.Any(e => e.userId == id);
         }
+
+
+
+        public string getPhoneNumber()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claim = identity.Claims.ToList();
+            var phoneNumber = claim[0].Value;
+            return phoneNumber;
+        }
+
+        public string getRoleFromPhone(string phoneNumber)
+        {
+            var roles = _context.Users.Where(s => s.numberPhone.Equals(phoneNumber)).Select(s => s.role);
+
+            return roles.FirstOrDefault();
+        }
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using BonsaiShop.Config;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+
 
 
 namespace BonsaiShop.Utility
@@ -49,6 +49,9 @@ namespace BonsaiShop.Utility
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodedToken;
         }
+
+
+       
 
 
 
