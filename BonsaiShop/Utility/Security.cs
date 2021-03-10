@@ -5,8 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-
-
+using BonsaiShop.Model;
 
 namespace BonsaiShop.Utility
 {
@@ -28,14 +27,15 @@ namespace BonsaiShop.Utility
             return sb.ToString();
         }
 
-        public static string GenerateJwtToken(string numberPhone, bool rememberMe)
+        public static string GenerateJwtToken(User user, bool rememberMe)
         {
             var securiryKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CofigJWT.SECRECTKEY));
             var credentials = new SigningCredentials(securiryKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email,numberPhone),
+                new Claim(JwtRegisteredClaimNames.Email,user.numberPhone),
+                new Claim("role",user.role),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };
 

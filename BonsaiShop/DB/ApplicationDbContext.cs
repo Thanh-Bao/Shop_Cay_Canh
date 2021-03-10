@@ -16,6 +16,7 @@ namespace BonsaiShop.DB
 
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderDetail>().HasKey(l => new { l.orderId, l.productId });

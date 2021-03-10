@@ -1,4 +1,6 @@
 ﻿using BonsaiShop.DB;
+using BonsaiShop.Filter;
+using BonsaiShop.Model;
 using BonsaiShop.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +27,7 @@ namespace BonsaiShop.Controllers
 
 
         [AdministratorAuthorization]
+
         [HttpGet]
         [Route("xxx")]
         public string sdnsosonfifsofnofn()
@@ -36,7 +39,7 @@ namespace BonsaiShop.Controllers
         [HttpGet]
         public string fsdsdf123()
         {
-            return Security.GenerateJwtToken("0943417917", false);
+            return Security.GenerateJwtToken(new User { numberPhone="095434323", role="Admin"}, false);
         }
 
          public string getPhoneNumber()

@@ -1,6 +1,7 @@
 ﻿using BonsaiShop.Config;
 using BonsaiShop.Controllers;
 using BonsaiShop.DB;
+using BonsaiShop.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,7 +56,7 @@ namespace BonsaiShop
 
 
 
-            
+           
 
 
             // In production, the React files will be served from this directory
