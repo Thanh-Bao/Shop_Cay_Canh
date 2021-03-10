@@ -9,8 +9,8 @@ namespace BonsaiShop.Config
     {
         public static class Role
         {
-            public static readonly string ADMIN = "Admin";
-            public static readonly string MEMBER = "Member";
+            public const string ADMIN = "Admin";
+            public const string MEMBER = "Member";
         }
     }
 }

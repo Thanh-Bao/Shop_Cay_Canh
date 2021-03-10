@@ -9,6 +9,8 @@ using BonsaiShop.DB;
 using BonsaiShop.Model;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using BonsaiShop.Filter;
+using BonsaiShop.DTO;
 
 namespace BonsaiShop.Controllers
 {
@@ -18,18 +20,44 @@ namespace BonsaiShop.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-       
+
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        [AdministratorAuthorization]
+        public ActionResult<IEnumerable<UserDTO>> GetMemberUsers(string role)
         {
-            return await _context.Users.ToListAsync();
+            string _role = "";
+            switch (role)
+            {
+                case Config.Const.Role.MEMBER:
+                    _role = Config.Const.Role.MEMBER;
+                    break;
+                case Config.Const.Role.ADMIN:
+                    _role = Config.Const.Role.ADMIN;
+                    break;
+                default:
+                    return NotFound();
+
+            }
+            var list = _context.Users
+                .Where(s => s.role.Equals(_role)).
+                Select(s => new UserDTO
+                {
+                    numberPhone = s.numberPhone,
+                    name = s.name,
+                    address = s.address
+                })
+                .ToList();
+            return list;
         }
+
+
 
 
         // GET: api/Users/5

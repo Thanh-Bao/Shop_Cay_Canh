@@ -27,6 +27,7 @@ namespace BonsaiShop.Filter
 
                 if (!role.Equals(Config.Const.Role.ADMIN))
                 {
+                    //403
                     context.Result = new ForbidResult("Bạn không có quyền truy cập nội dung này");
                 }
 
