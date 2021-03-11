@@ -34,7 +34,7 @@ namespace BonsaiShop.Utility
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email,user.numberPhone),
+                new Claim("phone",user.numberPhone),
                 new Claim("role",user.role),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };

@@ -1,6 +1,7 @@
 ﻿using BonsaiShop.Config;
 using BonsaiShop.Controllers;
 using BonsaiShop.DB;
+using BonsaiShop.DTO;
 using BonsaiShop.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,9 @@ namespace BonsaiShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // add scope
+            services.AddScoped<UserDTO>();
+
             // CROS
             services.AddCors(options => {
                 options.AddPolicy("CrosPolicy", builder => builder.AllowAnyOrigin()

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using BonsaiShop.Filter;
 using BonsaiShop.DTO;
+using BonsaiShop.DAO;
 
 namespace BonsaiShop.Controllers
 {
@@ -18,59 +19,23 @@ namespace BonsaiShop.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-
+        private readonly ApplicationDbContext context;
         public UsersController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
+
 
 
         // GET: api/Users?role=[role]&page=[page]
         [HttpGet]
         [AdministratorAuthorization]
-        public ActionResult<IEnumerable<UserDTO>> GetUsers(string role, string page)
+        public IActionResult GetUsers(string role, string page)
         {
             try
             {
-                string _role = "";
-                int _page = 1;
-                switch (role)
-                {
-                    case Config.Const.Role.MEMBER:
-                        _role = Config.Const.Role.MEMBER;
-                        break;
-                    case Config.Const.Role.ADMIN:
-                        _role = Config.Const.Role.ADMIN;
-                        break;
-                    default:
-                        return NotFound();
-
-                }
-
-                if (page != null)
-                {
-                    _page = Int32.Parse(page);
-                }
-
-                //Bỏ N phần tử đầu tiên
-                int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
-
-                var list = _context.Users
-                    .Where(s => s.role.Equals(_role))
-                    .Skip(Nskip)
-                    .Take(Config.Const.PAGE_SIZE)
-                    .OrderByDescending(s => s.userId)
-                    .Select(s => new UserDTO
-                    {
-                        numberPhone = s.numberPhone,
-                        name = s.name,
-                        address = s.address
-                    })
-                    .ToList();
-
-                return list;
+                var list = new UserDAO(context).GetUsers(role, page);               
+                return Ok(list);
             }
             catch
             {
@@ -78,8 +43,9 @@ namespace BonsaiShop.Controllers
             }
         }
 
-        [HttpGet]
+       /* [HttpGet]
         [Route("search")]
+        [AdministratorAuthorization]
         public ActionResult<IEnumerable<UserDTO>> SearchUserByKeyWord(string keyword, string page)
         {
             try
@@ -122,21 +88,20 @@ namespace BonsaiShop.Controllers
 
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{phone}")]
+        [MemberAuthorization]
+        public async Task<ActionResult<User>> GetUser(int phone)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(phone);
 
             if (user == null)
             {
                 return NotFound();
             }
-
             return user;
         }
 
         // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -213,7 +178,7 @@ namespace BonsaiShop.Controllers
             var roles = _context.Users.Where(s => s.numberPhone.Equals(phoneNumber)).Select(s => s.role);
 
             return roles.FirstOrDefault();
-        }
+        }*/
 
     }
 }
