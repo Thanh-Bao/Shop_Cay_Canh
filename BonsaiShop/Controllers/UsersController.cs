@@ -30,7 +30,7 @@ namespace BonsaiShop.Controllers
         // GET: api/Users?role=[role]&page=[page]
         [HttpGet]
         [AdministratorAuthorization]
-        public ActionResult<IEnumerable<UserDTO>> GetMemberUsers(string role, string page)
+        public ActionResult<IEnumerable<UserDTO>> GetUsers(string role, string page)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace BonsaiShop.Controllers
                 var list = _context.Users
                     .Where(s => s.role.Equals(_role))
                     .Skip(Nskip)
-                    .Take(Config.Const.PAGE_SIZE) 
+                    .Take(Config.Const.PAGE_SIZE)
                     .OrderByDescending(s => s.userId)
                     .Select(s => new UserDTO
                     {
@@ -78,7 +78,47 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("search")]
+        public ActionResult<IEnumerable<UserDTO>> SearchUserByKeyWord(string keyword, string page)
+        {
+            try
+            {
+       
+                int _page = 1;
 
+                if (page != null)
+                {
+                    _page = Int32.Parse(page);
+                }
+
+                //Bỏ N phần tử đầu tiên
+                int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+
+                var list = _context.Users
+                    .Where(s => (s.numberPhone.Contains(keyword)
+                               ||s.address.Contains(keyword)
+                               ||s.name.Contains(keyword)
+                              )&&s.role.Equals(Config.Const.Role.MEMBER)
+                    )
+                    .Skip(Nskip)
+                    .Take(Config.Const.PAGE_SIZE)
+                    .OrderByDescending(s => s.userId)
+                    .Select(s => new UserDTO
+                    {
+                        numberPhone = s.numberPhone,
+                        name = s.name,
+                        address = s.address
+                    })
+                    .ToList();
+
+                return list;
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
 
         // GET: api/Users/5
