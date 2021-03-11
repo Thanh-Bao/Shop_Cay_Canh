@@ -19,10 +19,10 @@ namespace BonsaiShop.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
-        public UsersController(ApplicationDbContext context)
+        private readonly UserDAO userDAO;
+        public UsersController(UserDAO userDAO)
         {
-            this.context = context;
+            this.userDAO = userDAO;
         }
 
 
@@ -34,7 +34,7 @@ namespace BonsaiShop.Controllers
         {
             try
             {
-                var list = new UserDAO(context).GetUsers(role, page);               
+                var list = userDAO.GetUsers(role, page);               
                 return Ok(list);
             }
             catch

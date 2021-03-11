@@ -1,5 +1,6 @@
 ﻿using BonsaiShop.Config;
 using BonsaiShop.Controllers;
+using BonsaiShop.DAO;
 using BonsaiShop.DB;
 using BonsaiShop.DTO;
 using BonsaiShop.Filter;
@@ -28,8 +29,8 @@ namespace BonsaiShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // add scope
-            services.AddScoped<UserDTO>();
+            // add scope for DAO
+            services.AddScoped<UserDAO>();
 
             // CROS
             services.AddCors(options => {
