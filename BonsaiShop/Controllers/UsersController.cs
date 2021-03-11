@@ -27,34 +27,55 @@ namespace BonsaiShop.Controllers
         }
 
 
-        // GET: api/Users
+        // GET: api/Users?role=[role]&page=[page]
         [HttpGet]
         [AdministratorAuthorization]
-        public ActionResult<IEnumerable<UserDTO>> GetMemberUsers(string role)
+        public ActionResult<IEnumerable<UserDTO>> GetMemberUsers(string role, string page)
         {
-            string _role = "";
-            switch (role)
+            try
             {
-                case Config.Const.Role.MEMBER:
-                    _role = Config.Const.Role.MEMBER;
-                    break;
-                case Config.Const.Role.ADMIN:
-                    _role = Config.Const.Role.ADMIN;
-                    break;
-                default:
-                    return NotFound();
-
-            }
-            var list = _context.Users
-                .Where(s => s.role.Equals(_role)).
-                Select(s => new UserDTO
+                string _role = "";
+                int _page = 1;
+                switch (role)
                 {
-                    numberPhone = s.numberPhone,
-                    name = s.name,
-                    address = s.address
-                })
-                .ToList();
-            return list;
+                    case Config.Const.Role.MEMBER:
+                        _role = Config.Const.Role.MEMBER;
+                        break;
+                    case Config.Const.Role.ADMIN:
+                        _role = Config.Const.Role.ADMIN;
+                        break;
+                    default:
+                        return NotFound();
+
+                }
+
+                if (page != null)
+                {
+                    _page = Int32.Parse(page);
+                }
+
+                //Bỏ N phần tử đầu tiên
+                int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+
+                var list = _context.Users
+                    .Where(s => s.role.Equals(_role))
+                    .Skip(Nskip)
+                    .Take(Config.Const.PAGE_SIZE) 
+                    .OrderByDescending(s => s.userId)
+                    .Select(s => new UserDTO
+                    {
+                        numberPhone = s.numberPhone,
+                        name = s.name,
+                        address = s.address
+                    })
+                    .ToList();
+
+                return list;
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 

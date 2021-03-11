@@ -12,5 +12,9 @@ namespace BonsaiShop.Config
             public const string ADMIN = "Admin";
             public const string MEMBER = "Member";
         }
+
+        public const int PAGE_SIZE = 4;
     }
+
+
 }
