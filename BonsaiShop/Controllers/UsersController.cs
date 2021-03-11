@@ -25,8 +25,6 @@ namespace BonsaiShop.Controllers
             this.userDAO = userDAO;
         }
 
-
-
         // GET: api/Users?role=[role]&page=[page]
         [HttpGet]
         [AdministratorAuthorization]
@@ -34,7 +32,7 @@ namespace BonsaiShop.Controllers
         {
             try
             {
-                var list = userDAO.GetUsers(role, page);               
+                var list = userDAO.GetUsers(role, page);
                 return Ok(list);
             }
             catch
@@ -43,46 +41,19 @@ namespace BonsaiShop.Controllers
             }
         }
 
-       /* [HttpGet]
+        [HttpGet]
         [Route("search")]
         [AdministratorAuthorization]
-        public ActionResult<IEnumerable<UserDTO>> SearchUserByKeyWord(string keyword, string page)
+        public IActionResult SearchUserByKeyWord(string keyword, string page)
         {
             try
             {
-       
-                int _page = 1;
-
-                if (page != null)
-                {
-                    _page = Int32.Parse(page);
-                }
-
-                //Bỏ N phần tử đầu tiên
-                int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
-
-                var list = _context.Users
-                    .Where(s => (s.numberPhone.Contains(keyword)
-                               ||s.address.Contains(keyword)
-                               ||s.name.Contains(keyword)
-                              )&&s.role.Equals(Config.Const.Role.MEMBER)
-                    )
-                    .Skip(Nskip)
-                    .Take(Config.Const.PAGE_SIZE)
-                    .OrderByDescending(s => s.userId)
-                    .Select(s => new UserDTO
-                    {
-                        numberPhone = s.numberPhone,
-                        name = s.name,
-                        address = s.address
-                    })
-                    .ToList();
-
-                return list;
+                var list = userDAO.SearchUserByKeyWord(keyword, page);
+                return Ok(list);
             }
             catch
             {
-                return BadRequest();
+                return NotFound();
             }
         }
 
@@ -90,95 +61,76 @@ namespace BonsaiShop.Controllers
         // GET: api/Users/5
         [HttpGet("{phone}")]
         [MemberAuthorization]
-        public async Task<ActionResult<User>> GetUser(int phone)
+        public IActionResult GetUser(string phone)
         {
-            var user = await _context.Users.FindAsync(phone);
-
+            UserDTO user = userDAO.GetUser(phone);
             if (user == null)
             {
-                return NotFound();
+                return NotFound(new MessageResponse
+                {
+                    statusCode = 404,
+                    message = "Không tìm thấy tài khoản tương ướng với SĐT " + phone
+                });
             }
-            return user;
+            return Ok(user);
         }
 
         // PUT: api/Users/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("{phone}")]
+        public IActionResult PutUser(string phone, [FromBody] UserDTO user)
         {
-            if (id != user.userId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                if (!userDAO.UserExists(phone))
+                {
+                    return NotFound(new MessageResponse
+                    {
+                        statusCode = 404,
+                        message = "Không tìm thấy tài khoản tương ướng với SĐT "+phone
+                    });
+                } else
+                {
+                    userDAO.UpdateUser(phone, user);
+                }
+                return NoContent();
+
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(new MessageResponse { 
+                    statusCode = 400, 
+                    message="Cập nhật thất bại, thông tin user không bị thay đổi"});
             }
 
-            return NoContent();
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /*// POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public  IActionResult PostUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            context.Users.Add(user);
+             context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.userId }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async IActionResult DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user =  context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            context.Users.Remove(user);
+             context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.userId == id);
-        }
-
-
-
-        public string getPhoneNumber()
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IList<Claim> claim = identity.Claims.ToList();
-            var phoneNumber = claim[0].Value;
-            return phoneNumber;
-        }
-
-        public string getRoleFromPhone(string phoneNumber)
-        {
-            var roles = _context.Users.Where(s => s.numberPhone.Equals(phoneNumber)).Select(s => s.role);
-
-            return roles.FirstOrDefault();
         }*/
+
+
 
     }
 }

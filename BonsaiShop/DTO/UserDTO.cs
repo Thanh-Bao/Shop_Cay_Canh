@@ -10,5 +10,6 @@ namespace BonsaiShop.DTO
         public string numberPhone { set; get; }
         public string name { set; get; }
         public string address { set; get; }
+        public string password { set; get; }
     }
 }
