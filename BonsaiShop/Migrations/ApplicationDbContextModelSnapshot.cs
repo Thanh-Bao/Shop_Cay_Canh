@@ -25,10 +25,13 @@ namespace BonsaiShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("TotalMoney")
-                        .HasColumnType("int");
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("timestamp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalMoney")
                         .HasColumnType("int");
 
                     b.Property<int>("userId")
@@ -118,7 +121,6 @@ namespace BonsaiShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("userId");

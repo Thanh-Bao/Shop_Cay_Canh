@@ -34,7 +34,7 @@ namespace BonsaiShop.Migrations
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    role = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,8 @@ namespace BonsaiShop.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(type: "int", nullable: false),
                     timestamp = table.Column<int>(type: "int", nullable: false),
-                    TotalMoney = table.Column<int>(type: "int", nullable: false)
+                    totalMoney = table.Column<int>(type: "int", nullable: false),
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

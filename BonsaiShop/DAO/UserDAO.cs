@@ -111,6 +111,24 @@ namespace BonsaiShop.DAO
             }
         }
 
+        public bool CreateUser(User user)
+        {
+            try
+            {
+                if (user.numberPhone == null || user.password == null)
+                {
+                    return false;
+                }
+                context.Users.Add(user);
+                context.SaveChangesAsync();
+                return true;
+            } catch
+            {
+                return false;
+            }
+        }
+
+
     }
 }
 

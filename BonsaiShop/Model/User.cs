@@ -18,7 +18,6 @@ namespace BonsaiShop.Model
         public string address { set; get; }
         [Required]
         public string password { set; get; }
-        [Required]
         public string role { set; get; }
 
         public ICollection<Order> orders { get; set; }

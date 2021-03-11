@@ -14,10 +14,11 @@ namespace BonsaiShop.Model
 
         public int userId { set; get; }
 
-        [Required]
         public int timestamp { set; get; }
        
-        public int TotalMoney { set; get; }
+        public int totalMoney { set; get; }
+
+        public string status { set; get; }
 
         [ForeignKey("userId")]
         public User user { set; get; }

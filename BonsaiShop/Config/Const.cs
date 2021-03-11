@@ -13,6 +13,12 @@ namespace BonsaiShop.Config
             public const string MEMBER = "Member";
         }
 
+        public static class OrderStatus
+        {
+            public const string SHIPPING = "Shipping";
+            public const string CANCEL = "Cancel";
+        }
+
         public const int PAGE_SIZE = 4;
     }
 

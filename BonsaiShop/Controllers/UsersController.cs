@@ -75,8 +75,10 @@ namespace BonsaiShop.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/0943417917
+        // body yêu cầu tối thiểu 2 trường SDT và password
         [HttpPut("{phone}")]
+        [MemberAuthorization]
         public IActionResult PutUser(string phone, [FromBody] UserDTO user)
         {
             try
@@ -104,33 +106,32 @@ namespace BonsaiShop.Controllers
 
         }
 
-        /*// POST: api/Users
+        // POST: api/Users
         [HttpPost]
-        public  IActionResult PostUser(User user)
+        [Route("register")]
+        public  IActionResult registerMember(User user)
         {
-            context.Users.Add(user);
-             context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.userId }, user);
-        }
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async IActionResult DeleteUser(int id)
-        {
-            var user =  context.Users.FindAsync(id);
-            if (user == null)
+            try
             {
-                return NotFound();
+                if (userDAO.UserExists(user.numberPhone))
+                {
+                    return BadRequest(new MessageResponse
+                    {
+                        statusCode = 400,
+                        message = "Số điện thoại này đã được đăng kí"
+                    });
+                }
+                user.role = Config.Const.Role.MEMBER;
+                userDAO.CreateUser(user);
+                return CreatedAtAction("GetUser", new { id = user.userId }, user);
+            } catch
+            {
+                return BadRequest(new MessageResponse
+                {
+                    statusCode = 400,
+                    message = "Hãy nhập thông tin hợp lệ"
+                });
             }
-
-            context.Users.Remove(user);
-             context.SaveChangesAsync();
-
-            return NoContent();
-        }*/
-
-
-
+        }
     }
 }
