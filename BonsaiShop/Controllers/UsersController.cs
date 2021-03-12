@@ -145,6 +145,7 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        // POST : /api/Users/login?rememberMe=[false]
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
