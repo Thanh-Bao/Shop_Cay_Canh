@@ -148,16 +148,13 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult login([FromBody] Object[] obj)
+        public IActionResult login([FromBody] User user,bool rememberMe)
         {
-            User user = (User) obj.First();
             string role = userDAO.login(user.phone, user.password);
-
             if (role != null)
             {
-                return Ok(Security.GenerateJwtToken(user.phone, role, true));
+                return Ok(Security.GenerateJwtToken(user.phone, role, rememberMe));
             }
-
            return Forbid("Đăng nhập thất bại");
 
         }
