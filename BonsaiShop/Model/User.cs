@@ -13,7 +13,7 @@ namespace BonsaiShop.Model
         [Key]
         public int userId { set; get; }
         [Required(ErrorMessage = "Please enter corect number phone"), MaxLength(13)]
-        public string numberPhone { set; get; }
+        public string phone { set; get; }
         public string name { set; get; }
         public string address { set; get; }
         [Required]

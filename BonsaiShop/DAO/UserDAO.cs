@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static BonsaiShop.Config.Const;
 
 namespace BonsaiShop.DAO
 {
@@ -36,7 +37,7 @@ namespace BonsaiShop.DAO
                 .OrderByDescending(s => s.userId)
                 .Select(s => new UserDTO
                 {
-                    numberPhone = s.numberPhone,
+                    phone = s.phone,
                     name = s.name,
                     address = s.address
                 })
@@ -54,7 +55,7 @@ namespace BonsaiShop.DAO
             //Bỏ N phần tử đầu tiên
             int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
             var list = context.Users
-                .Where(s => (s.numberPhone.Contains(keyword)
+                .Where(s => (s.phone.Contains(keyword)
                            || s.address.Contains(keyword)
                            || s.name.Contains(keyword)
                           ) && s.role.Equals(Config.Const.Role.MEMBER)
@@ -64,7 +65,7 @@ namespace BonsaiShop.DAO
                 .OrderByDescending(s => s.userId)
                 .Select(s => new UserDTO
                 {
-                    numberPhone = s.numberPhone,
+                    phone = s.phone,
                     name = s.name,
                     address = s.address
                 })
@@ -74,10 +75,10 @@ namespace BonsaiShop.DAO
 
         public UserDTO GetUser(string phone)
         {
-            return context.Users.Where(s => s.numberPhone.Equals(phone))
+            return context.Users.Where(s => s.phone.Equals(phone))
                 .Select(s => new UserDTO
                 {
-                    numberPhone = s.numberPhone,
+                    phone = s.phone,
                     name = s.name,
                     address = s.address
                 }).FirstOrDefault();
@@ -85,7 +86,7 @@ namespace BonsaiShop.DAO
 
         public bool UserExists(string phone)
         {
-            return context.Users.Any(e => e.numberPhone == phone);
+            return context.Users.Any(e => e.phone == phone);
         }
 
         public bool UpdateUser(string phone, UserDTO user)
@@ -93,7 +94,7 @@ namespace BonsaiShop.DAO
             try
             {
                User _user = context.Users.Where(
-                    s => s.numberPhone.Equals(phone))
+                    s => s.phone.Equals(phone))
                     .FirstOrDefault();
                 if (user.name != null)
                     _user.name = user.name;
@@ -115,7 +116,7 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                if (user.numberPhone == null || user.password == null)
+                if (user.phone == null || user.password == null)
                 {
                     return false;
                 }
@@ -126,6 +127,25 @@ namespace BonsaiShop.DAO
             {
                 return false;
             }
+        }
+
+        public string login(string phone, string password)
+        {
+            if (!UserExists(phone))
+            {
+                return null;
+            }
+
+            User templeUser = context.Users
+                .Where(s => s.phone.Equals(phone))
+                .FirstOrDefault();
+
+            if (!password.Equals(templeUser.phone))
+            {
+                return null;
+            }
+
+            return templeUser.role;
         }
 
 

@@ -30,7 +30,7 @@ namespace BonsaiShop.Migrations
                 {
                     userId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    numberPhone = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),

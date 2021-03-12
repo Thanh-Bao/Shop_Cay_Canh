@@ -27,15 +27,15 @@ namespace BonsaiShop.Utility
             return sb.ToString();
         }
 
-        public static string GenerateJwtToken(User user, bool rememberMe)
+        public static string GenerateJwtToken(string phone, string role, bool rememberMe)
         {
             var securiryKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CofigJWT.SECRECTKEY));
             var credentials = new SigningCredentials(securiryKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim("phone",user.numberPhone),
-                new Claim("role",user.role),
+                new Claim("phone",phone),
+                new Claim("role",role),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };
 

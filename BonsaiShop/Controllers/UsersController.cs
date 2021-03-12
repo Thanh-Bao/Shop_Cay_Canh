@@ -12,6 +12,7 @@ using System.Security.Claims;
 using BonsaiShop.Filter;
 using BonsaiShop.DTO;
 using BonsaiShop.DAO;
+using BonsaiShop.Utility;
 
 namespace BonsaiShop.Controllers
 {
@@ -27,6 +28,7 @@ namespace BonsaiShop.Controllers
 
         // GET: api/Users?role=[role]&page=[page]
         [HttpGet]
+        [Authorize]
         [AdministratorAuthorization]
         public IActionResult GetUsers(string role, string page)
         {
@@ -42,6 +44,7 @@ namespace BonsaiShop.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("search")]
         [AdministratorAuthorization]
         public IActionResult SearchUserByKeyWord(string keyword, string page)
@@ -59,7 +62,9 @@ namespace BonsaiShop.Controllers
 
 
         // GET: api/Users/5
+
         [HttpGet("{phone}")]
+        [Authorize]
         [MemberAuthorization]
         public IActionResult GetUser(string phone)
         {
@@ -78,6 +83,7 @@ namespace BonsaiShop.Controllers
         // PUT: api/Users/0943417917
         // body yêu cầu tối thiểu 2 trường SDT và password
         [HttpPut("{phone}")]
+        [Authorize]
         [MemberAuthorization]
         public IActionResult PutUser(string phone, [FromBody] UserDTO user)
         {
@@ -88,9 +94,10 @@ namespace BonsaiShop.Controllers
                     return NotFound(new MessageResponse
                     {
                         statusCode = 404,
-                        message = "Không tìm thấy tài khoản tương ướng với SĐT "+phone
+                        message = "Không tìm thấy tài khoản tương ướng với SĐT " + phone
                     });
-                } else
+                }
+                else
                 {
                     userDAO.UpdateUser(phone, user);
                 }
@@ -99,9 +106,11 @@ namespace BonsaiShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                return BadRequest(new MessageResponse { 
-                    statusCode = 400, 
-                    message="Cập nhật thất bại, thông tin user không bị thay đổi"});
+                return BadRequest(new MessageResponse
+                {
+                    statusCode = 400,
+                    message = "Cập nhật thất bại, thông tin user không bị thay đổi"
+                });
             }
 
         }
@@ -109,11 +118,12 @@ namespace BonsaiShop.Controllers
         // POST: api/Users
         [HttpPost]
         [Route("register")]
-        public  IActionResult registerMember(User user)
+        [AllowAnonymous]
+        public IActionResult registerMember(User user)
         {
             try
             {
-                if (userDAO.UserExists(user.numberPhone))
+                if (userDAO.UserExists(user.phone))
                 {
                     return BadRequest(new MessageResponse
                     {
@@ -124,7 +134,8 @@ namespace BonsaiShop.Controllers
                 user.role = Config.Const.Role.MEMBER;
                 userDAO.CreateUser(user);
                 return CreatedAtAction("GetUser", new { id = user.userId }, user);
-            } catch
+            }
+            catch
             {
                 return BadRequest(new MessageResponse
                 {
@@ -132,6 +143,23 @@ namespace BonsaiShop.Controllers
                     message = "Hãy nhập thông tin hợp lệ"
                 });
             }
+        }
+
+        [HttpPost]
+        [Route("login")]
+        [AllowAnonymous]
+        public IActionResult login([FromBody] Object[] obj)
+        {
+            User user = (User) obj.First();
+            string role = userDAO.login(user.phone, user.password);
+
+            if (role != null)
+            {
+                return Ok(Security.GenerateJwtToken(user.phone, role, true));
+            }
+
+           return Forbid("Đăng nhập thất bại");
+
         }
     }
 }
