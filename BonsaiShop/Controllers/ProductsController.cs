@@ -9,6 +9,7 @@ using BonsaiShop.DB;
 using BonsaiShop.Model;
 using BonsaiShop.DAO;
 using BonsaiShop.DTO;
+using BonsaiShop.Filter;
 
 namespace BonsaiShop.Controllers
 {
@@ -25,11 +26,28 @@ namespace BonsaiShop.Controllers
 
         // GET: api/Products?page=[page]
         [HttpGet]
-        public IActionResult GetProducts(int? page, bool? forAdmin)
+        public IActionResult GetProductsForPublic(int? page)
         {
             try
             {
-                var list = productDAO.GetProducts(page, forAdmin);
+                var list = productDAO.GetProducts(page, false);
+                return Ok(list);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
+        // GET: api/Products/Admin?page=[page]
+        [HttpGet("Admin")]
+        [AdministratorAuthorization]
+        public IActionResult GetProductsForAdmin(int? page)
+        {
+            try
+            {
+                var list = productDAO.GetProducts(page, true);
                 return Ok(list);
             }
             catch
@@ -39,13 +57,15 @@ namespace BonsaiShop.Controllers
         }
 
         [HttpPost]
+        [AdministratorAuthorization]
         public IActionResult CreateProduct([FromBody] Product product)
         {
             try
             {
                 productDAO.CreateProduct(product);
                 return StatusCode(201);
-            } catch
+            }
+            catch
             {
                 return BadRequest();
             }
@@ -53,14 +73,29 @@ namespace BonsaiShop.Controllers
 
         // Endpoint : PUT : api/Products/12342
         [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id,[FromBody] Product product)
+        [AdministratorAuthorization]
+        public IActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            try
+            if (productDAO.UpdateProduct(id, product))
             {
-                productDAO.UpdateProduct(id, product);
                 return NoContent();
             }
-            catch
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        // DELETE: api/Products1/5
+        [HttpDelete("{id}")]
+        [AdministratorAuthorization]
+        public IActionResult DeleteProduct(int id)
+        {
+            if (productDAO.Delete(id))
+            {
+                return NoContent();
+            }
+            else
             {
                 return BadRequest();
             }

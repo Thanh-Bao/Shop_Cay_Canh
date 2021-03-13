@@ -119,6 +119,25 @@ namespace BonsaiShop.DAO
             }
         }
 
+        public bool Delete(int id)
+        {
+            try
+            {
+                var product = context.Products.Find(id);
+                if (product == null)
+                {
+                    return false;
+                }
+                context.Products.Remove(product);
+                context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         public bool ProductExist(int id)
         {
