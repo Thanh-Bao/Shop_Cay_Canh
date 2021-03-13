@@ -8,10 +8,10 @@ namespace BonsaiShop.DTO
     public class ProductDTO
     {
         public string name { set; get; }
-        public string price { set; get; }
-        public string quantity { set; get; }
+        public int price { set; get; }
+        public int? quantity { set; get; }
         public string description { set; get; }
-        public string height { set; get; }
+        public int height { set; get; }
         public string origin { set; get; }
     }
 }

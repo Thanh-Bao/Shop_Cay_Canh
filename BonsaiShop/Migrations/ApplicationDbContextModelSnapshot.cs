@@ -93,8 +93,8 @@ namespace BonsaiShop.Migrations
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("height")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("height")
+                        .HasColumnType("int");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -103,13 +103,11 @@ namespace BonsaiShop.Migrations
                     b.Property<string>("origin")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("price")
+                        .HasColumnType("int");
 
-                    b.Property<string>("quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("productId");
 

@@ -29,8 +29,12 @@ namespace BonsaiShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // add scope for DAO
+            // add for DAO Class
             services.AddScoped<UserDAO>();
+            services.AddScoped<ProductDAO>();
+            services.AddScoped<OrderDAO>();
+            services.AddScoped<OrderDetailDAO>();
+            services.AddScoped<CartDAO>();
 
             // CROS
             services.AddCors(options => {

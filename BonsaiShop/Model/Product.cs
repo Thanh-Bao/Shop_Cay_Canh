@@ -15,14 +15,14 @@ namespace BonsaiShop.Model
         public string name { set; get; }
 
         [Required]
-        public string price { set; get; }
+        public int price { set; get; }
 
         [Required]
-        public string quantity { set; get; }
+        public int quantity { set; get; }
 
         public string description { set; get; }
 
-        public string height { set; get; }
+        public int height { set; get; }
 
         public string origin { set; get; }
 

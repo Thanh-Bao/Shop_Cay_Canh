@@ -9,6 +9,8 @@ using BonsaiShop.DTO;
 
 namespace BonsaiShop.Filter
 {
+    // Mỗi member chỉ được request đến dữ liệu của member đó
+    // So sánh SĐT member đó cần tìm trong parameter và SĐT trong payload token
     public class MemberAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)

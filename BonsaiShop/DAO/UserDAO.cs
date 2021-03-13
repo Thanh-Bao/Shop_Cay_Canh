@@ -21,12 +21,12 @@ namespace BonsaiShop.DAO
             this.context = context;
         }
 
-        public List<UserDTO> GetUsers(string role, string page)
+        public List<UserDTO> GetUsers(string role, int? page)
         {
             int _page = 1;
             if (page != null)
             {
-                _page = Int32.Parse(page);
+                _page =(Int32) page;
             }
             //Bỏ N phần tử đầu tiên
             int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
@@ -89,7 +89,7 @@ namespace BonsaiShop.DAO
             return context.Users.Any(e => e.phone == phone);
         }
 
-        public bool UpdateUser(string phone, UserDTO user)
+        public bool UpdateUser(string phone,UserDTO user)
         {
             try
             {

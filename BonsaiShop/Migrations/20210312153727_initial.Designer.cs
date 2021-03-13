@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonsaiShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210312083051_initial")]
+    [Migration("20210312153727_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,8 +95,8 @@ namespace BonsaiShop.Migrations
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("height")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("height")
+                        .HasColumnType("int");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -105,13 +105,11 @@ namespace BonsaiShop.Migrations
                     b.Property<string>("origin")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("price")
+                        .HasColumnType("int");
 
-                    b.Property<string>("quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("productId");
 

@@ -13,10 +13,10 @@ namespace BonsaiShop.Migrations
                     productId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    price = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    price = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    height = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    height = table.Column<int>(type: "int", nullable: false),
                     origin = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

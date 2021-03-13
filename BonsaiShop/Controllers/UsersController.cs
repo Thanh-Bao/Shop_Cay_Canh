@@ -30,7 +30,7 @@ namespace BonsaiShop.Controllers
         [HttpGet]
         [Authorize]
         [AdministratorAuthorization]
-        public IActionResult GetUsers(string role, string page)
+        public IActionResult GetUsers(string role, int page)
         {
             try
             {
@@ -99,7 +99,8 @@ namespace BonsaiShop.Controllers
                 }
                 else
                 {
-                    userDAO.UpdateUser(phone, user);
+                    user.phone = phone;
+                    userDAO.UpdateUser(phone,user);
                 }
                 return NoContent();
 
