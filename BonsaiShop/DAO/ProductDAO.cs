@@ -11,11 +11,11 @@ namespace BonsaiShop.DAO
 {
     public class ProductDAO
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext dbcontext;
 
         public ProductDAO(ApplicationDbContext context)
         {
-            this.context = context;
+            this.dbcontext = context;
         }
 
 
@@ -37,7 +37,7 @@ namespace BonsaiShop.DAO
             // Ẩn hiện Số lượng mỗi sản phẩm
             if (_forAdmin)
             {
-                list = context.Products
+                list = dbcontext.Products
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
                 .OrderByDescending(s => s.productId)
@@ -55,7 +55,7 @@ namespace BonsaiShop.DAO
             }
             else
             {
-                list = context.Products
+                list = dbcontext.Products
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
                 .OrderByDescending(s => s.productId)
@@ -77,7 +77,7 @@ namespace BonsaiShop.DAO
 
         public Product GetProduct(int id)
         {
-            return context.Products.Find(id);
+            return dbcontext.Products.Find(id);
         }
 
 
@@ -85,8 +85,8 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                context.Products.Add(product);
-                context.SaveChangesAsync();
+                dbcontext.Products.Add(product);
+                dbcontext.SaveChangesAsync();
                 return true;
             }
             catch
@@ -99,7 +99,7 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                Product _product = context.Products.Find(id);
+                Product _product = dbcontext.Products.Find(id);
                 if (_product == null)
                 {
                     return false;
@@ -110,7 +110,7 @@ namespace BonsaiShop.DAO
                 _product.description = product.description;
                 _product.height = product.height;
                 _product.origin = product.origin;
-                context.SaveChangesAsync();
+                dbcontext.SaveChangesAsync();
                 return true;
             }
             catch
@@ -123,13 +123,13 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                var product = context.Products.Find(id);
+                var product = dbcontext.Products.Find(id);
                 if (product == null)
                 {
                     return false;
                 }
-                context.Products.Remove(product);
-                context.SaveChangesAsync();
+                dbcontext.Products.Remove(product);
+                dbcontext.SaveChangesAsync();
                 return true;
             }
             catch
@@ -141,7 +141,7 @@ namespace BonsaiShop.DAO
 
         public bool ProductExist(int id)
         {
-            return context.Products.Any(p => p.productId == id);
+            return dbcontext.Products.Any(p => p.productId == id);
         }
 
     }

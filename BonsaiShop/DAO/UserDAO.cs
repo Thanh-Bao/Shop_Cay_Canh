@@ -13,12 +13,12 @@ namespace BonsaiShop.DAO
 {
     public class UserDAO
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext dbcontext;
 
 
         public UserDAO(ApplicationDbContext context)
         {
-            this.context = context;
+            this.dbcontext = context;
         }
 
         public List<UserDTO> GetUsers(string role, int? page)
@@ -30,7 +30,7 @@ namespace BonsaiShop.DAO
             }
             //Bỏ N phần tử đầu tiên
             int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
-            var list = context.Users
+            var list = dbcontext.Users
                 .Where(s => s.role.Equals(role))
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
@@ -54,7 +54,7 @@ namespace BonsaiShop.DAO
             }
             //Bỏ N phần tử đầu tiên
             int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
-            var list = context.Users
+            var list = dbcontext.Users
                 .Where(s => (s.phone.Contains(keyword)
                            || s.address.Contains(keyword)
                            || s.name.Contains(keyword)
@@ -75,7 +75,7 @@ namespace BonsaiShop.DAO
 
         public UserDTO GetUser(string phone)
         {
-            return context.Users.Where(s => s.phone.Equals(phone))
+            return dbcontext.Users.Where(s => s.phone.Equals(phone))
                 .Select(s => new UserDTO
                 {
                     phone = s.phone,
@@ -86,14 +86,14 @@ namespace BonsaiShop.DAO
 
         public bool UserExists(string phone)
         {
-            return context.Users.Any(e => e.phone == phone);
+            return dbcontext.Users.Any(e => e.phone == phone);
         }
 
         public bool UpdateUser(string phone,UserDTO user)
         {
             try
             {
-               User _user = context.Users.Where(
+               User _user = dbcontext.Users.Where(
                     s => s.phone.Equals(phone))
                     .FirstOrDefault();
                 if (user.name != null)
@@ -103,7 +103,7 @@ namespace BonsaiShop.DAO
                 if (user.password != null)
                     _user.password = user.password;
 
-                context.SaveChangesAsync();
+                dbcontext.SaveChangesAsync();
                 return true;
             }
             catch
@@ -120,8 +120,8 @@ namespace BonsaiShop.DAO
                 {
                     return false;
                 }
-                context.Users.Add(user);
-                context.SaveChangesAsync();
+                dbcontext.Users.Add(user);
+                dbcontext.SaveChangesAsync();
                 return true;
             } catch
             {
@@ -136,7 +136,7 @@ namespace BonsaiShop.DAO
                 return null;
             }
 
-            User templeUser = context.Users
+            User templeUser = dbcontext.Users
                 .Where(s => s.phone.Equals(phone))
                 .FirstOrDefault();
 
@@ -148,6 +148,11 @@ namespace BonsaiShop.DAO
             return templeUser.role;
         }
 
+        public int PhoneToID(string phone)
+        {
+            User user = dbcontext.Users.Where(s => s.phone.Equals(phone)).FirstOrDefault();
+            return user.userId;
+        }
 
     }
 }

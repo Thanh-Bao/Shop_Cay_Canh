@@ -8,12 +8,12 @@ namespace BonsaiShop.DAO
 {
     public class OrderDAO
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext dbcontext;
 
 
-        public OrderDAO(ApplicationDbContext context)
+        public OrderDAO(ApplicationDbContext dbcontext)
         {
-            this.context = context;
+            this.dbcontext = dbcontext;
         }
     }
 }
