@@ -96,5 +96,36 @@ namespace BonsaiShop.DAO
                 && s._user.phone.Equals(phone));
             return isExist;
         }
+
+       
+        public bool DeleteItemFromCart(string phone, int productID)
+        {
+            try
+            {
+                Cart cart = dbcontext.Cart.Find(userDAO.PhoneToID(phone), productID);
+                dbcontext.Cart.Remove(cart);
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteCart(string phone)
+        {
+            try
+            {
+                var cart = dbcontext.Cart.Where(s => s.userId == userDAO.PhoneToID(phone));
+                dbcontext.Cart.RemoveRange(cart);
+                dbcontext.SaveChangesAsync();
+                return true;
+            } catch
+            {
+                return false;
+            }
+        }
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BonsaiShop.DAO;
 using BonsaiShop.DTO;
+using BonsaiShop.Filter;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,9 @@ namespace BonsaiShop.Controllers
             this.cartDAO = cartDAO;
         }
 
-        // api/Cart/5
+        // api/Cart/0965456545
         [HttpGet("{phone}")]
+        [MemberAuthorization]
         public IActionResult GetCart(string phone)
         {
             try
@@ -33,12 +35,30 @@ namespace BonsaiShop.Controllers
             }
         }
 
+       //  api/Cart/0965456545
         [HttpPut("{phone}")]
-        public IActionResult UpdateCart(string phone)
+        [MemberAuthorization]
+        public IActionResult UpdateCart(string phone,[FromBody] int productID)
         {
             try
             {
+                cartDAO.UpdateCart(phone, productID);
+                return NoContent();
+            } catch
+            {
+                return BadRequest();
+            }
+        }
 
+        //  api/Cart/0965456545
+        [HttpDelete("{phone}")]
+        [MemberAuthorization]
+        public IActionResult DeleteItemFromCart(string phone, [FromBody] int productID)
+        {
+            try
+            {
+                cartDAO.DeleteItemFromCart(phone, productID);
+                return NoContent();
             } catch
             {
                 return BadRequest();
