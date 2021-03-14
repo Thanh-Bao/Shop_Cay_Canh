@@ -154,6 +154,12 @@ namespace BonsaiShop.DAO
             return user.userId;
         }
 
+        public string IdToPhone(int id)
+        {
+            User user = dbcontext.Users.Find(id);
+            return user.phone;
+        }
+
     }
 }
 
