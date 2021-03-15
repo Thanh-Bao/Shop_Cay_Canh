@@ -95,5 +95,25 @@ namespace BonsaiShop.DAO
             }
         }
 
+        public bool AddOrder(int userID, int totalMoney)
+        {
+            try
+            {
+                Order order = new Order
+                {
+                    userId = userID,
+                    timestamp = (Int32) DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                    status = Config.Const.OrderStatus.PENDING,
+                    totalMoney = totalMoney
+                };
+                dbcontext.Orders.Add(order);
+                dbcontext.SaveChangesAsync();
+               return  true;
+            } catch
+            {
+                return false;
+            }
+        }
+
     }
 }

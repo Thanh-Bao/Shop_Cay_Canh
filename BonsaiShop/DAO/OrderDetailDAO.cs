@@ -40,5 +40,20 @@ namespace BonsaiShop.DAO
             return list;
         }
 
+
+        public bool AddOrderDetail(int orderID, OrderDetailDTO[] orderDetailDTOs)
+        {
+            try
+            {
+
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
