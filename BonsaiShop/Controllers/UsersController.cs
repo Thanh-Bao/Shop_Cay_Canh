@@ -120,7 +120,7 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public IActionResult registerMember(User user)
+        public IActionResult RegisterMember(User user)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult login([FromBody] User user,bool rememberMe)
+        public IActionResult Login([FromBody] User user,bool rememberMe)
         {
             string role = userDAO.login(user.phone, user.password);
             if (role != null)
