@@ -5,8 +5,7 @@ class App extends Component {
         return (
             <div>
                 <div>ffassfdasd
-
-{console.log("hihihi"), console.log(process.env.REACT_APP_HIHI)}
+                {console.log("hihihi"), console.log(process.env.REACT_APP_HIHI)}
                 </div>
             </div>
         );
