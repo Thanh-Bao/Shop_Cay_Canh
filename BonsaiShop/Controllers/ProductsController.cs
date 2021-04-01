@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BonsaiShop.DB;
+﻿using Microsoft.AspNetCore.Mvc;
 using BonsaiShop.Model;
 using BonsaiShop.DAO;
-using BonsaiShop.DTO;
 using BonsaiShop.Filter;
 
 namespace BonsaiShop.Controllers

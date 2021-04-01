@@ -1,9 +1,6 @@
 ﻿using BonsaiShop.Config;
-using BonsaiShop.Controllers;
 using BonsaiShop.DAO;
 using BonsaiShop.DB;
-using BonsaiShop.DTO;
-using BonsaiShop.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

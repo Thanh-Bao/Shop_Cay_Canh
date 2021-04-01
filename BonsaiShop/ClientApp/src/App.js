@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 class App extends Component {
     render() {
         return (
             <div>
                 <div>ffassfdasd
-                {console.log("hihihi"), console.log(process.env.REACT_APP_HIHI)}
+                    {console.log(this.props.kkk)}
                 </div>
             </div>
         );
     }
 }
-
-export default App;
+const mapStateToProps = state => ({
+    kkk: state.abc
+})
+export default connect(mapStateToProps)(App);

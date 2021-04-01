@@ -1,13 +1,10 @@
 ﻿using BonsaiShop.DB;
 using BonsaiShop.DTO;
 using BonsaiShop.Model;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using static BonsaiShop.Config.Const;
+
 
 namespace BonsaiShop.DAO
 {
