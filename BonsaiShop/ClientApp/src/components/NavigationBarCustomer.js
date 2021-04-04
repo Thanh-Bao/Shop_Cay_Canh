@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
-
-class Admin extends Component {
+class NavigationBarCustomer extends Component {
     render() {
         return (
             <div>
-               
-                {this.props.children}
+                This is menu
             </div>
         );
     }
 }
 
-export default Admin;
+export default NavigationBarCustomer;
