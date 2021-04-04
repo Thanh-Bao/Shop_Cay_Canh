@@ -153,5 +153,11 @@ namespace BonsaiShop.Controllers
            return Forbid("Đăng nhập thất bại");
 
         }
-    }
+
+/*        Format 
+            {
+    "phone" : "123",
+    "password" : "123"
+}*/
+}
 }

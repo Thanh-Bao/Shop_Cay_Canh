@@ -5,6 +5,25 @@ class Home extends Component {
         return (
             <div>
                 Customer Home
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>2</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
             </div>
         );
     }

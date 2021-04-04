@@ -1,0 +1,27 @@
+#CustomerNavigationBar{
+    background-color: #e2fafb;
+}
+
+#navigationBarSpacingBottom{
+    margin-bottom: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+    #navigationBarSpacingBottom{
+        margin-bottom: 80px;
+    }
+    #ListMenuItemNav{
+        margin-top: 20px;
+    }
+  }
+
+  .NavItem:hover{
+      font-size: 15px;
+      font-weight: bolder;
+  }
+
+
+.NavItemActive{
+    color: #fff !important; 
+    background-color: #0d6efd  !important;
+}
