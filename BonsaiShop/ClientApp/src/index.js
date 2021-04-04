@@ -1,4 +1,4 @@
-﻿import 'bootstrap/dist/css/bootstrap.css';
+﻿import { BrowserRouter as Router } from "react-router-dom";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Store from './Store';
@@ -9,7 +9,9 @@ const rootElement = document.getElementById('root');
 
 ReactDOM.render(
     <Provider store={Store}>
-        <App />
+        <Router >
+            <App />
+        </Router>
     </Provider>
     ,
     rootElement);

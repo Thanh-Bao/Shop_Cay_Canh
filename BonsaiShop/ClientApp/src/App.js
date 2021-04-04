@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import CustomerRouter from './components/Router/CustomerRouter';
+import AdminRouter from './components/Router/AdminRouter'
+import Unauthorized from './components/Utility/Unauthorized';
+
+
+
 class App extends Component {
     render() {
         return (
-            <div>
-                <div>ffassfdasd
-                    {console.log(this.props.kkk)}
-                </div>
-            </div>
+            <Router>
+                <Route exact path="/KhongCoQuyenTruyCap" component={Unauthorized} />
+                <CustomerRouter />
+                <AdminRouter />
+            </Router>
         );
     }
 }
