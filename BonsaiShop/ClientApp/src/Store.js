@@ -23,12 +23,14 @@ function AllReducer(state = initialState, action) {
         case "UPDATE_FILTER_ORIGIN":
             return {
                 ...state,
-                filterOrigin: action.data
+                filterOrigin: action.data,
+                rangeBarChange : false
             }
         case "UPDATE_SORT_MODE":
             return {
                 ...state,
-                SortMode: action.data
+                SortMode: action.data,
+                rangeBarChange : false
             }
         default:
             break;

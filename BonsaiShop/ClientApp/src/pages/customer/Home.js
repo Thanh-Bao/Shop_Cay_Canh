@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Pagination from "react-js-pagination";
 import '../../css/CustomerHome.css';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activePage: 1
+        };
+    }
+
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({ activePage: pageNumber });
+    }
+
     render() {
         let videoIntro = () => {
             if (this.props.rangeBarChange) {
@@ -25,7 +38,6 @@ class Home extends Component {
         }
         return (
             <div>
-                {console.log(this.props.rangeBarChange)}
                 {videoIntro()}
                 <h1>1</h1>
                 <h1>1</h1>
@@ -46,6 +58,21 @@ class Home extends Component {
                 <h1>1</h1>
                 <h1>1</h1>
                 <h1>1</h1>
+                <div className="container">
+                    <div className="row justify-content-center mb-4">
+                        <Pagination
+                            activePage={this.state.activePage}
+                            firstPageText="trang đầu"
+                            lastPageText="trang cuối"
+                            itemClass="page-item"
+                            linkClass="page-link"
+                            itemsCountPerPage={10}
+                            totalItemsCount={450}
+                            pageRangeDisplayed={5}
+                            onChange={this.handlePageChange.bind(this)}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -54,7 +81,7 @@ const mapStateToProps = state => ({
     filterPrice: state.filterPrice,
     filterHeight: state.filterHeight,
     filterOrigin: state.filterOrigin,
-    rangeBarChange : state.rangeBarChange,
+    rangeBarChange: state.rangeBarChange,
     SortMode: state.SortMode,
 })
 export default connect(mapStateToProps)(Home);
