@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import 'react-input-range/lib/css/index.css';
 
 class FilterBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: 2 };
-        this.handleChange = this.handleChange.bind(this);
-    }
     handleChange(event) {
         this.setState(console.log({ value: event.target.value }));
     }
@@ -19,7 +14,7 @@ class FilterBar extends Component {
                     <div className="row d-flex justify-content-between">
 
                         <div className="col-1">
-                            <span className="text-nowrap">Mức giá :</span>
+                            <span className="text-nowrap filter-lbl-nav">Mức giá :</span>
                         </div>
                         <div className="col-3">
                             <InputRange
@@ -31,7 +26,7 @@ class FilterBar extends Component {
                                 onChange={filterPrice => this.props.dispatch({ type: "UPDATE_FILTER_PRICE", data: filterPrice })} />
                         </div>
                         <div className="col-1">
-                            <span className="text-nowrap">Chiều cao:</span>
+                            <span className="text-nowrap filter-lbl-nav">Chiều cao:</span>
                         </div>
                         <div className="col-3">
                             <InputRange
