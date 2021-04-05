@@ -6,11 +6,14 @@ import 'react-input-range/lib/css/index.css';
 class FilterBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'coconut'};
+        this.state = { value: 2 };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState(console.log({ value: event.target.value }));
     }
     render() {
         return (
-
             <div id="filter-bar-customer">
                 <div className="container-fluid">
                     <div className="row d-flex justify-content-between">
@@ -41,8 +44,8 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select  className="form-control" value={this.state.value} onChange={this.handleChange}>
-                                    <option  selected disabled>Chọn xuất xứ</option>
+                                <select className="form-control" value={this.props.filterOrigin} onChange={event => { this.props.dispatch({ type: "UPDATE_FILTER_ORIGIN", data: event.target.value }) }}>
+                                    <option value={0}>Chọn xuất xứ</option>
                                     <option value={"Việt Nam"}>Việt Nam</option>
                                     <option value={"Thái Lan"}>Thái Lan</option>
                                     <option value={"Đài Loan"}>Đài Loan</option>
@@ -52,8 +55,8 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select value={99} className="form-control" value={this.state.value} onChange={this.handleChange}>
-                                    <option selected disabled>Sắp xếp theo</option>
+                                <select className="form-control" value={this.props.SortMode} onChange={event => { this.props.dispatch({ type: "UPDATE_SORT_MODE", data: event.target.value }) }}>
+                                    <option value={0}  >Sắp xếp theo</option>
                                     <option value={1}>Giá</option>
                                     <option value={2}>Chiều cao</option>
                                     <option value={3}>Mới cập nhật</option>
@@ -67,10 +70,10 @@ class FilterBar extends Component {
         );
     }
 }
-
 const mapStateToProps = state => ({
     filterPrice: state.filterPrice,
-    filterHeight: state.filterHeight
+    filterHeight: state.filterHeight,
+    filterOrigin: state.filterOrigin,
+    SortMode: state.SortMode,
 })
-
 export default connect(mapStateToProps)(FilterBar);

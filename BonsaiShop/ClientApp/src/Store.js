@@ -1,7 +1,9 @@
 import { createStore } from 'redux';
 const initialState = {
     filterPrice: { min: 300, max: 600 },
-    filterHeight: { min: 40, max: 80 }
+    filterHeight: { min: 40, max: 80 },
+    filterOrigin : 0,
+    SortMode : 0,
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
@@ -14,6 +16,16 @@ function AllReducer(state = initialState, action) {
             return {
                 ...state,
                 filterHeight: action.data
+            }
+        case "UPDATE_FILTER_ORIGIN":
+            return {
+                ...state,
+                filterOrigin: action.data
+            }
+        case "UPDATE_SORT_MODE":
+            return {
+                ...state,
+                SortMode: action.data
             }
         default:
             break;
