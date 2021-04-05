@@ -17,7 +17,7 @@ class FooterCustomer extends Component {
                                 {/* facebook  Button */}
                                 <a href="https://www.facebook.com/thanhbao123456/" target="blank" className="social-margin">
                                     <div className="social-icon facebook">
-                                        <i class="fab fa-facebook-f"></i>
+                                        <i className="fab fa-facebook-f"></i>
                                     </div>
                                 </a>
                                 {/* pinterest Button */}
@@ -75,8 +75,9 @@ class FooterCustomer extends Component {
                                 <h5 className="my-2 font-weight-bold d-none d-md-block">Product</h5>
                                 <div className="d-md-none title" data-target="#Product" data-toggle="collapse">
                                     <div className="mt-3 font-weight-bold">Product
-              <div className="float-right navbar-toggler">
-                                            
+          <div className="float-right navbar-toggler">
+                                            <i className="fas fa-angle-down" />
+                                            <i className="fas fa-angle-up" />
                                         </div>
                                     </div>
                                 </div>
@@ -94,8 +95,9 @@ class FooterCustomer extends Component {
                                 <h5 className="my-2 font-weight-bold d-none d-md-block">Company</h5>
                                 <div className="d-md-none title" data-target="#Company" data-toggle="collapse">
                                     <div className="mt-3 font-weight-bold">Company
-              <div className="float-right navbar-toggler">
-                                            
+          <div className="float-right navbar-toggler">
+                                            <i className="fas fa-angle-down" />
+                                            <i className="fas fa-angle-up" />
                                         </div>
                                     </div>
                                 </div>
@@ -114,8 +116,9 @@ class FooterCustomer extends Component {
                                 <h5 className="my-2 font-weight-bold d-none d-md-block">Resources</h5>
                                 <div className="d-md-none title" data-target="#Resources" data-toggle="collapse">
                                     <div className="mt-3 font-weight-bold">Resources
-              <div className="float-right navbar-toggler">
-                                            
+          <div className="float-right navbar-toggler">
+                                            <i className="fas fa-angle-down" />
+                                            <i className="fas fa-angle-up" />
                                         </div>
                                     </div>
                                 </div>
@@ -134,13 +137,14 @@ class FooterCustomer extends Component {
                                 <h5 className="my-2 font-weight-bold d-none d-md-block">Get Help</h5>
                                 <div className="d-md-none title" data-target="#Get-Help" data-toggle="collapse">
                                     <div className="mt-3 font-weight-bold">Get Help
-              <div className="float-right navbar-toggler">
-                                           
+          <div className="float-right navbar-toggler">
+                                            <i className="fas fa-angle-down" />
+                                            <i className="fas fa-angle-up" />
                                         </div>
                                     </div>
                                 </div>
                                 <ul className="list-unstyled collapse" id="Get-Help">
-                                    <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/" >Help Center</a></li>
+                                    <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Help Center</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Contact Us</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Privacy Policy</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Terms</a></li>
@@ -151,6 +155,7 @@ class FooterCustomer extends Component {
                         </div>
                     </div>
                     {/*/.Footer Links*/}
+
                     <hr className="mb-0" />
                     {/*Copyright*/}
                     <div className="py-3 text-center">

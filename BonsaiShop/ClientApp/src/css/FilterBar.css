@@ -1,0 +1,21 @@
+#filter-bar-customer{
+    background-color: rgba(238, 234, 234, 0.26) !important;
+    padding-top: 25px;
+}
+
+
+.input-range__track--active{
+    background-color: #0d6efd  !important;
+}
+
+.input-range__slider{
+    background: #0d6efd ;
+    border-color: #0d6efd ;
+}
+
+.input-range__label-container{
+    color: black;
+    font-family: 'Nunito';
+    font-size: 12px;
+}
+

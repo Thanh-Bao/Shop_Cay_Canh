@@ -3,17 +3,8 @@
 }
 
 #navigationBarSpacingBottom{
-    margin-bottom: 60px;
+    margin-bottom: 55px;
 }
-
-@media only screen and (max-width: 600px) {
-    #navigationBarSpacingBottom{
-        margin-bottom: 80px;
-    }
-    #ListMenuItemNav{
-        margin-top: 20px;
-    }
-  }
 
   .NavItem:hover{
       font-size: 15px;
@@ -25,3 +16,23 @@
     color: #fff !important; 
     background-color: #0d6efd  !important;
 }
+
+#nav-btn-search{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-weight: bolder;
+
+}
+
+#nav-input-search {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+#nav-icon-search{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+

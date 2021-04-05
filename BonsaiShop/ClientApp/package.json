@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "bootstrap": "^5.0.0-beta3",
     "connected-react-router": "6.5.2",
     "dotenv": "^8.2.0",
     "history": "4.10.1",
@@ -13,6 +12,7 @@
     "popper.js": "^1.16.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-input-range": "^1.3.0",
     "react-redux": "^7.2.3",
     "react-router": "5.1.2",
     "react-router-dom": "^5.1.2",

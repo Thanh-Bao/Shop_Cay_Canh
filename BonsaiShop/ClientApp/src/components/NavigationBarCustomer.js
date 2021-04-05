@@ -5,47 +5,54 @@ class NavigationBarCustomer extends Component {
     render() {
         return (
             <div>
-                <nav className=" navbar fixed-top navbar-expand-lg navbar-light" id="CustomerNavigationBar">
-                    <div className="container-fluid d-flex justify-content-between">
-                        <NavLink className="navbar-brand" to="/home">
-                            <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width={30} height={24} />
-                        </NavLink>
-                        <button className="navbar-toggler mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon" />
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <form className="d-flex ms-auto">
-                                <div className="input-group">
-                                    <span className="input-group-text" id="basic-addonNavCustomer"><i class="fas fa-search"></i></span>
-                                    <input type="text" className="form-control" placeholder="Bạn tìm gì?" aria-label="Username" aria-describedby="basic-addonNavCustomer" />
-                                </div>
-                                <button className="btn btn-outline-success ms-2" type="submit">Tìm</button>
-                            </form>
-                            <ul id="ListMenuItemNav" className="nav nav-pills nav-fill ms-auto mb-2 mb-lg-0 ">
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i class="fas fa-home"></i> Trang Chủ</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i class="fas fa-box"></i> Xem đơn hàng</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i class="fas fa-key"></i> Đăng nhập</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i class="fas fa-user-plus"></i> Đăng Kí</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i class="fas fa-shopping-cart"></i> Liên hệ</NavLink>
-                                </li>
+                <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
 
-                            </ul>
-                        </div>
+                    <NavLink className="navbar-brand" to="/">
+                        <img src="/favicon.ico" alt="" width={35} height={24} />
+                    </NavLink>
+
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentTopMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon" />
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="navbarSupportedContentTopMenu">
+
+
+                        <form className="form-inline ml-auto my-2 my-lg-0">
+                            <div className="input-group">
+                                <span id="nav-icon-search" className="input-group-text" id="basic-addonNavCustomer"><i className="fas fa-search"></i></span>
+                                <input id="nav-input-search" type="text" className="form-control" placeholder="Bạn tìm gì?" aria-label="Username" aria-describedby="basic-addonNavCustomer" />
+                            </div>
+                            <button id="nav-btn-search" className="btn btn-outline-success my-2 my-sm-0 " type="submit">Tìm</button>
+                        </form>
+
+
+                        <ul className="nav nav-pills ml-auto">
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i className="fas fa-user-plus"></i> Đăng Kí</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
+                            </li>
+                        </ul>
+
+
                     </div>
                 </nav>
                 <div id="navigationBarSpacingBottom"></div>
+
             </div>
         );
     }
