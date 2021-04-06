@@ -29,3 +29,12 @@
 .card-images-change:hover .img-top-change {
   display: inline;
 }
+
+.btn-cart-product{
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.text-card-description{
+  font-weight: 300;
+}
