@@ -7,3 +7,4 @@ npm i redux/
 npm i react-redux/
 npm install react-router-dom/
 npm i axios/
+npm i react-text-truncate
