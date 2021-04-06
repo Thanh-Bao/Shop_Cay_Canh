@@ -3,12 +3,24 @@ import InputRange from 'react-input-range';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import 'react-input-range/lib/css/index.css';
+import callAPi from '../callAPI/callAPIMainServer';
 
 class FilterBar extends Component {
 
     handleChange(type, data) {
         this.props.dispatch({ type: type, data: data });
         this.props.dispatch({ type: "REDIRECT_TO_HOME" });
+        var condition = {
+            filterOrigin: this.props.filterOrigin,
+            SortMode: this.props.SortMode,
+            filterPrice: this.props.filterPrice,
+            filterHeight: this.props.filterHeight
+        }
+        callAPi('products/filter', null, { page: this.props.activePage }, condition).then(res => {
+            console.log(res.data.list);
+            this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+        })
+        
     }
     render() {
         let redirectToHome = () => {
@@ -82,6 +94,7 @@ const mapStateToProps = state => ({
     filterHeight: state.filterHeight,
     filterOrigin: state.filterOrigin,
     SortMode: state.SortMode,
-    redirectToHome: state.redirectToHome
+    redirectToHome: state.redirectToHome,
+    activePage : state.activePage
 })
 export default connect(mapStateToProps)(FilterBar);

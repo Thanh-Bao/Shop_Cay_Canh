@@ -7,17 +7,11 @@ import Loading from '../../components/Loading';
 import CartProduct from '../../components/CartProduct';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activePage: 1,
-        };
-    }
 
     handlePageChange(pageNumber) {
-        this.setState({ activePage: pageNumber });
+        this.props.dispatch({ type: "UPDATE_ACTIVE_PAGE", data: pageNumber });
         this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: null });
-        callAPi('products',null,{page:pageNumber}).then(res => {
+        callAPi('products', null, { page: pageNumber }).then(res => {
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
         })
     }
@@ -52,27 +46,24 @@ class Home extends Component {
             }
         }
 
-        let listCartProducts = () => {
-            var elements = [];
-            if (this.props.listProductCustomer != null) {
-                this.props.listProductCustomer.map(product => {
-                    elements.push(
-                        <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                                name={product.name}
-                                price={product.price}
-                                height={product.height}
-                                description={product.description}
-                            />
-                        </div>
-                    )
-                })
-            } else {
-                elements.push(<Loading />)
-            }
-            return elements;
+        let listCartProducts;
+        if (this.props.listProductCustomer != null) {
+            listCartProducts = this.props.listProductCustomer.map(product => {
+                return (
+                    <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
+                        <CartProduct
+                            thumbnail="https://picsum.photos/id/132/3200/900"
+                            fullImage="https://via.placeholder.com/700x400"
+                            name={product.name}
+                            price={product.price}
+                            height={product.height}
+                            description={product.description}
+                        />
+                    </div>
+                )
+            })
+        } else {
+            listCartProducts = <Loading />
         }
 
         return (
@@ -81,14 +72,14 @@ class Home extends Component {
                 {/*  LIST */}
                 <div className="container mt-4">
                     <div className="row">
-                        {listCartProducts()}
+                        {listCartProducts}
                     </div>
                 </div>
                 {/* / LIST */}
                 <div className="container mt-4">
                     <div className="row justify-content-center mb-4">
                         <Pagination
-                            activePage={this.state.activePage}
+                            activePage={this.props.activePage}
                             firstPageText="trang đầu"
                             lastPageText="trang cuối"
                             itemClass="page-item"
@@ -105,7 +96,6 @@ class Home extends Component {
     }
 }
 
-// édgbigsgbsdgbsdbisdgbsdibi
 const mapStateToProps = state => ({
     filterPrice: state.filterPrice,
     filterHeight: state.filterHeight,
@@ -114,6 +104,7 @@ const mapStateToProps = state => ({
     SortMode: state.SortMode,
     listProductCustomer: state.listProductCustomer,
     itemsCountPerPage: state.itemsCountPerPage,
-    totalItemsCount: state.totalItemsCount
+    totalItemsCount: state.totalItemsCount,
+    activePage : state.activePage
 })
 export default connect(mapStateToProps)(Home);

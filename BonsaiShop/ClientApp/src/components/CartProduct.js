@@ -19,7 +19,7 @@ class CartProduct extends Component {
                         </h3>
                     </div>
                     <hr />
-                    <span class="mr-2 badge badge-pill badge-info d-inline">Cao: {this.props.height} cm</span>
+                    <span className="mr-2 badge badge-pill badge-info d-inline">Cao: {this.props.height} cm</span>
                      <TextTruncate
                         line={3}
                         element="p"

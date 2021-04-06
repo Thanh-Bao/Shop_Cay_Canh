@@ -5,15 +5,22 @@ import { connect } from 'react-redux';
 class NavigationBarCustomer extends Component {
 
     disableRedirectToHome(){
-        this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"})
+        this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"});
+        this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
     }
+
+    redirectToHome(){
+        this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
+        this.props.dispatch({type:"SHOW_VIDEO_INTRO"});
+    }
+
 
     render() {
         return (
             <div>
                 <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
 
-                    <NavLink onClick={() => this.props.dispatch({type:"SHOW_VIDEO_INTRO"})} className="navbar-brand" to="/">
+                    <NavLink onClick={() => this.redirectToHome()} className="navbar-brand" to="/">
                         <img src="/favicon.ico" alt="" width={35} height={24} />
                     </NavLink>
 
@@ -35,7 +42,7 @@ class NavigationBarCustomer extends Component {
 
                         <ul className="nav nav-pills ml-auto">
                             <li className="nav-item">
-                                <NavLink onClick={() => this.props.dispatch({type:"SHOW_VIDEO_INTRO"})}  activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
+                                <NavLink onClick={() => this.redirectToHome()}  activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
