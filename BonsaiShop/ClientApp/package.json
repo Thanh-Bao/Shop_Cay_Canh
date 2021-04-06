@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
+    "axios": "^0.21.1",
     "connected-react-router": "6.5.2",
     "dotenv": "^8.2.0",
     "history": "4.10.1",

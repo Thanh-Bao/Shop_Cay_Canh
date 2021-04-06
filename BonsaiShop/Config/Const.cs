@@ -20,7 +20,7 @@ namespace BonsaiShop.Config
             public const string CANCEL = "Cancel";
         }
 
-        public const int PAGE_SIZE = 4;
+        public const int PAGE_SIZE = 6;
     }
 
 

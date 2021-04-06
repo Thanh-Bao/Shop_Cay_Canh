@@ -18,6 +18,12 @@ namespace BonsaiShop.DAO
         }
 
 
+        public int GetTotalProducts()
+        {
+            int total = dbcontext.Products.Select(p => p).Count();
+            return total;
+        }
+
         public List<ProductDTO> GetProducts(int? page, bool? forAdmin)
         {
             int _page = 1;
@@ -43,6 +49,7 @@ namespace BonsaiShop.DAO
                 .Select(s =>
                new ProductDTO
                {
+                   productID = s.productId,
                    name = s.name,
                    price = s.price,
                    quantity = s.quantity,
@@ -61,6 +68,7 @@ namespace BonsaiShop.DAO
                 .Select(s =>
                new ProductDTO
                {
+                   productID = s.productId,
                    name = s.name,
                    price = s.price,
                    quantity = null,

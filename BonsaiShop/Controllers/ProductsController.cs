@@ -23,7 +23,12 @@ namespace BonsaiShop.Controllers
             try
             {
                 var list = productDAO.GetProducts(page, false);
-                return Ok(list);
+                int total = productDAO.GetTotalProducts();
+                var result = new { 
+                    totalItem = total,
+                    pageSize = Config.Const.PAGE_SIZE,
+                    list };
+                return Ok(result);
             }
             catch
             {
