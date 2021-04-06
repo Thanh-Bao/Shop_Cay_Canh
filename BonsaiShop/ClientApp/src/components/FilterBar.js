@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import InputRange from 'react-input-range';
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import 'react-input-range/lib/css/index.css';
 
 class FilterBar extends Component {
-    handleChange(event) {
-        this.setState(console.log({ value: event.target.value }));
+
+    handleChange(type, data) {
+        this.props.dispatch({ type: type, data: data });
+        this.props.dispatch({ type: "REDIRECT_TO_HOME" });
     }
     render() {
+        let redirectToHome = () => {
+            if (this.props.redirectToHome) {
+                return <Redirect to='/home' />
+            } else {
+                return null;
+            }
+
+        }
         return (
             <div id="filter-bar-customer">
+                {redirectToHome()}
                 <div className="container-fluid">
                     <div className="row d-flex justify-content-between">
 
@@ -23,7 +35,7 @@ class FilterBar extends Component {
                                 maxValue={900}
                                 minValue={100}
                                 value={this.props.filterPrice}
-                                onChange={filterPrice => this.props.dispatch({ type: "UPDATE_FILTER_PRICE", data: filterPrice })} />
+                                onChange={filterPrice => this.handleChange("UPDATE_FILTER_PRICE", filterPrice)} />
                         </div>
                         <div className="col-1">
                             <span className="text-nowrap filter-lbl-nav">Chiều cao:</span>
@@ -35,7 +47,7 @@ class FilterBar extends Component {
                                 maxValue={100}
                                 minValue={20}
                                 value={this.props.filterHeight}
-                                onChange={filterHeight => this.props.dispatch({ type: "UPDATE_FILTER_HEIGHT", data: filterHeight })} />
+                                onChange={filterHeight => this.handleChange("UPDATE_FILTER_HEIGHT", filterHeight)} />
                         </div>
                         <div className="col-2">
                             <div className="form-group">
@@ -70,5 +82,6 @@ const mapStateToProps = state => ({
     filterHeight: state.filterHeight,
     filterOrigin: state.filterOrigin,
     SortMode: state.SortMode,
+    redirectToHome: state.redirectToHome
 })
 export default connect(mapStateToProps)(FilterBar);

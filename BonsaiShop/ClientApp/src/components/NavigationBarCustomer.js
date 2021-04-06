@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class NavigationBarCustomer extends Component {
+
+    disableRedirectToHome(){
+        this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"})
+    }
+
     render() {
         return (
             <div>
                 <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
 
-                    <NavLink className="navbar-brand" to="/">
+                    <NavLink onClick={() => this.props.dispatch({type:"SHOW_VIDEO_INTRO"})} className="navbar-brand" to="/">
                         <img src="/favicon.ico" alt="" width={35} height={24} />
                     </NavLink>
 
@@ -29,22 +35,22 @@ class NavigationBarCustomer extends Component {
 
                         <ul className="nav nav-pills ml-auto">
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
+                                <NavLink onClick={() => this.props.dispatch({type:"SHOW_VIDEO_INTRO"})}  activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i className="fas fa-user-plus"></i> Đăng Kí</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i className="fas fa-user-plus"></i> Đăng Kí</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
                             </li>
                         </ul>
 
@@ -58,4 +64,8 @@ class NavigationBarCustomer extends Component {
     }
 }
 
-export default NavigationBarCustomer;
+const mapStateToProps = state => ({
+    rangeBarChange: state.rangeBarChange,
+    redirectToHome: state.redirectToHome
+})
+export default connect(mapStateToProps)(NavigationBarCustomer);

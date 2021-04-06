@@ -48,21 +48,5 @@ header {
     }
   }
 
-  .sloganOverlay{
-      font-weight: bolder;
-  }
+  
 
-  .card-images-change {
-    position: relative;
-    display: inline-block;
-}
-.card-images-change .img-top-change {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99;
-}
-.card-images-change:hover .img-top-change {
-    display: inline;
-}

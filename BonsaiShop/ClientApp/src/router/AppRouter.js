@@ -18,16 +18,15 @@ import UsesManagement from '../pages/admin/UsersManagement';
 import PageNotFound from '../pages/utility/PageNotFound';
 import ProtectedRoute from '../router/ProtectedRoute';
 import Unauthorized from '../pages/utility/Unauthorized';
+import ScrollToTop from '../pages/utility/ScrollToTop';
 
 
 class AppRouter extends Component {
     render() {
         return (
             <Router>
+                <ScrollToTop />
                 <Switch>
-
-
-
                     <Route exact path="/admin/:path?">
                         <AdminLayout>
                             <Switch>

@@ -1,0 +1,31 @@
+.wraper-fixed-img {
+    /* width: 347px;*/
+    min-height: 200px;
+    max-height: 200px; 
+    float: left;
+  }
+  
+  .img-item-fixed {
+    max-width: 100%;
+      height: 100%;
+  }
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+  .sloganOverlay{
+    font-weight: bolder;
+}
+
+.card-images-change {
+  position: relative;
+  display: inline-block;
+}
+.card-images-change .img-top-change {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.card-images-change:hover .img-top-change {
+  display: inline;
+}

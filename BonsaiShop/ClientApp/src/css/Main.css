@@ -19,3 +19,5 @@ body::-webkit-scrollbar {
 @import "NavigationBar.css";
 @import "FilterBar.css";
 @import "Footer.css";
+
+@import "CartProduct.css"

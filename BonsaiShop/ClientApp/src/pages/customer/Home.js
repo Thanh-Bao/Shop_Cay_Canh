@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
 import callAPi from '../../callAPI/callAPIMainServer';
 import '../../css/CustomerHome.css';
+import Loading from '../../components/Loading';
+import CartProduct from '../../components/CartProduct';
 
 class Home extends Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class Home extends Component {
     }
 
     handlePageChange(pageNumber) {
-        // console.log(`active page is ${pageNumber}`);
+        console.log(`active page is ${pageNumber}`);
         this.setState({ activePage: pageNumber });
     }
 
@@ -44,7 +46,7 @@ class Home extends Component {
                             <div className="d-flex h-100 text-center align-items-center">
                                 <div className="w-100 text-white">
                                     <h1 id="brand-name-overlay" className="display-3 sloganOverlay">Bảo Bảo Shop</h1>
-                                    <p className="lead mb-0 sloganOverlay">Mang cả thiên nhiên vào chính ngôi nhà của bạn!</p>
+                                    <p className="lead mb-0 sloganOverlay">Hệ thống mua sắm và thanh toán 1 chạm hàng đầu thế giới</p>
                                 </div>
                             </div>
                         </div>
@@ -59,9 +61,7 @@ class Home extends Component {
                     return elements.push(<h1 key={product.productID}>{product.name}</h1>)
                 })
             } else {
-                elements.push(<div className="container-fluid text-center">
-                    <img className="img-fluid" alt="hahah" src="/loading.gif"></img>
-                </div>)
+                elements.push(<Loading />)
             }
             return elements;
         }
@@ -69,103 +69,46 @@ class Home extends Component {
         return (
             <div>
                 {videoIntro()}
-                {/* Page Content */}
+                {/*  LIST */}
                 <div className="container mt-4">
                     <div className="row">
 
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                            />
+                        </div>
+                        <div className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                            />
+                        </div>
+                        <div className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                            />
+                        </div>
+                        <div className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                            />
+                        </div>
+                        <div className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                            />
                         </div>
 
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <div className="card h-100">
-                                <a className="card-images-change" href="#">
-                                    <img className="card-img-top" src="https://picsum.photos/700/400" alt="Front" />
-                                    <img className="card-img-top img-top-change" src="https://via.placeholder.com/700x400" alt="Back" />
-                                </a>
-                                <div className="card-body">
-                                    <h4 className="card-title">
-                                        <a href="#">Project Three</a>
-                                    </h4>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
-                {/* /.container */}
+                {/* / LIST */}
                 <div className="container">
                     <div className="row justify-content-center mb-4">
                         <Pagination
