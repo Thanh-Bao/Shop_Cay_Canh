@@ -1,7 +1,7 @@
 ﻿
 namespace BonsaiShop.DTO
 {
-    public class MessageResponse
+    public class MessageResponseDTO
     {
         public int statusCode { set; get; }
         public string message { set; get; }

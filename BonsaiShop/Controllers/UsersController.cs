@@ -64,7 +64,7 @@ namespace BonsaiShop.Controllers
             UserDTO user = userDAO.GetUser(phone);
             if (user == null)
             {
-                return NotFound(new MessageResponse
+                return NotFound(new MessageResponseDTO
                 {
                     statusCode = 404,
                     message = "Không tìm thấy tài khoản tương ướng với SĐT " + phone
@@ -84,7 +84,7 @@ namespace BonsaiShop.Controllers
             {
                 if (!userDAO.UserExists(phone))
                 {
-                    return NotFound(new MessageResponse
+                    return NotFound(new MessageResponseDTO
                     {
                         statusCode = 404,
                         message = "Không tìm thấy tài khoản tương ướng với SĐT " + phone
@@ -100,7 +100,7 @@ namespace BonsaiShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                return BadRequest(new MessageResponse
+                return BadRequest(new MessageResponseDTO
                 {
                     statusCode = 400,
                     message = "Cập nhật thất bại, thông tin user không bị thay đổi"
@@ -119,7 +119,7 @@ namespace BonsaiShop.Controllers
             {
                 if (userDAO.UserExists(user.phone))
                 {
-                    return BadRequest(new MessageResponse
+                    return BadRequest(new MessageResponseDTO
                     {
                         statusCode = 400,
                         message = "Số điện thoại này đã được đăng kí"
@@ -131,7 +131,7 @@ namespace BonsaiShop.Controllers
             }
             catch
             {
-                return BadRequest(new MessageResponse
+                return BadRequest(new MessageResponseDTO
                 {
                     statusCode = 400,
                     message = "Hãy nhập thông tin hợp lệ"

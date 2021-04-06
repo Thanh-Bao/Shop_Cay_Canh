@@ -2,6 +2,7 @@
 using BonsaiShop.Model;
 using BonsaiShop.DAO;
 using BonsaiShop.Filter;
+using BonsaiShop.DTO;
 
 namespace BonsaiShop.Controllers
 {
@@ -24,10 +25,12 @@ namespace BonsaiShop.Controllers
             {
                 var list = productDAO.GetProducts(page, false);
                 int total = productDAO.GetTotalProducts();
-                var result = new { 
+                var result = new
+                {
                     totalItem = total,
                     pageSize = Config.Const.PAGE_SIZE,
-                    list };
+                    list = list
+                };
                 return Ok(result);
             }
             catch
@@ -36,6 +39,28 @@ namespace BonsaiShop.Controllers
             }
         }
 
+
+        [HttpGet("filter")]
+        public IActionResult FilterProducts(int? page, [FromBody] FilterDTO condition)
+        {
+            try
+            {
+                var list = productDAO.ProductFilter(page, condition);
+                int total = productDAO.totalResultFilter(condition);
+                var result = new
+                {
+                    totalItem = total,
+                    pageSize = Config.Const.PAGE_SIZE,
+                    list = list
+                };
+
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         // GET: api/Products/Admin?page=[page]
         [HttpGet("Admin")]

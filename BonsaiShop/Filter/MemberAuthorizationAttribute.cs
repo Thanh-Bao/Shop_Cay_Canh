@@ -30,7 +30,7 @@ namespace BonsaiShop.Filter
             }
             catch
             {
-                context.Result = new UnauthorizedObjectResult(new MessageResponse
+                context.Result = new UnauthorizedObjectResult(new MessageResponseDTO
                 {
                     statusCode = 401,
                     message = "Lỗi xác định quyền truy cập, bạn không thể xem nội dung này"

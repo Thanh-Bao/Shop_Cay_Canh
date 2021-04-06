@@ -24,6 +24,8 @@ namespace BonsaiShop.DAO
             return total;
         }
 
+
+
         public List<ProductDTO> GetProducts(int? page, bool? forAdmin)
         {
             int _page = 1;
@@ -101,6 +103,68 @@ namespace BonsaiShop.DAO
                 return false;
             }
         }
+
+
+        public int totalResultFilter(FilterDTO condition)
+        {
+            int total = dbcontext.Products.Where(
+                s =>
+                  (s.height > condition.heightRange.min)
+                  && (s.height < condition.heightRange.max)
+                  && (s.price > condition.priceRange.min)
+                  && (s.price < condition.priceRange.max)
+                  && (s.origin.Equals(condition.origin))
+                ).Select(s => s).Count();
+            return total;
+        }
+
+        public List<ProductDTO> ProductFilter(int? page, FilterDTO condition)
+        {
+            int _page = 1;
+            if (page != null)
+            {
+                _page = (Int32)page;
+            }
+            //Bỏ N phần tử đầu tiên
+            int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+            List<ProductDTO> list = null;
+            list = dbcontext.Products
+              .Where(s =>
+                  (s.height > condition.heightRange.min)
+                  && (s.height < condition.heightRange.max)
+                  && (s.price > condition.priceRange.min)
+                  && (s.price < condition.priceRange.max)
+                  && (s.origin.Equals(condition.origin))
+              )
+              .Skip(Nskip)
+              .Take(Config.Const.PAGE_SIZE)
+              .Select(s =>
+             new ProductDTO
+             {
+                 productID = s.productId,
+                 name = s.name,
+                 price = s.price,
+                 quantity = null,
+                 description = s.description,
+                 height = s.height,
+                 origin = s.origin
+             }
+          ).ToList();
+            if (condition.sort == 1)
+            {
+                list.OrderByDescending(s => s.price);
+            }
+            else if (condition.sort == 2)
+            {
+                list.OrderByDescending(s => s.height);
+            }
+            else
+            {
+                list.OrderByDescending(s => s.productID);
+            }
+            return list;
+        }
+
 
         public bool UpdateProduct(int id, Product product)
         {

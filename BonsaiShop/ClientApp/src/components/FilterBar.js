@@ -63,7 +63,7 @@ class FilterBar extends Component {
                         <div className="col-2">
                             <div className="form-group">
                                 <select className="form-control" value={this.props.SortMode} onChange={event => this.handleChange("UPDATE_SORT_MODE", event.target.value)} >
-                                    <option value={0}  >Sắp xếp theo</option>
+                                    <option value={0}>Sắp xếp theo</option>
                                     <option value={1}>Giá</option>
                                     <option value={2}>Chiều cao</option>
                                     <option value={3}>Mới cập nhật</option>
