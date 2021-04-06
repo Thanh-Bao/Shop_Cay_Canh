@@ -43,9 +43,9 @@ namespace BonsaiShop.DAO
             if (_forAdmin)
             {
                 list = dbcontext.Products
+                .OrderByDescending(s => s.productId)
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
-                .OrderByDescending(s => s.productId)
                 .Select(s =>
                new ProductDTO
                {
@@ -62,9 +62,9 @@ namespace BonsaiShop.DAO
             else
             {
                 list = dbcontext.Products
+                .OrderByDescending(s => s.productId)
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
-                .OrderByDescending(s => s.productId)
                 .Select(s =>
                new ProductDTO
                {

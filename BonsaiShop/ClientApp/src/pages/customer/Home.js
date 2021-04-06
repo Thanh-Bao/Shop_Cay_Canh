@@ -18,7 +18,8 @@ class Home extends Component {
         console.log(`active page is ${pageNumber}`);
         this.setState({ activePage: pageNumber });
         this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: null });
-        callAPi('products',null,{page:this.state.activePage}).then(res => {
+        callAPi('products',null,{page:pageNumber}).then(res => {
+            console.log(res.data.list);
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
         })
     }
