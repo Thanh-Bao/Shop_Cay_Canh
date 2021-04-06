@@ -51,7 +51,7 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select className="form-control" value={this.props.filterOrigin} onChange={event => { this.props.dispatch({ type: "UPDATE_FILTER_ORIGIN", data: event.target.value }) }}>
+                                <select className="form-control" value={this.props.filterOrigin} onChange={event => this.handleChange("UPDATE_FILTER_ORIGIN", event.target.value)} >
                                     <option value={0}>Chọn xuất xứ</option>
                                     <option value={"Việt Nam"}>Việt Nam</option>
                                     <option value={"Thái Lan"}>Thái Lan</option>
@@ -62,7 +62,7 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select className="form-control" value={this.props.SortMode} onChange={event => { this.props.dispatch({ type: "UPDATE_SORT_MODE", data: event.target.value }) }}>
+                                <select className="form-control" value={this.props.SortMode} onChange={event => this.handleChange("UPDATE_SORT_MODE", event.target.value)} >
                                     <option value={0}  >Sắp xếp theo</option>
                                     <option value={1}>Giá</option>
                                     <option value={2}>Chiều cao</option>

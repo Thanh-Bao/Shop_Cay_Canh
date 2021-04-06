@@ -11,25 +11,24 @@ class Home extends Component {
         super(props);
         this.state = {
             activePage: 1,
-            listProduct: null,
-            itemsCountPerPage: 1,
-            totalItemsCount: 1
         };
     }
 
     handlePageChange(pageNumber) {
         console.log(`active page is ${pageNumber}`);
         this.setState({ activePage: pageNumber });
+        this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: null });
+        callAPi('products',null,{page:this.state.activePage}).then(res => {
+            this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+        })
     }
 
 
     componentDidMount() {
         callAPi('products').then(res => {
-            this.setState({
-                listProduct: res.data.list,
-                totalItemsCount: res.data.totalItem,
-                itemsCountPerPage: res.data.pageSize
-            })
+            this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+            this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
+            this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
         })
     }
 
@@ -46,7 +45,7 @@ class Home extends Component {
                             <div className="d-flex h-100 text-center align-items-center">
                                 <div className="w-100 text-white">
                                     <h1 id="brand-name-overlay" className="display-3 sloganOverlay">Bảo Bảo Shop</h1>
-                                    <p className="lead mb-0 sloganOverlay">Hệ thống mua sắm và thanh toán 1 chạm hàng đầu thế giới</p>
+                                    <p className="lead mb-0 sloganOverlay">Hệ thống chuỗi của hàng mua sắm và thanh toán 1 chạm hàng đầu thế giới</p>
                                 </div>
                             </div>
                         </div>
@@ -54,11 +53,22 @@ class Home extends Component {
             }
         }
 
-        let test = () => {
+        let listCartProducts = () => {
             var elements = [];
-            if (this.state.listProduct != null) {
-                this.state.listProduct.map(product => {
-                    return elements.push(<h1 key={product.productID}>{product.name}</h1>)
+            if (this.props.listProductCustomer != null) {
+                this.props.listProductCustomer.map(product => {
+                    elements.push(
+                        <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                                name={product.name}
+                                price={product.price}
+                                height={product.height}
+                                description={product.description}
+                            />
+                        </div>
+                    )
                 })
             } else {
                 elements.push(<Loading />)
@@ -72,44 +82,11 @@ class Home extends Component {
                 {/*  LIST */}
                 <div className="container mt-4">
                     <div className="row">
-
-
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                            />
-                        </div>
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                            />
-                        </div>
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                            />
-                        </div>
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                            />
-                        </div>
-                        <div className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
-                            />
-                        </div>
-
-
+                        {listCartProducts()}
                     </div>
                 </div>
                 {/* / LIST */}
-                <div className="container">
+                <div className="container mt-4">
                     <div className="row justify-content-center mb-4">
                         <Pagination
                             activePage={this.state.activePage}
@@ -117,28 +94,26 @@ class Home extends Component {
                             lastPageText="trang cuối"
                             itemClass="page-item"
                             linkClass="page-link"
-                            itemsCountPerPage={this.state.itemsCountPerPage}
-                            totalItemsCount={this.state.totalItemsCount}
+                            itemsCountPerPage={this.props.itemsCountPerPage}
+                            totalItemsCount={this.props.totalItemsCount}
                             pageRangeDisplayed={parseInt(process.env.REACT_APP_PAGE_RANGE_DISPLAYED)}
                             onChange={this.handlePageChange.bind(this)}
                         />
                     </div>
                 </div>
-
-
-                {
-                    test()
-                }
-
             </div>
         );
     }
 }
+// édgbigsgbsdgbsdbisdgbsdibi
 const mapStateToProps = state => ({
     filterPrice: state.filterPrice,
     filterHeight: state.filterHeight,
     filterOrigin: state.filterOrigin,
     rangeBarChange: state.rangeBarChange,
     SortMode: state.SortMode,
+    listProductCustomer: state.listProductCustomer,
+    itemsCountPerPage: state.itemsCountPerPage,
+    totalItemsCount: state.totalItemsCount
 })
 export default connect(mapStateToProps)(Home);

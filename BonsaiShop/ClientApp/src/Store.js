@@ -6,10 +6,9 @@ const initialState = {
     rangeBarChange: true,
     filterOrigin: 0,
     SortMode: 0,
-    redirectToHome : false,
+    redirectToHome: false,
     // List customer product handling
-    activePage: 1,
-    listProduct: null,
+    listProductCustomer: null,
     itemsCountPerPage: 1,
     totalItemsCount: 1
 }
@@ -24,12 +23,12 @@ function AllReducer(state = initialState, action) {
         case "REDIRECT_TO_HOME":
             return {
                 ...state,
-                redirectToHome : true
+                redirectToHome: true
             }
         case "DISABLE_REDIRECT_TO_HOME":
             return {
                 ...state,
-                redirectToHome : false
+                redirectToHome: false
             }
         case "UPDATE_FILTER_PRICE":
             return {
@@ -56,6 +55,21 @@ function AllReducer(state = initialState, action) {
                 rangeBarChange: false
             }
         // List customer product handling
+        case "FETCH_CUSTOMER_LIST_PRODUCT":
+            return {
+                ...state,
+                listProductCustomer: action.data,
+            }
+        case "UPDATE_ITEMS_COUNT_PER_PAGE":
+            return {
+                ...state,
+                itemsCountPerPage : action.data,
+            }
+        case "UPDATE_TOTAL_ITEMS_COUNT":
+            return {
+                ...state,
+                totalItemsCount : action.data,
+            }
         default:
             break;
     }
