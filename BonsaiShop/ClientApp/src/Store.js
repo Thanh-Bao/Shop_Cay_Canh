@@ -4,7 +4,7 @@ const initialState = {
     filterPrice: { min: 300, max: 600 },
     filterHeight: { min: 40, max: 80 },
     rangeBarChange: true,
-    filterOrigin: 0,
+    filterOrigin: " ",
     SortMode: 0,
     redirectToHome: false,
     // List customer product handling

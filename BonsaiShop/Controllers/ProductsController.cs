@@ -40,11 +40,16 @@ namespace BonsaiShop.Controllers
         }
 
 
-        [HttpGet("filter")]
+        [HttpPost("filter")]
         public IActionResult FilterProducts(int? page, [FromBody] FilterDTO condition)
         {
+
             try
             {
+                // Đổi đơn vị
+                condition.priceRange.min = condition.priceRange.min * 1000;
+                condition.priceRange.max = condition.priceRange.max * 1000;
+
                 var list = productDAO.ProductFilter(page, condition);
                 int total = productDAO.totalResultFilter(condition);
                 var result = new
