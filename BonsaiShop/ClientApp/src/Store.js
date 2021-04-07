@@ -11,7 +11,7 @@ const initialState = {
     listProductCustomer: null,
     itemsCountPerPage: 1,
     totalItemsCount: 1,
-    activePage : 1
+    activePage: 1
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
@@ -64,17 +64,17 @@ function AllReducer(state = initialState, action) {
         case "UPDATE_ITEMS_COUNT_PER_PAGE":
             return {
                 ...state,
-                itemsCountPerPage : action.data,
+                itemsCountPerPage: action.data,
             }
         case "UPDATE_TOTAL_ITEMS_COUNT":
             return {
                 ...state,
-                totalItemsCount : action.data,
+                totalItemsCount: action.data,
             }
         case "UPDATE_ACTIVE_PAGE":
             return {
                 ...state,
-                activePage : action.data
+                activePage: action.data
             }
         default:
             break;

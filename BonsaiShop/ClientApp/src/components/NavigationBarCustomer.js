@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import callAPi from '../callAPI/callAPIMainServer';
 
 class NavigationBarCustomer extends Component {
 
     disableRedirectToHome(){
         this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"});
         this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
+       
     }
 
     redirectToHome(){
         this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
         this.props.dispatch({type:"SHOW_VIDEO_INTRO"});
+        callAPi('products').then(res => {
+            this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+            this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
+            this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
+        })
     }
 
 

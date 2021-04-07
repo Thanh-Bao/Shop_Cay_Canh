@@ -6,9 +6,11 @@ class CartProduct extends Component {
         var numeral = require('numeral');
         return (
             <div className="card h-100">
-                <a className="card-images-change wraper-fixed-img" href="/ghdsdf">
+                <a className="card-images-change wraper-fixed-img container-img-overlay" href="/ghdsdf">
                     <img className="card-img-top img-item-fixed" src={this.props.thumbnail} alt="Front" />
                     <img className="card-img-top img-top-change img-item-fixed" src={this.props.fullImage} alt="Back" />
+                    <span className="bottom-left-img-overlay mr-2 badge badge-pill badge-primary d-inline">Cao: {this.props.height} cm</span>
+                    <span className="bottom-right-img-overlay mr-2 badge badge-pill badge-info d-inline">Xuất xứ: {this.props.origin}</span>
                 </a>
                 <div className="card-body">
                     <div className="text-center">
@@ -19,7 +21,7 @@ class CartProduct extends Component {
                         </h3>
                     </div>
                     <hr />
-                    <span className="mr-2 badge badge-pill badge-info d-inline">Cao: {this.props.height} cm</span>
+                    
                      <TextTruncate
                         line={3}
                         element="p"

@@ -6,6 +6,7 @@ import '../../css/CustomerHome.css';
 import Loading from '../../components/Loading';
 import CartProduct from '../../components/CartProduct';
 
+
 class Home extends Component {
 
     handlePageChange(pageNumber) {
@@ -13,6 +14,8 @@ class Home extends Component {
         this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: null });
         callAPi('products', null, { page: pageNumber }).then(res => {
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+            this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
+            this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
         })
     }
 
@@ -58,6 +61,7 @@ class Home extends Component {
                             price={product.price}
                             height={product.height}
                             description={product.description}
+                            origin={product.origin}
                         />
                     </div>
                 )

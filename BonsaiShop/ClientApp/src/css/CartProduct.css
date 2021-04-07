@@ -24,7 +24,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 11;
 }
 .card-images-change:hover .img-top-change {
   display: inline;
@@ -37,4 +37,24 @@
 
 .text-card-description{
   font-weight: 300;
+}
+
+.container-img-overlay{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.bottom-left-img-overlay {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  z-index: 11;
+}
+
+.bottom-right-img-overlay {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  z-index: 11;
 }

@@ -115,7 +115,7 @@ namespace BonsaiShop.DAO
                   && (s.height < condition.heightRange.max)
                  && (s.price > condition.priceRange.min)
                   && (s.price < condition.priceRange.max)
-                 // && (s.origin.Equals(condition.origin))
+                  && (s.origin.Contains(condition.origin))
               ).Select(s => s).Count();
             return total;
         }
@@ -138,7 +138,7 @@ namespace BonsaiShop.DAO
                   && (s.height < condition.heightRange.max)
                   && (s.price > condition.priceRange.min)
                   && (s.price < condition.priceRange.max)
-                  //&& (s.origin.Equals(condition.origin))
+                  && (s.origin.Contains(condition.origin))
               )
               .Skip(Nskip)
               .Take(Config.Const.PAGE_SIZE)
