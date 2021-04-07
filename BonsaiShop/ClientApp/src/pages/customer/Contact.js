@@ -11,7 +11,7 @@ class Contact extends Component {
     render() {
         return (
             <div>
-            <select id="lang" value="123" onChange={event => this.change(event.target.value)} >
+            <select  onChange={event => this.change(event.target.value)} >
                <option value="select">Select</option>
                <option value="Java">Java</option>
                <option value="C++">C++</option>
