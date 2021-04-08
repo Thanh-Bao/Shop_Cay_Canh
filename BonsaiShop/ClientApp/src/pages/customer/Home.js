@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
 import callAPi from '../../callAPI/callAPIMainServer';
 import '../../css/CustomerHome.css';
-import Loading from '../../components/Loading';
+import ImageHolder from '../../components/Loading';
 import CartProduct from '../../components/CartProduct';
 
 
@@ -51,35 +51,34 @@ class Home extends Component {
 
         let listCartProducts;
         if (this.props.listProductCustomer != null) {
-            listCartProducts = this.props.listProductCustomer.map(product => {
-                return (
-                    <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
-                        <CartProduct
-                            thumbnail="https://picsum.photos/id/132/3200/900"
-                            fullImage="https://via.placeholder.com/700x400"
-                            name={product.name}
-                            price={product.price}
-                            height={product.height}
-                            description={product.description}
-                            origin={product.origin}
-                        />
-                    </div>
-                )
-            })
+            if (this.props.listProductCustomer.length == 0) {
+                listCartProducts = <ImageHolder url="/no_result.gif" />
+            } else {
+                listCartProducts = this.props.listProductCustomer.map(product => {
+                    return (
+                        <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
+                            <CartProduct
+                                thumbnail="https://picsum.photos/id/132/3200/900"
+                                fullImage="https://via.placeholder.com/700x400"
+                                name={product.name}
+                                price={product.price}
+                                height={product.height}
+                                description={product.description}
+                                origin={product.origin}
+                            />
+                        </div>
+                    )
+                })
+            }   
         } else {
-            listCartProducts = <Loading />
-        }
+            listCartProducts = <ImageHolder url="/loading.gif" />
+        };
 
-        return (
-            <div>
-                {videoIntro()}
-                {/*  LIST */}
-                <div className="container mt-4">
-                    <div className="row">
-                        {listCartProducts}
-                    </div>
-                </div>
-                {/* / LIST */}
+
+        let showPagination;
+
+        if (this.props.listProductCustomer!=null && this.props.listProductCustomer.length > 0) {
+            showPagination = (
                 <div className="container mt-4">
                     <div className="row justify-content-center mb-4">
                         <Pagination
@@ -95,6 +94,22 @@ class Home extends Component {
                         />
                     </div>
                 </div>
+            );
+        }
+
+        return (
+            <div>
+                {videoIntro()}
+                {/*  LIST */}
+                <div className="container mt-4">
+                    <div className="row">
+                        {listCartProducts}
+                    </div>
+                </div>
+                {/* / LIST */}
+
+                {showPagination}
+
             </div>
         );
     }
@@ -109,6 +124,6 @@ const mapStateToProps = state => ({
     listProductCustomer: state.listProductCustomer,
     itemsCountPerPage: state.itemsCountPerPage,
     totalItemsCount: state.totalItemsCount,
-    activePage : state.activePage
+    activePage: state.activePage
 })
 export default connect(mapStateToProps)(Home);
