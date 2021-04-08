@@ -9,6 +9,11 @@ class FilterBar extends Component {
 
     handleChange(type, data) {
         this.props.dispatch({ type: type, data: data });
+        this.reloadList();
+    }
+
+
+    reloadList() {
         this.props.dispatch({ type: "REDIRECT_TO_HOME" });
         var condition = {
             origin: this.props.filterOrigin,
@@ -25,8 +30,8 @@ class FilterBar extends Component {
             console.log(res.data);
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
         })
-        
     }
+
     render() {
         let redirectToHome = () => {
             if (this.props.redirectToHome) {
@@ -68,7 +73,7 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select className="form-control"  onChange={event => this.handleChange("UPDATE_FILTER_ORIGIN", event.target.value)} >
+                                <select className="form-control" onChange={event => this.props.dispatch({ type: "UPDATE_FILTER_ORIGIN", data: event.target.value })} >
                                     <option value={0}>Chọn xuất xứ</option>
                                     <option value={"Việt Nam"}>Việt Nam</option>
                                     <option value={"Thái Lan"}>Thái Lan</option>
@@ -79,7 +84,7 @@ class FilterBar extends Component {
                         </div>
                         <div className="col-2">
                             <div className="form-group">
-                                <select className="form-control" onChange={event => this.handleChange("UPDATE_SORT_MODE", event.target.value)} >
+                                <select className="form-control" onChange={event => this.handleChange("UPDATE_SORT_MODE", event.target.value),this.reloadList()} >
                                     <option value={0}>Sắp xếp theo</option>
                                     <option value={1}>Giá</option>
                                     <option value={2}>Chiều cao</option>
@@ -100,6 +105,6 @@ const mapStateToProps = state => ({
     filterPrice: state.filterPrice,
     filterHeight: state.filterHeight,
     redirectToHome: state.redirectToHome,
-    activePage : state.activePage
+    activePage: state.activePage
 })
 export default connect(mapStateToProps)(FilterBar);
