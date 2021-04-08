@@ -29,9 +29,9 @@ class Home extends Component {
     }
 
     render() {
-        let videoIntro = () => {
+        let videoIntro; 
             if (this.props.rangeBarChange) {
-                return (
+                videoIntro = (
                     <header>
                         <div className="overlay" />
                         <video playsInline="playsinline" autoPlay="autoplay" muted="muted" loop="loop">
@@ -46,8 +46,10 @@ class Home extends Component {
                             </div>
                         </div>
                     </header>)
+            } else if(this.props.totalItemsCount>0){
+                videoIntro = <h4 className="ml-4 mt-4">Tìm thấy <strong>{this.props.totalItemsCount}</strong> sản phẩm phù hợp</h4>
             }
-        }
+        
 
         let listCartProducts;
         if (this.props.listProductCustomer != null) {
@@ -99,7 +101,7 @@ class Home extends Component {
 
         return (
             <div>
-                {videoIntro()}
+                {videoIntro}
                 {/*  LIST */}
                 <div className="container mt-4">
                     <div className="row">

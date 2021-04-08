@@ -24,6 +24,8 @@ class FilterBar extends Component {
             console.log("RESPONSE")
             console.log(res.data);
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+            this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
+            this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
         })
         
     }
