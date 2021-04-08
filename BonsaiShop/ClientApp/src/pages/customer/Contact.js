@@ -16,7 +16,7 @@ class Contact extends Component {
                <option value="Java">Java</option>
                <option value="C++">C++</option>
             </select>
-            <p></p>
+            <p></p>            
         </div>
         );
     }

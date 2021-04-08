@@ -11,10 +11,16 @@ const initialState = {
     listProductCustomer: null,
     itemsCountPerPage: 1,
     totalItemsCount: 1,
-    activePage: 1
+    activePage: 1,
+    /// Search
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
+        case "HIDDEN_VIDEO_INTRO":
+            return {
+                ...state,
+                rangeBarChange: false
+            }
         case "SHOW_VIDEO_INTRO":
             return {
                 ...state,

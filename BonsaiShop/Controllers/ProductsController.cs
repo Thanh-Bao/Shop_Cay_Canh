@@ -40,6 +40,26 @@ namespace BonsaiShop.Controllers
         }
 
 
+        [HttpGet("search")]
+        public IActionResult Search(int?page, string keyword)
+        {
+            try
+            {
+                var list = productDAO.SearchProduct(page, keyword);
+                var result = new
+                {
+                    totalItem = productDAO.TotalItemSearchResult(keyword),
+                    pageSize = 999999,
+                    list = list
+                };
+                return Ok(result);
+            } catch
+            {
+                return BadRequest();
+            }
+        }
+
+
         [HttpPost("filter")]
         public IActionResult FilterProducts(int? page, [FromBody] FilterDTO condition)
         {

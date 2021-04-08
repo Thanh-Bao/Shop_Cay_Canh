@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import callAPi from '../callAPI/callAPIMainServer';
+import SuggestSearch from '../components/SuggestSearch';
 
 class NavigationBarCustomer extends Component {
+    
 
     disableRedirectToHome(){
         this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"});
@@ -21,6 +23,8 @@ class NavigationBarCustomer extends Component {
         })
     }
 
+   
+    
 
     render() {
         return (
@@ -38,13 +42,7 @@ class NavigationBarCustomer extends Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContentTopMenu">
 
 
-                        <form className="form-inline ml-auto my-2 my-lg-0">
-                            <div className="input-group">
-                                <span id="nav-icon-search" className="input-group-text" id="basic-addonNavCustomer"><i className="fas fa-search"></i></span>
-                                <input id="nav-input-search" type="text" className="form-control" placeholder="Bạn tìm gì?" aria-label="Username" aria-describedby="basic-addonNavCustomer" />
-                            </div>
-                            <button id="nav-btn-search" className="btn btn-outline-success my-2 my-sm-0 " type="submit">Tìm</button>
-                        </form>
+                        <SuggestSearch />
 
 
                         <ul className="nav nav-pills ml-auto">
@@ -79,7 +77,9 @@ class NavigationBarCustomer extends Component {
 }
 
 const mapStateToProps = state => ({
+    listProductCustomer: state.listProductCustomer,
     rangeBarChange: state.rangeBarChange,
-    redirectToHome: state.redirectToHome
+    redirectToHome: state.redirectToHome,
+    CustomerKeyWord : state.CustomerKeyWord
 })
 export default connect(mapStateToProps)(NavigationBarCustomer);

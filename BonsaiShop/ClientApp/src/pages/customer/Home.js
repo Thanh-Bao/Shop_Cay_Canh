@@ -47,13 +47,13 @@ class Home extends Component {
                         </div>
                     </header>)
             } else if(this.props.totalItemsCount>0){
-                videoIntro = <h4 className="ml-4 mt-4">Tìm thấy <strong>{this.props.totalItemsCount}</strong> sản phẩm phù hợp</h4>
+                videoIntro = <h4 className="ml-4 mt-4">Tìm thấy <strong>{this.props.totalItemsCount}</strong> sản phẩm phù hợp 
+                </h4>
             }
-        
 
         let listCartProducts;
         if (this.props.listProductCustomer != null) {
-            if (this.props.listProductCustomer.length == 0) {
+            if (this.props.listProductCustomer.length === 0) {
                 listCartProducts = <ImageHolder url="/no_result.gif" />
             } else {
                 listCartProducts = this.props.listProductCustomer.map(product => {
@@ -72,8 +72,11 @@ class Home extends Component {
                     )
                 })
             }   
-        } else {
+        } else if(this.props.listProductCustomer==null){
             listCartProducts = <ImageHolder url="/loading.gif" />
+        } else {
+            listCartProducts = <ImageHolder url="/no_result.gif" />
+
         };
 
 
@@ -126,6 +129,7 @@ const mapStateToProps = state => ({
     listProductCustomer: state.listProductCustomer,
     itemsCountPerPage: state.itemsCountPerPage,
     totalItemsCount: state.totalItemsCount,
-    activePage: state.activePage
+    activePage: state.activePage,
+    
 })
 export default connect(mapStateToProps)(Home);

@@ -111,10 +111,10 @@ namespace BonsaiShop.DAO
 
             int total = dbcontext.Products
                 .Where(s =>
-                  (s.height > condition.heightRange.min)
-                  && (s.height < condition.heightRange.max)
-                 && (s.price > condition.priceRange.min)
-                  && (s.price < condition.priceRange.max)
+                  (s.height >= condition.heightRange.min)
+                  && (s.height <= condition.heightRange.max)
+                 && (s.price >= condition.priceRange.min)
+                  && (s.price <= condition.priceRange.max)
                   && (s.origin.Contains(condition.origin))
               ).Select(s => s).Count();
             return total;
@@ -134,10 +134,10 @@ namespace BonsaiShop.DAO
             List<ProductDTO> list = null;
             list = dbcontext.Products
               .Where(s =>
-                  (s.height > condition.heightRange.min)
-                  && (s.height < condition.heightRange.max)
-                  && (s.price > condition.priceRange.min)
-                  && (s.price < condition.priceRange.max)
+                  (s.height >= condition.heightRange.min)
+                  && (s.height <= condition.heightRange.max)
+                  && (s.price >= condition.priceRange.min)
+                  && (s.price <= condition.priceRange.max)
                   && (s.origin.Contains(condition.origin))
               )
               .Skip(Nskip)
@@ -192,6 +192,42 @@ namespace BonsaiShop.DAO
             {
                 return false;
             }
+        }
+
+        public int TotalItemSearchResult(string keyword)
+        {
+            var total = dbcontext.Products
+                .Where(s => s.name.Contains(keyword)).Select(s => s).Count();
+            return total;
+        }
+
+        public List<ProductDTO> SearchProduct(int? page, string keyword)
+        {
+
+            int _page = 1;
+            if (page != null)
+            {
+                _page = (Int32)page;
+            }
+            //Bỏ N phần tử đầu tiên
+            int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+            var list = dbcontext.Products
+                .Where(s => s.name.Contains(keyword))
+                .Skip(Nskip)
+                .Take(Config.Const.PAGE_SIZE)
+                .OrderByDescending(s => s.productId)
+                .Select(s => new ProductDTO
+                {
+                    productID = s.productId,
+                    name = s.name,
+                    price = s.price,
+                    quantity = null,
+                    description = s.description,
+                    height = s.height,
+                    origin = s.origin
+                })
+                .ToList();
+            return list;
         }
 
         public bool Delete(int id)

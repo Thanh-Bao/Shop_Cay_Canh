@@ -5,6 +5,35 @@ class ProductDetail extends Component {
         return (
             <div>
                 Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
+                Customer : Product Detail
             </div>
         );
     }
