@@ -4,7 +4,7 @@ import Pagination from "react-js-pagination";
 import callAPi from '../../callAPI/callAPIMainServer';
 import '../../css/CustomerHome.css';
 import ImageHolder from '../../components/Loading';
-import CartProduct from '../../components/CartProduct';
+import CardProduct from '../../components/CardProduct';
 
 
 class Home extends Component {
@@ -51,15 +51,16 @@ class Home extends Component {
                 </h4>
             }
 
-        let listCartProducts;
+        let listCardProducts;
         if (this.props.listProductCustomer != null) {
             if (this.props.listProductCustomer.length === 0) {
-                listCartProducts = <ImageHolder url="/no_result.gif" />
+                listCardProducts = <ImageHolder url="/no_result.gif" />
             } else {
-                listCartProducts = this.props.listProductCustomer.map(product => {
+                listCardProducts = this.props.listProductCustomer.map(product => {
                     return (
                         <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
-                            <CartProduct
+                            <CardProduct
+                                productID= {product.productID}
                                 thumbnail="https://picsum.photos/id/132/3200/900"
                                 fullImage="https://via.placeholder.com/700x400"
                                 name={product.name}
@@ -73,9 +74,9 @@ class Home extends Component {
                 })
             }   
         } else if(this.props.listProductCustomer==null){
-            listCartProducts = <ImageHolder url="/loading.gif" />
+            listCardProducts = <ImageHolder url="/loading.gif" />
         } else {
-            listCartProducts = <ImageHolder url="/no_result.gif" />
+            listCardProducts = <ImageHolder url="/no_result.gif" />
 
         };
 
@@ -108,7 +109,7 @@ class Home extends Component {
                 {/*  LIST */}
                 <div className="container mt-4">
                     <div className="row">
-                        {listCartProducts}
+                        {listCardProducts}
                     </div>
                 </div>
                 {/* / LIST */}

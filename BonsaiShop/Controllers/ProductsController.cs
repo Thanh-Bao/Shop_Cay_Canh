@@ -39,6 +39,23 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetPrductDetailCustomer(int id)
+        {
+            try
+            {
+                var pro = productDAO.GetProduct(id);
+                pro.quantity = null;
+                return Ok(pro);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+      
+
+
 
         [HttpGet("search")]
         public IActionResult Search(int?page, string keyword)

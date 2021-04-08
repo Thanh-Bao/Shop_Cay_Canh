@@ -18,7 +18,7 @@ namespace BonsaiShop.Model
         public int price { set; get; }
 
         [Required]
-        public int quantity { set; get; }
+        public int? quantity { set; get; }
 
         public string description { set; get; }
 
