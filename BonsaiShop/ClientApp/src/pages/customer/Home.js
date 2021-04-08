@@ -10,6 +10,7 @@ import CartProduct from '../../components/CartProduct';
 class Home extends Component {
 
     handlePageChange(pageNumber) {
+        console.log(pageNumber);
         this.props.dispatch({ type: "UPDATE_ACTIVE_PAGE", data: pageNumber });
         this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: null });
         callAPi('products', null, { page: pageNumber }).then(res => {

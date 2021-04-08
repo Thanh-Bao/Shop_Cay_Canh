@@ -25,10 +25,12 @@ class FilterBar extends Component {
         console.log("REQUEST")
         console.log(condition.origin);
 
-        callAPi('products/filter', 'POST', { page: this.props.activePage }, condition).then(res => {
+        callAPi('products/filter', 'POST', { page: 1 }, condition).then(res => {
             console.log("RESPONSE")
             console.log(res.data);
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
+            this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
+            this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
         })
     }
 
@@ -71,7 +73,7 @@ class FilterBar extends Component {
                                 value={this.props.filterHeight}
                                 onChange={filterHeight => this.handleChange("UPDATE_FILTER_HEIGHT", filterHeight)} />
                         </div>
-                        <div className="col-2">
+                        {/* <div className="col-2">
                             <div className="form-group">
                                 <select className="form-control" onChange={event => this.props.dispatch({ type: "UPDATE_FILTER_ORIGIN", data: event.target.value })} >
                                     <option value={0}>Chọn xuất xứ</option>
@@ -81,8 +83,8 @@ class FilterBar extends Component {
                                     <option value={"Hoa Kỳ"}>Hoa Kỳ</option>
                                 </select>
                             </div>
-                        </div>
-                        <div className="col-2">
+                        </div> */}
+                        {/* <div className="col-2">
                             <div className="form-group">
                                 <select className="form-control" onChange={event => this.handleChange("UPDATE_SORT_MODE", event.target.value),this.reloadList()} >
                                     <option value={0}>Sắp xếp theo</option>
@@ -92,7 +94,7 @@ class FilterBar extends Component {
                                 </select>
 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div >
