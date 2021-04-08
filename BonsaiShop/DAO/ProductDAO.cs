@@ -107,23 +107,19 @@ namespace BonsaiShop.DAO
 
         public int totalResultFilter(FilterDTO condition)
         {
-          
-
-            int total = dbcontext.Products
-                .Where(s =>
+            int total = dbcontext.Products.Where(
+                s =>
                   (s.height > condition.heightRange.min)
                   && (s.height < condition.heightRange.max)
-                 && (s.price > condition.priceRange.min)
+                  && (s.price > condition.priceRange.min)
                   && (s.price < condition.priceRange.max)
-                  && (s.origin.Contains(condition.origin))
-              ).Select(s => s).Count();
+                  && (s.origin.Equals(condition.origin))
+                ).Select(s => s).Count();
             return total;
         }
 
         public List<ProductDTO> ProductFilter(int? page, FilterDTO condition)
         {
-           
-
             int _page = 1;
             if (page != null)
             {
@@ -138,7 +134,7 @@ namespace BonsaiShop.DAO
                   && (s.height < condition.heightRange.max)
                   && (s.price > condition.priceRange.min)
                   && (s.price < condition.priceRange.max)
-                  && (s.origin.Contains(condition.origin))
+                  && (s.origin.Equals(condition.origin))
               )
               .Skip(Nskip)
               .Take(Config.Const.PAGE_SIZE)

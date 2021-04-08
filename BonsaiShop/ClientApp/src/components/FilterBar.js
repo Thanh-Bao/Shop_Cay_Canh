@@ -16,18 +16,13 @@ class FilterBar extends Component {
     reloadList() {
         this.props.dispatch({ type: "REDIRECT_TO_HOME" });
         var condition = {
-            origin: this.props.filterOrigin,
-            sort: this.props.SortMode,
-            priceRange: this.props.filterPrice,
-            heightRange: this.props.filterHeight,
+            filterOrigin: this.props.filterOrigin,
+            SortMode: this.props.SortMode,
+            filterPrice: this.props.filterPrice,
+            filterHeight: this.props.filterHeight
         }
-
-        console.log("REQUEST")
-        console.log(condition.origin);
-
-        callAPi('products/filter', 'POST', { page: 1 }, condition).then(res => {
-            console.log("RESPONSE")
-            console.log(res.data);
+        callAPi('products/filter', null, { page: this.props.activePage }, condition).then(res => {
+            console.log(res.data.list);
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
             this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
             this.props.dispatch({ type: "UPDATE_TOTAL_ITEMS_COUNT", data: res.data.totalItem });
@@ -102,10 +97,10 @@ class FilterBar extends Component {
     }
 }
 const mapStateToProps = state => ({
-    filterOrigin: state.filterOrigin,
-    SortMode: state.SortMode,
     filterPrice: state.filterPrice,
     filterHeight: state.filterHeight,
+    filterOrigin: state.filterOrigin,
+    SortMode: state.SortMode,
     redirectToHome: state.redirectToHome,
     activePage: state.activePage
 })
