@@ -15,6 +15,8 @@ namespace BonsaiShop.Migrations
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     price = table.Column<int>(type: "int", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
+                    thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    detailImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     height = table.Column<int>(type: "int", nullable: false),
                     origin = table.Column<string>(type: "nvarchar(max)", nullable: true)

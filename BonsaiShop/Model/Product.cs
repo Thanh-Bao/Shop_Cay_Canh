@@ -19,6 +19,8 @@ namespace BonsaiShop.Model
 
         [Required]
         public int? quantity { set; get; }
+        public string thumbnail { set; get; }
+        public string detailImage { set; get; }
 
         public string description { set; get; }
 

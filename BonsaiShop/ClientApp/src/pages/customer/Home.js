@@ -61,8 +61,8 @@ class Home extends Component {
                         <div key={product.productID} className="col-lg-4 col-sm-6 mb-4">
                             <CardProduct
                                 productID= {product.productID}
-                                thumbnail="https://picsum.photos/id/132/3200/900"
-                                fullImage="https://via.placeholder.com/700x400"
+                                thumbnail={product.thumbnail}
+                                fullImage={product.detailImage}
                                 name={product.name}
                                 price={product.price}
                                 height={product.height}

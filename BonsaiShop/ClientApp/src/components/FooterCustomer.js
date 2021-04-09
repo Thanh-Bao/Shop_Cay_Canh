@@ -159,7 +159,7 @@ class FooterCustomer extends Component {
                     <hr className="mb-0" />
                     {/*Copyright*/}
                     <div className="py-3 text-center">
-                        Copyright 2000-2022  | Cty Cổ Phần Thương Mại và Dịch Vụ Thanh Bảo Group
+                       <img src="DMCA.png" alt="dmca"/> Copyright 2000-2022  | Cty Cổ Phần Thương Mại và Dịch Vụ Thanh Bảo Group
                     </div>
                     {/*/.Copyright*/}
                 </footer>

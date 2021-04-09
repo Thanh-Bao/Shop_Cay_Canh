@@ -3,6 +3,7 @@ using BonsaiShop.Model;
 using BonsaiShop.DAO;
 using BonsaiShop.Filter;
 using BonsaiShop.DTO;
+using System;
 
 namespace BonsaiShop.Controllers
 {
@@ -39,6 +40,18 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("random")]
+        public IActionResult GetRandomList()
+        {
+
+           
+            var list = productDAO.GetRandomProducts();
+            return Ok(list);
+
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult GetPrductDetailCustomer(int id)
         {
@@ -53,12 +66,12 @@ namespace BonsaiShop.Controllers
                 return BadRequest();
             }
         }
-      
+
 
 
 
         [HttpGet("search")]
-        public IActionResult Search(int?page, string keyword)
+        public IActionResult Search(int? page, string keyword)
         {
             try
             {
@@ -70,7 +83,8 @@ namespace BonsaiShop.Controllers
                     list = list
                 };
                 return Ok(result);
-            } catch
+            }
+            catch
             {
                 return BadRequest();
             }

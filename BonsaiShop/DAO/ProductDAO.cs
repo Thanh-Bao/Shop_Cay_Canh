@@ -55,6 +55,8 @@ namespace BonsaiShop.DAO
                    name = s.name,
                    price = s.price,
                    quantity = s.quantity,
+                   thumbnail = s.thumbnail,
+                   detailImage = s.detailImage,
                    description = s.description,
                    height = s.height,
                    origin = s.origin
@@ -74,6 +76,8 @@ namespace BonsaiShop.DAO
                    name = s.name,
                    price = s.price,
                    quantity = null,
+                   thumbnail = s.thumbnail,
+                   detailImage = s.detailImage,
                    description = s.description,
                    height = s.height,
                    origin = s.origin
@@ -107,7 +111,7 @@ namespace BonsaiShop.DAO
 
         public int totalResultFilter(FilterDTO condition)
         {
-          
+
 
             int total = dbcontext.Products
                 .Where(s =>
@@ -122,7 +126,7 @@ namespace BonsaiShop.DAO
 
         public List<ProductDTO> ProductFilter(int? page, FilterDTO condition)
         {
-           
+
 
             int _page = 1;
             if (page != null)
@@ -182,6 +186,8 @@ namespace BonsaiShop.DAO
                 _product.name = product.name;
                 _product.price = product.price;
                 _product.quantity = product.quantity;
+                _product.thumbnail = product.thumbnail;
+                _product.detailImage = product.detailImage;
                 _product.description = product.description;
                 _product.height = product.height;
                 _product.origin = product.origin;
@@ -222,6 +228,8 @@ namespace BonsaiShop.DAO
                     name = s.name,
                     price = s.price,
                     quantity = null,
+                    thumbnail = s.thumbnail,
+                    detailImage = s.detailImage,
                     description = s.description,
                     height = s.height,
                     origin = s.origin
@@ -249,7 +257,37 @@ namespace BonsaiShop.DAO
             }
         }
 
-       
+        public List<ProductDTO> GetRandomProducts()
+        {
+
+            int total = dbcontext.Products.Select(s => s).Count();
+            int quantity = 3;
+            int startIndex = 0;
+            Random rnd = new Random();
+            if (total >= 4)
+            {
+                startIndex = rnd.Next(1, total - quantity);
+            } else
+            {
+                quantity = total;
+            }
+            var list = dbcontext.Products
+               .Skip(startIndex)
+              .Take(quantity)
+              .Select(s => new ProductDTO
+              {
+                  productID = s.productId,
+                  name = s.name,
+                  price = s.price,
+                  quantity = null,
+                  thumbnail = s.thumbnail,
+                  detailImage = s.detailImage,
+                  description = s.description,
+                  height = s.height,
+                  origin = s.origin
+              }).ToList();
+            return list;
+        }
 
         public bool ProductExist(int id)
         {

@@ -33,7 +33,7 @@ class CardProduct extends Component {
 
                     <div className="d-flex mt-2 justify-content-between">
                         <button type="button" className="btn-cart-product btn btn-outline-primary"><i className="fas fa-eye"></i>Xem chi tiết</button>
-                        <button type="button" className="btn-cart-product btn btn-warning"><i className="fas fa-cart-plus"></i> Thêm vào giỏ hàng</button>
+                        <button type="button" className="btn-cart-product btn btn-primary"><i className="fas fa-cart-plus"></i> Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
