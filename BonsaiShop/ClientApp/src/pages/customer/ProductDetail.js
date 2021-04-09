@@ -43,6 +43,7 @@ class ProductDetail extends Component {
             })
         })
 
+        
 
     }
 
@@ -60,11 +61,11 @@ class ProductDetail extends Component {
         let pro = this.state.product;
 
         let titleSuggest;
-        if(this.state.productSuggest != null){
+        if (this.state.productSuggest != null) {
             titleSuggest = <h3 className="mb-3"><strong>Các sản phẩm thường được mua kèm theo:</strong></h3>
         }
 
-
+        let url = process.env.REACT_APP_DOMAIN + "/productdetail/" + this.getProductID();
         let CONTENT;
         if (this.state.product != null) {
             CONTENT = (
@@ -104,9 +105,9 @@ class ProductDetail extends Component {
                                 <li>Hỗ trợ mua sỉ số lượng lớn.</li>
                             </ul>
 
-                            
-                            <button type="button" class="btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
-                            <Link to="/cart"><button type="button" class=" ml-4 btn btn-success btn-lg"><i className="fas fa-money-check-alt"></i> <strong>Mua hàng</strong></button></Link>
+
+                            <button type="button" className="btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
+                            <Link to="/cart"><button type="button" className=" ml-4 btn btn-success btn-lg"><i className="fas fa-money-check-alt"></i> <strong>Mua hàng</strong></button></Link>
 
                         </div>
                     </div>
@@ -115,8 +116,18 @@ class ProductDetail extends Component {
 
                     <h3 className="my-4">Mô tả chi tiết:</h3>
                     <p className="mb-4">{pro.description}</p>
+
+                    <div className="container mb-2">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="fb-comments" data-href={url}
+                                    data-mobile data-numposts="5"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     {titleSuggest}
-                   
+
 
 
                 </div>
@@ -153,7 +164,7 @@ class ProductDetail extends Component {
             <div>
                 {CONTENT}
 
-               
+
 
                 <div className="container mt-4">
                     <div className="row">
