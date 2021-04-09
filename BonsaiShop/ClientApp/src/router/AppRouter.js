@@ -30,7 +30,7 @@ class AppRouter extends Component {
                     <Route exact path="/admin/:path?">
                         <AdminLayout>
                             <Switch>
-                                <ProtectedRoute exact path="/admin" component={Dashboard} isAuth={false} />
+                                <ProtectedRoute exact path="/admin" component={Dashboard} isAuth={true} />
                                 <ProtectedRoute exact path="/admin/users" component={UsesManagement} isAuth={true} />
                                 <Route path="*" component={PageNotFound} />
                             </Switch>
