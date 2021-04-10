@@ -12,8 +12,12 @@ import Register from '../pages/customer/Register';
 import Cart from '../pages/customer/Cart';
 import Contact from '../pages/customer/Contact';
 // Admin
-import Dashboard from '../pages/admin/Dashboard';
-import UsesManagement from '../pages/admin/UsersManagement';
+import Orders from '../pages/admin/Orders';
+import ProductsList from '../pages/admin/Products';
+import AddProduct from '../pages/admin/AddProduct';
+import Users from '../pages/admin/Users';
+import Report from '../pages/admin/Reports';
+import Revenue from '../pages/admin/Revenue';
 //Utility
 import PageNotFound from '../pages/utility/PageNotFound';
 import ProtectedRoute from '../router/ProtectedRoute';
@@ -30,8 +34,13 @@ class AppRouter extends Component {
                     <Route exact path="/admin/:path?">
                         <AdminLayout>
                             <Switch>
-                                <ProtectedRoute exact path="/admin" component={Dashboard} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/users" component={UsesManagement} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/" component={Orders} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/orders" component={Orders} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/products" component={ProductsList} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/addProduct" component={AddProduct} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/users" component={Users} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/report" component={Report} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={true} />
                                 <Route path="*" component={PageNotFound} />
                             </Switch>
                         </AdminLayout>

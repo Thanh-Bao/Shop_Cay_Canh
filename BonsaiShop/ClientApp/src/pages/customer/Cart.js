@@ -16,6 +16,17 @@ class Cart extends Component {
                 <h1>Giỏ hàng</h1>
                 <h1>Giỏ hàng</h1>
                 <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
+                <h1>Giỏ hàng</h1>
             </div>
         );
     }

@@ -3,6 +3,11 @@ import TextTruncate from 'react-text-truncate';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class CardProduct extends Component {
+
+    handleEditorChange = (content, editor) => {
+        console.log('Content was updated:', content);
+    }
+
     render() {
         var numeral = require('numeral');
         return (

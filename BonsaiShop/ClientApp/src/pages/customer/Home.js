@@ -91,8 +91,8 @@ class Home extends Component {
                             activePage={this.props.activePage}
                             firstPageText="trang đầu"
                             lastPageText="trang cuối"
-                            itemClass="page-item"
-                            linkClass="page-link"
+                            itemclassName="page-item"
+                            linkclassName="page-link"
                             itemsCountPerPage={this.props.itemsCountPerPage}
                             totalItemsCount={this.props.totalItemsCount}
                             pageRangeDisplayed={parseInt(process.env.REACT_APP_PAGE_RANGE_DISPLAYED)}
