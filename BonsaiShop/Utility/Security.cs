@@ -38,12 +38,16 @@ namespace BonsaiShop.Utility
                 new Claim("role",role),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };
-
+            int minute = CofigJWT.TIMEEXPIRED;
+            if (rememberMe)
+            {
+                minute = 999999;
+            }
             var token = new JwtSecurityToken(
                 issuer: CofigJWT.ISSUER,
                 audience: CofigJWT.AUDIENCE,
                 claims,
-                expires: DateTime.UtcNow.AddMinutes(rememberMe ? 9999999 : CofigJWT.TIMEEXPIRED),
+                expires: DateTime.UtcNow.AddMinutes(minute),
                 signingCredentials: credentials
             );
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);

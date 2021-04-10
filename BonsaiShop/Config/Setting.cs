@@ -13,7 +13,7 @@ namespace BonsaiShop.Config
 
         public static readonly string SECRECTKEY = "snfnsdoiff67fsdfFTFGihuhdHGt878hfBY";
 
-        public static readonly double TIMEEXPIRED = 1;
+        public static readonly int TIMEEXPIRED = 1;
     }
 
     

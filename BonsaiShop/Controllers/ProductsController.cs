@@ -4,6 +4,7 @@ using BonsaiShop.DAO;
 using BonsaiShop.Filter;
 using BonsaiShop.DTO;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonsaiShop.Controllers
 {
@@ -134,7 +135,16 @@ namespace BonsaiShop.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("test")]
+        [Authorize]
+        public IActionResult CreateProduct123()
+        {
+            return Ok(123499);
+        }
+
+
+            [HttpPost]
         [Route("create")]
         //[AdministratorAuthorization]
         public IActionResult CreateProduct([FromBody] Product product)
