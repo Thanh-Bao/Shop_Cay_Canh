@@ -12,4 +12,6 @@ npm i numeral/
 npm i @fortawesome/fontawesome-free/
  npm i @tinymce/tinymce-react/
  npm i firebase/
- npm i react-firebase-file-uploader
+ npm i react-firebase-file-uploader/
+ npm install react-html-parser/
+ npm i string-strip-html
