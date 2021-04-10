@@ -9,4 +9,7 @@ npm install react-router-dom/
 npm i axios/
 npm i react-text-truncate/
 npm i numeral/
-npm i @fortawesome/fontawesome-free
+npm i @fortawesome/fontawesome-free/
+ npm i @tinymce/tinymce-react/
+ npm i firebase/
+ npm i react-firebase-file-uploader
