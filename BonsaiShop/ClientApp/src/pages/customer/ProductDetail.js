@@ -3,6 +3,7 @@ import CallAPI from '../../callAPI/callAPIMainServer'
 import ImgHolder from '../../components/Loading';
 import { Redirect } from "react-router-dom";
 import CardProduct from '../../components/CardProduct';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
@@ -115,7 +116,8 @@ class ProductDetail extends Component {
 
 
                     <h3 className="my-4">Mô tả chi tiết:</h3>
-                    <p className="mb-4">{pro.description}</p>
+
+                    {ReactHtmlParser(pro.description)}
 
                     <div className="container mb-2">
                         <div className="row">

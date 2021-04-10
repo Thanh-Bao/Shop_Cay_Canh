@@ -3,13 +3,10 @@ import TextTruncate from 'react-text-truncate';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class CardProduct extends Component {
-
-    handleEditorChange = (content, editor) => {
-        console.log('Content was updated:', content);
-    }
-
     render() {
         var numeral = require('numeral');
+        var striptags = require('striptags');
+
         return (
             <div className="card h-100">
                 <Link className="card-images-change wraper-fixed-img container-img-overlay" to={`/productdetail/`+this.props.productID}>
@@ -33,7 +30,7 @@ class CardProduct extends Component {
                         element="p"
                         truncateText=" …"
                         containerClassName=" d-inline card-text text-card-description"
-                        text={this.props.description}
+                        text={striptags(this.props.description)}
                     />
 
                     <div className="d-flex mt-2 justify-content-between">

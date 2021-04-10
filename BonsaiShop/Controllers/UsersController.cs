@@ -113,7 +113,7 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public IActionResult RegisterMember(User user)
+        public IActionResult RegisterMember([FromBody] User user)
         {
             try
             {

@@ -135,7 +135,8 @@ namespace BonsaiShop.Controllers
         }
 
         [HttpPost]
-        [AdministratorAuthorization]
+        [Route("create")]
+        //[AdministratorAuthorization]
         public IActionResult CreateProduct([FromBody] Product product)
         {
             try

@@ -137,7 +137,7 @@ namespace BonsaiShop.DAO
                 .Where(s => s.phone.Equals(phone))
                 .FirstOrDefault();
 
-            if (!password.Equals(templeUser.phone))
+            if (!password.Equals(templeUser.password))
             {
                 return null;
             }

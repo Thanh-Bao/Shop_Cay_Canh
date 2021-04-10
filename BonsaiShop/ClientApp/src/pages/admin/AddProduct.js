@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
+import callAPi from '../../callAPI/callAPIMainServer';
 
 
 
@@ -32,8 +33,8 @@ class AddProduct extends Component {
             height: '',
             origin: "",
             thumbnail: null,
-            imgDetail: null,
-            description : ""
+            detailImage: null,
+            description: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,7 +54,7 @@ class AddProduct extends Component {
             .ref("images")
             .child(filename)
             .getDownloadURL()
-            .then(url => this.setState({ imgDetail: url }));
+            .then(url => this.setState({ detailImage: url }));
     };
 
     handleInputChange(event) {
@@ -70,14 +71,23 @@ class AddProduct extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+
+        
+        callAPi('products/create', 'POST', null , this.state).then(res => {
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+
+
     }
 
-    handleEditorChange = content=> {
+    handleEditorChange = content => {
         this.setState({
-            description : content
+            description: content
         });
-      }
+    }
     render() {
 
         let renderImgThumbnail;
@@ -85,8 +95,8 @@ class AddProduct extends Component {
         if (this.state.thumbnail != null) {
             renderImgThumbnail = <img width={100} src={this.state.thumbnail} />
         }
-        if (this.state.imgDetail != null) {
-            renderImgDetail = <img width={100} src={this.state.imgDetail} />
+        if (this.state.detailImage != null) {
+            renderImgDetail = <img width={100} src={this.state.detailImage} />
         }
 
 
@@ -95,7 +105,7 @@ class AddProduct extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 text-center">
-                        <h1 className="mt-2">Thêm mới 1 sản phẩm</h1>
+                            <h1 className="mt-2">Thêm mới 1 sản phẩm</h1>
                         </div>
                         <form onSubmit={this.handleSubmit} className="col-12">
                             <div className="form-group">
@@ -115,7 +125,7 @@ class AddProduct extends Component {
                                             onChange={this.handleInputChange}
                                             name="price" type="number" id="inputPassword5" className="form-control"
                                             placeholder="> 100.000đ"
-                                            />
+                                        />
 
                                     </div>
                                 </div>
@@ -125,8 +135,8 @@ class AddProduct extends Component {
                                         <input
                                             value={this.state.quantity}
                                             onChange={this.handleInputChange}
-                                            name="quantity" type="number" id="inputPassword5" className="form-control" 
-                                            />
+                                            name="quantity" type="number" id="inputPassword5" className="form-control"
+                                        />
 
                                     </div>
                                 </div>
@@ -141,7 +151,7 @@ class AddProduct extends Component {
                                             onChange={this.handleInputChange}
                                             name="height" type="number" id="inputPassword5" className="form-control"
                                             placeholder="10cm - 100cm"
-                                            />
+                                        />
 
                                     </div>
                                 </div>
@@ -201,9 +211,9 @@ class AddProduct extends Component {
 
                             <p>Nhập Mô tả chi tiết</p>
                             <Editor
-                                
+
                                 initialValue="<span></span>"
-                                
+
                                 init={{
                                     height: 500,
                                     menubar: true,
