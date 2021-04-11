@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import '../../css/Login.css'
 import callAPi from '../../callAPI/callAPIMainServer';
 
-class Login extends Component {
+class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,9 +19,8 @@ class Login extends Component {
 
     handleInputChange(event) {
         const target = event.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name;
-
+        let value = target.value;
         this.setState({
             [name]: value,
             loginfailed: false
@@ -36,9 +35,9 @@ class Login extends Component {
             password: this.state.password,
         }
         callAPi('Users/login', 'POST', { rememberLogin: this.state.rememberLogin }, body).then(res => {
-            localStorage.setItem("token",res.data);
+            localStorage.setItem("token", res.data);
             alert("Đăng nhập thành công");
-            this.props.history.push('/home')
+            this.props.history.push('/admin')
         }).catch(
             err => {
                 this.setState({
@@ -54,7 +53,7 @@ class Login extends Component {
         if (this.state.loginfailed) {
             loginFailedMessage = (
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><i className="fas fa-exclamation-triangle"></i></strong> Số điện thoại hoặc mật khẩu không đúng! Vui lòng kiểm tra lại.
+                    <strong><i className="fas fa-exclamation-triangle"></i></strong> Sai tài khoản! Vui lòng kiểm tra lại.
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -63,22 +62,22 @@ class Login extends Component {
         }
         return (
             <div>
-                <div className="container-fluid ">
+                <div className="container-fluid mt-5 mt-5">
                     <div className="row no-gutter d-flex justify-content-center my-5 pb-5">
                         <div className="col-4">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="text-center mb-5">
-                                    <i style={{ fontSize: 80 }} className="far fa-user"></i>
+                                    <i style={{ fontSize: 80 }} className="fas fa-user-shield"></i>
                                 </div>
 
                                 {loginFailedMessage}
 
                                 <div className="form-label-group">
-                                    <label htmlFor="inputEmail">Số điện thoại</label>
+                                    <label htmlFor="inputEmail">Tên tài khoản</label>
                                     <input
                                         name="phone"
                                         onChange={this.handleInputChange}
-                                        type="text" className="form-control  boder-style" placeholder="09xxxxxxxx" autoFocus required />
+                                        type="text" className="form-control  boder-style" autoFocus required />
                                 </div>
                                 <div className="mt-2 form-label-group">
                                     <label htmlFor="inputPassword">Mật khẩu</label>
@@ -87,26 +86,24 @@ class Login extends Component {
                                         onChange={this.handleInputChange}
                                         type="password" className="form-control boder-style" placeholder="*********" required />
                                 </div>
-                                <div className="custom-control custom-checkbox mb-3">
-                                    <input
-                                        onChange={this.handleInputChange}
-                                        name="rememberLogin" type="checkbox" className="custom-control-input" id="customCheck1" />
-                                    <label className="mt-2 custom-control-label" htmlFor="customCheck1">Ghi nhớ đăng nhập</label>
-                                </div>
-                                <button className=" boder-style btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Đăng nhập</button>
-                                <div className="text-center">
-                                    <a href="#"> Quên mật khẩu?</a>
-                                </div>
-                                <div className="text-center my-3">
-                                    <span>Chưa có tài khoản? </span><Link to="/register" className="badge badge-pill badge-success"> Đăng kí ngay</Link>
-                                </div>
+                                <button className=" boder-style btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mt-5" type="submit"><i className="fas fa-unlock"></i> Admin đăng nhập</button>
                             </form>
                         </div>
                     </div>
+
+                    <div className="row text-center justify-content-center">
+                        <div className="col-12">
+                            <Link to="/home" className="btn btn-success btn-lg active" role="button" aria-pressed="true"> <i className="fas fa-home"></i> Trang chủ</Link>
+                            <br />
+                            <p className="mt-3 text-danger font-weight-bold">Nếu bạn không phải Admin hãy trở về trang chủ</p>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         );
     }
 }
 
-export default Login;
+export default AdminLogin;

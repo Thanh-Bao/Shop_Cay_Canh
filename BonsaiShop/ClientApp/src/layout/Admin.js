@@ -22,7 +22,7 @@ class Admin extends Component {
                         <div className="list-group list-group-flush">
                             <NavLink to="/admin/orders" className="list-group-item list-group-item-action"><i className="fas fa-file-invoice-dollar"></i> <span className="font-weight-bold">Đơn hàng</span></NavLink>
                             <NavLink to="/admin/products" className="list-group-item list-group-item-action"><i className="fas fa-boxes"></i> <span className="font-weight-bold">Danh sách sản phẩn</span></NavLink>
-                            <NavLink to="/admin/addProduct" className="list-group-item list-group-item-action"><i className="fas fa-tree"></i> <span className="font-weight-bold">Thêm sản phẩm</span></NavLink>
+                            <NavLink to="/admin/add-product" className="list-group-item list-group-item-action"><i className="fas fa-tree"></i> <span className="font-weight-bold">Thêm sản phẩm</span></NavLink>
                             <NavLink to="/admin/users" className="list-group-item list-group-item-action"><i className="fas fa-user-circle"></i> <span className="font-weight-bold">Tài khoản</span></NavLink>
                             <NavLink to="/admin/report" className="list-group-item list-group-item-action"><i className="fas fa-envelope-open-text"></i> <span className="font-weight-bold">Phản hồi</span></NavLink>
                             <NavLink to="/admin/revenue" className="list-group-item list-group-item-action"><i className="fas fa-hand-holding-usd"></i> <span className="font-weight-bold">Chi tiết doanh thu</span></NavLink>

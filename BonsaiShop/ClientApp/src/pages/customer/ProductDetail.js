@@ -66,7 +66,7 @@ class ProductDetail extends Component {
             titleSuggest = <h3 className="mb-3"><strong>Các sản phẩm thường được mua kèm theo:</strong></h3>
         }
 
-        let url = process.env.REACT_APP_DOMAIN + "/productdetail/" + this.getProductID();
+        let url = process.env.REACT_APP_DOMAIN + "/product-detail/" + this.getProductID();
         let CONTENT;
         if (this.state.product != null) {
             CONTENT = (

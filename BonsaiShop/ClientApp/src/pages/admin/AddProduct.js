@@ -65,20 +65,16 @@ class AddProduct extends Component {
         this.setState({
             [name]: value
         });
-
-
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        callAPi('products/create', 'POST', null , this.state).then(res => {
-            console.log(res.data)
-        }).catch(err=>{
-            console.log(err)
+        callAPi('products/create', 'POST', null, this.state).then(res => {
+            alert("Đã thêm thành công");
+        }).catch(err => {
+            alert("BẠN KHÔNG CÓ QUYỀN VỚI THAO TÁC NÀY!");
         })
-
-        alert("Đã thêm thành công");
-
+        
     }
 
     handleEditorChange = content => {
@@ -108,7 +104,7 @@ class AddProduct extends Component {
                         <form onSubmit={this.handleSubmit} className="col-12">
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Tên</label>
-                                <input
+                                <input required
                                     value={this.state.name}
                                     onChange={this.handleInputChange}
                                     name="name" type="text" className="form-control" placeholder="Tên không quá 50 ký tự" />
@@ -118,7 +114,7 @@ class AddProduct extends Component {
                                 <div className="col-6">
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Giá (VNĐ)</label>
-                                        <input
+                                        <input required
                                             value={this.state.price}
                                             onChange={this.handleInputChange}
                                             name="price" type="number" id="inputPassword5" className="form-control"
@@ -130,7 +126,7 @@ class AddProduct extends Component {
                                 <div className="col-6">
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Số lượng</label>
-                                        <input
+                                        <input required
                                             value={this.state.quantity}
                                             onChange={this.handleInputChange}
                                             name="quantity" type="number" id="inputPassword5" className="form-control"
@@ -144,7 +140,7 @@ class AddProduct extends Component {
                                 <div className="col-6">
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Chiều cao (cm)</label>
-                                        <input
+                                        <input required
                                             value={this.state.height}
                                             onChange={this.handleInputChange}
                                             name="height" type="number" id="inputPassword5" className="form-control"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class FooterCustomer extends Component {
     render() {
@@ -148,7 +149,7 @@ class FooterCustomer extends Component {
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Contact Us</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Privacy Policy</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Terms</a></li>
-                                    <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Login</a></li>
+                                    <li><Link className="link-footer" to="/admin/login"><i className="fas fa-shield-alt"></i> Admin Login</Link></li>
                                 </ul>
                             </div>
                             {/*/.Fourth column*/}

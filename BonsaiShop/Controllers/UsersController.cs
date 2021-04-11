@@ -143,21 +143,21 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] User user, bool rememberMe)
+        public IActionResult Login([FromBody] User user, bool rememberLogin)
         {
             string role = userDAO.login(user.phone, user.password);
             try
             {
                 if (role != null)
                 {
-                    return Ok(Security.GenerateJwtToken(user.phone, role, true));
+                    return Ok(Security.GenerateJwtToken(user.phone, role, rememberLogin));
                 }
             }
             catch
             {
-                return NotFound(role);
+                return Forbid("Đăng nhập thất bại");
             }
-               return Forbid("Đăng nhập thất bại");
+            return Forbid("Đăng nhập thất bại");
 
 
         }

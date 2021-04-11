@@ -50,7 +50,7 @@ class NavigationBarCustomer extends Component {
                                 <NavLink onClick={() => this.redirectToHome()}  activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/orderTracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
+                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/order-tracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>

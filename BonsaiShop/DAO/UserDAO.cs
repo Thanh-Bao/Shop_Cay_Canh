@@ -130,18 +130,16 @@ namespace BonsaiShop.DAO
         {
             if (!UserExists(phone))
             {
-                return "Số điện thoại chưa đăng kí";
+                return null;
             }
-
             User templeUser = dbcontext.Users
                 .Where(s => s.phone.Equals(phone))
                 .FirstOrDefault();
 
             if (!password.Equals(templeUser.password))
             {
-                return "Số điện thoại hoặc mật khẩu không đúng";
+                return null;
             }
-
             return templeUser.role;
         }
 

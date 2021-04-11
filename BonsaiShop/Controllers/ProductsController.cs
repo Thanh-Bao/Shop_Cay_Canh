@@ -135,15 +135,6 @@ namespace BonsaiShop.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("test")]
-        [AdministratorAuthorization]
-        public IActionResult CreateProduct123()
-        {
-            return Ok(123499);
-        }
-
-
         [HttpPost]
         [Route("create")]
         [AdministratorAuthorization]
