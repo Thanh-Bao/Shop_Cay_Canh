@@ -7,8 +7,8 @@ import CustomerLayout from '../layout/Customer';
 // Customer
 import Home from '../pages/customer/Home';
 import ProductDetail from '../pages/customer/ProductDetail';
-import OrderTracking from '../pages/customer/OrderTracking';
 import Login from '../pages/customer/Login';
+import OTPRegister from '../pages/customer/OTPRegister';
 import Register from '../pages/customer/Register';
 import Cart from '../pages/customer/Cart';
 import Contact from '../pages/customer/Contact';
@@ -61,9 +61,9 @@ class AppRouter extends Component {
                                 <Route exact path="/unauthorized" component={Unauthorized} />
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/home" component={Home} />
-                                <Route exact path="/order-tracking" component={OrderTracking} />
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/register" component={Register} />
+                                <Route exact path="/otp-register" component={OTPRegister} />
                                 <Route exact path="/profile" component={Profile} />
                                 <Route exact path="/cart" component={Cart} />
                                 <Route exact path="/contact" component={Contact} />

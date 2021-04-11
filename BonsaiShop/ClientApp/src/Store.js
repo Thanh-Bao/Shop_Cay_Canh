@@ -1,6 +1,8 @@
 import { createStore } from 'redux';
 
 let name = localStorage.getItem("customerName");
+let adminLogined = localStorage.getItem("adminLogined");
+
 
 const initialState = {
     // filter handling
@@ -18,7 +20,7 @@ const initialState = {
     /// Search
 
     //Authentication
-    adminLogined: false,
+    adminLogined: adminLogined,
     customerNameWellcome: name
 }
 function AllReducer(state = initialState, action) {

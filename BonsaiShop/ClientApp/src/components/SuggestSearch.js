@@ -108,7 +108,7 @@ class SuggestSearch extends Component {
                                     <a target="_blank" 
                                     id="ItemSuggest"
                                      onClick={onClick}
-                                    href={process.env.REACT_APP_DOMAIN+`/product-detail/`+product.productID}>{product.name}</a>
+                                    href={process.env.REACT_APP_DOMAIN+`product-detail/`+product.productID}>{product.name}</a>
                                 </li>
                             );
                         })}

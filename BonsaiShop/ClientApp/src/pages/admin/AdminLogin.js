@@ -40,6 +40,7 @@ class AdminLogin extends Component {
             if (res.data.role.localeCompare("Admin")===0) {
                 localStorage.setItem("token", res.data.token);
                 this.props.dispatch({ type: "UPDATE_ADMIN_LOGIN", data: true });
+                localStorage.setItem("adminLogined",true);
                 alert("Đăng nhập thành công");
                 this.props.history.push('/admin')
             } else {

@@ -8,6 +8,7 @@
     "axios": "^0.21.1",
     "connected-react-router": "6.5.2",
     "firebase": "^8.3.3",
+    "firebaseui": "^4.8.0",
     "history": "4.10.1",
     "jquery": "^3.5.1",
     "merge": "1.2.1",

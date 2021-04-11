@@ -3,23 +3,17 @@ import { Editor } from '@tinymce/tinymce-react';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import callAPi from '../../callAPI/callAPIMainServer';
+import firebaseConfig from '../../FirebaseConfig';
 
 
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
-    apiKey: "AIzaSyCfAKzNHLhlI3_0xxlQQ2PKeuVExG6E_xY",
-    authDomain: "dotnet2021bonsaishop.firebaseapp.com",
-    databaseURL: "https://dotnet2021bonsaishop-default-rtdb.firebaseio.com",
-    projectId: "dotnet2021bonsaishop",
-    storageBucket: "dotnet2021bonsaishop.appspot.com",
-    messagingSenderId: "716055325870",
-    appId: "1:716055325870:web:1383595713b4d66658913f",
-    measurementId: "G-12JX969BP3"
-};
+
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // if already initialized, use that one
+}
 firebase.analytics();
 
 
@@ -74,7 +68,7 @@ class AddProduct extends Component {
         }).catch(err => {
             alert("BẠN KHÔNG CÓ QUYỀN VỚI THAO TÁC NÀY!");
         })
-        
+
     }
 
     handleEditorChange = content => {
@@ -87,10 +81,10 @@ class AddProduct extends Component {
         let renderImgThumbnail;
         let renderImgDetail;
         if (this.state.thumbnail != null) {
-            renderImgThumbnail = <img width={100} src={this.state.thumbnail} />
+            renderImgThumbnail = <img width={200} src={this.state.thumbnail} />
         }
         if (this.state.detailImage != null) {
-            renderImgDetail = <img width={100} src={this.state.detailImage} />
+            renderImgDetail = <img width={200} src={this.state.detailImage} />
         }
 
 

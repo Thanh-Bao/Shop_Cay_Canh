@@ -35,7 +35,7 @@ class NavigationBarCustomer extends Component {
         if (this.props.customerNameWellcome != null) {
             showProfileButton = (
                 <li className="nav-item">
-                    <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/profile"><i className="fas fa-user-alt"></i> <span>Tài khoản-<span style={{fontWeight:900}}>{this.props.customerNameWellcome}</span></span></NavLink>
+                    <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/profile"><i className="fas fa-user-alt"></i> <span>Tài khoản-<span style={{ fontWeight: 900 }}>{this.props.customerNameWellcome}</span></span></NavLink>
                 </li>
             );
         }
@@ -79,9 +79,6 @@ class NavigationBarCustomer extends Component {
                             <li className="nav-item">
                                 <NavLink onClick={() => this.redirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/order-tracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
-                            </li>
                             {showProfileButton}
                             {showLoginBtn}
                             {showRegister}
@@ -90,6 +87,9 @@ class NavigationBarCustomer extends Component {
                             </li>
                             <li className="nav-item">
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
+                            </li>
+                            <li className="nav-item ml-3">
+                                <a className=" btn-danger nav-link NavItem" href=""><i id="shakeDownload" className="fas fa-mobile-alt"></i> Tải ứng dụng</a>
                             </li>
                         </ul>
 
