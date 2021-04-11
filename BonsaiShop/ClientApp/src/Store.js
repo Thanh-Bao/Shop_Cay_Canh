@@ -13,6 +13,10 @@ const initialState = {
     totalItemsCount: 1,
     activePage: 1,
     /// Search
+
+    //Authentication
+    adminLogined: false,
+    customerNameWellcome: null
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
@@ -81,6 +85,12 @@ function AllReducer(state = initialState, action) {
             return {
                 ...state,
                 activePage: action.data
+            }
+        // Authentication
+        case "UPDATE_ADMIN_LOGIN":
+            return {
+                ...state,
+                adminLogined: action.data
             }
         default:
             break;

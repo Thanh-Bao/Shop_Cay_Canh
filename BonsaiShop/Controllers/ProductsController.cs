@@ -3,8 +3,7 @@ using BonsaiShop.Model;
 using BonsaiShop.DAO;
 using BonsaiShop.Filter;
 using BonsaiShop.DTO;
-using System;
-using Microsoft.AspNetCore.Authorization;
+
 
 namespace BonsaiShop.Controllers
 {
@@ -180,6 +179,5 @@ namespace BonsaiShop.Controllers
                 return BadRequest();
             }
         }
-
     }
 }

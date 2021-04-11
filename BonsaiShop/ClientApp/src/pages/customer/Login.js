@@ -36,7 +36,8 @@ class Login extends Component {
             password: this.state.password,
         }
         callAPi('Users/login', 'POST', { rememberLogin: this.state.rememberLogin }, body).then(res => {
-            localStorage.setItem("token",res.data);
+            console.log(res.data);
+            localStorage.setItem("token",res.data.token);
             alert("Đăng nhập thành công");
             this.props.history.push('/home')
         }).catch(

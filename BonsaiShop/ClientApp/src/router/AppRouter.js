@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 // Layout
 import AdminLayout from '../layout/Admin';
 import CustomerLayout from '../layout/Customer';
@@ -26,8 +27,11 @@ import Unauthorized from '../pages/utility/Unauthorized';
 import ScrollToTop from '../pages/utility/ScrollToTop';
 
 
+
+
 class AppRouter extends Component {
     render() {
+        let adminAuthen = this.props.adminLogined;
         return (
             <Router>
                 <ScrollToTop />
@@ -38,13 +42,13 @@ class AppRouter extends Component {
                     <Route exact path="/admin/:path?">
                         <AdminLayout>
                             <Switch>
-                                <ProtectedRoute exact path="/admin/" component={Orders} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/orders" component={Orders} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/products" component={ProductsList} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/add-product" component={AddProduct} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/users" component={Users} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/report" component={Report} isAuth={true} />
-                                <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={true} />
+                                <ProtectedRoute exact path="/admin/" component={Orders} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/orders" component={Orders} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/products" component={ProductsList} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/add-product" component={AddProduct} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/users" component={Users} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/report" component={Report} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={adminAuthen} />
                                 <Route path="*" component={PageNotFound} />
                             </Switch>
                         </AdminLayout>
@@ -73,4 +77,7 @@ class AppRouter extends Component {
     }
 }
 
-export default AppRouter;
+const mapStateToProps = state => ({
+    adminLogined: state.adminLogined
+});
+export default connect(mapStateToProps)(AppRouter);

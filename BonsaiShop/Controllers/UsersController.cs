@@ -6,6 +6,8 @@ using BonsaiShop.Filter;
 using BonsaiShop.DTO;
 using BonsaiShop.DAO;
 using BonsaiShop.Utility;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace BonsaiShop.Controllers
 {
@@ -150,7 +152,21 @@ namespace BonsaiShop.Controllers
             {
                 if (role != null)
                 {
-                    return Ok(Security.GenerateJwtToken(user.phone, role, rememberLogin));
+                    var token = Security.GenerateJwtToken(user.phone, role, rememberLogin);
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadToken(token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    string role_payload = tokenS.Claims.First(claim => claim.Type == "role").Value;
+                    string phone_payload = tokenS.Claims.First(claim => claim.Type == "phone").Value;
+
+                    var result = new
+                    {
+                        role = role_payload,
+                        phone = phone_payload,
+                        token = token
+                    };
+
+                    return Ok(result);
                 }
             }
             catch

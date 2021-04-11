@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../../css/Login.css'
 import callAPi from '../../callAPI/callAPIMainServer';
 
@@ -35,9 +36,19 @@ class AdminLogin extends Component {
             password: this.state.password,
         }
         callAPi('Users/login', 'POST', { rememberLogin: this.state.rememberLogin }, body).then(res => {
-            localStorage.setItem("token", res.data);
-            alert("Đăng nhập thành công");
-            this.props.history.push('/admin')
+          
+            if (res.data.role.localeCompare("Admin")===0) {
+                localStorage.setItem("token", res.data.token);
+                this.props.dispatch({ type: "UPDATE_ADMIN_LOGIN", data: true });
+                alert("Đăng nhập thành công");
+                this.props.history.push('/admin')
+            } else {
+                this.setState({
+                    loginfailed: true
+                })
+                this.props.history.push('/admin/login')
+            }
+           
         }).catch(
             err => {
                 this.setState({
@@ -106,4 +117,8 @@ class AdminLogin extends Component {
     }
 }
 
-export default AdminLogin;
+
+const mapStateToProps = state => ({
+    adminLogined: state.adminLogined
+});
+export default connect(mapStateToProps)(AdminLogin);

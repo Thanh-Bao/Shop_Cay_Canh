@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import callAPi from '../callAPI/callAPIMainServer';
 import '../css/suggestSearch.css';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 class SuggestSearch extends Component {
     constructor(props) {
@@ -102,7 +103,7 @@ class SuggestSearch extends Component {
                             }
                             return (
                                 <li className={className} key={product.productID} onClick={onClick}>
-                                    {product.name}
+                                    <Link to={`/product-detail/`+this.props.productID}>{product.name}</Link>
                                 </li>
                             );
                         })}
