@@ -89,7 +89,7 @@ class NavigationBarCustomer extends Component {
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
                             </li>
                             <li className="nav-item ml-3">
-                                <a className=" btn-danger nav-link NavItem" href=""><i id="shakeDownload" className="fas fa-mobile-alt"></i> Tải ứng dụng</a>
+                                <a className=" btn-danger nav-link " href=""><i id="shakeDownload" className="fas fa-mobile-alt"></i> Tải App</a>
                             </li>
                         </ul>
 

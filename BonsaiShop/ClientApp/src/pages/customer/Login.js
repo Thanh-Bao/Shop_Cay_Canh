@@ -82,7 +82,7 @@ class Login extends Component {
                                     <input
                                         name="phone"
                                         onChange={this.handleInputChange}
-                                        type="text" className="form-control  boder-style" placeholder="09xxxxxxxx" autoFocus required />
+                                        type="number" className="form-control  boder-style" placeholder="09xxxxxxxx" autoFocus required />
                                 </div>
                                 <div className="mt-2 form-label-group">
                                     <label htmlFor="inputPassword">Mật khẩu</label>

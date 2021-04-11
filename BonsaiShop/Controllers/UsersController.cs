@@ -141,6 +141,35 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        // POST: api/Users
+        [HttpPost]
+        [Route("check-exist")]
+        [AllowAnonymous]
+        public IActionResult CheckExist([FromBody] User user)
+        {
+            try
+            {
+                if (userDAO.UserExists(user.phone))
+                {
+                    return Ok(true);
+                } else
+                {
+                    return Ok(false);
+                }
+               
+            }
+            catch
+            {
+                return BadRequest(new MessageResponseDTO
+                {
+                    statusCode = 400,
+                    message = "Hãy nhập thông tin hợp lệ"
+                });
+            }
+        }
+
+
+
         // POST : /api/Users/login?rememberMe=[false]
         [HttpPost]
         [Route("login")]
@@ -187,4 +216,6 @@ namespace BonsaiShop.Controllers
             "password" : "123"
         }*/
     }
+
+    
 }

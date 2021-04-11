@@ -22,6 +22,7 @@ const initialState = {
     //Authentication
     adminLogined: adminLogined,
     customerNameWellcome: name
+
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
