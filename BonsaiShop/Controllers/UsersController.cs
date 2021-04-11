@@ -93,7 +93,7 @@ namespace BonsaiShop.Controllers
                 else
                 {
                     user.phone = phone;
-                    userDAO.UpdateUser(phone,user);
+                    userDAO.UpdateUser(phone, user);
                 }
                 return NoContent();
 
@@ -143,21 +143,29 @@ namespace BonsaiShop.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] User user,bool rememberMe)
+        public IActionResult Login([FromBody] User user, bool rememberMe)
         {
             string role = userDAO.login(user.phone, user.password);
-            if (role != null)
+            try
             {
-                return Ok(Security.GenerateJwtToken(user.phone, role, rememberMe));
+                if (role != null)
+                {
+                    return Ok(Security.GenerateJwtToken(user.phone, role, true));
+                }
             }
-           return Forbid("Đăng nhập thất bại");
+            catch
+            {
+                return NotFound(role);
+            }
+               return Forbid("Đăng nhập thất bại");
+
 
         }
 
-/*        Format 
-            {
-    "phone" : "123",
-    "password" : "123"
-}*/
-}
+        /*        Format 
+                    {
+            "phone" : "123",
+            "password" : "123"
+        }*/
+    }
 }

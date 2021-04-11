@@ -71,15 +71,13 @@ class AddProduct extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // console.log(this.state);
-
-        
         callAPi('products/create', 'POST', null , this.state).then(res => {
             console.log(res.data)
         }).catch(err=>{
             console.log(err)
         })
 
+        alert("Đã thêm thành công");
 
     }
 

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import callAPi from '../callAPI/callAPIMainServer';
-import './style.css';
+import '../css/suggestSearch.css';
 
 class SuggestSearch extends Component {
     constructor(props) {

@@ -130,7 +130,7 @@ namespace BonsaiShop.DAO
         {
             if (!UserExists(phone))
             {
-                return null;
+                return "Số điện thoại chưa đăng kí";
             }
 
             User templeUser = dbcontext.Users
@@ -139,7 +139,7 @@ namespace BonsaiShop.DAO
 
             if (!password.Equals(templeUser.password))
             {
-                return null;
+                return "Số điện thoại hoặc mật khẩu không đúng";
             }
 
             return templeUser.role;
