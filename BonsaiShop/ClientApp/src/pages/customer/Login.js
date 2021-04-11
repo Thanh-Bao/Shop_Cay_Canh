@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../../css/Login.css'
 import callAPi from '../../callAPI/callAPIMainServer';
 
@@ -39,6 +40,8 @@ class Login extends Component {
             console.log(res.data);
             localStorage.setItem("token",res.data.token);
             alert("Đăng nhập thành công");
+            this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.name});
+            localStorage.setItem("customerName",res.data.name);
             this.props.history.push('/home')
         }).catch(
             err => {
@@ -98,6 +101,7 @@ class Login extends Component {
                                 <div className="text-center">
                                     <a href="#"> Quên mật khẩu?</a>
                                 </div>
+
                                 <div className="text-center my-3">
                                     <span>Chưa có tài khoản? </span><Link to="/register" className="badge badge-pill badge-success"> Đăng kí ngay</Link>
                                 </div>
@@ -110,4 +114,7 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    
+});
+export default connect(mapStateToProps)(Login);

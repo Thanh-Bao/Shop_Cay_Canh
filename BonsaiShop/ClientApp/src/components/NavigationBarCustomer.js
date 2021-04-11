@@ -5,17 +5,17 @@ import callAPi from '../callAPI/callAPIMainServer';
 import SuggestSearch from '../components/SuggestSearch';
 
 class NavigationBarCustomer extends Component {
-    
 
-    disableRedirectToHome(){
-        this.props.dispatch({type:"DISABLE_REDIRECT_TO_HOME"});
-        this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
-       
+
+    disableRedirectToHome() {
+        this.props.dispatch({ type: "DISABLE_REDIRECT_TO_HOME" });
+        this.props.dispatch({ type: "UPDATE_ACTIVE_PAGE", data: 1 });
+
     }
 
-    redirectToHome(){
-        this.props.dispatch({type:"UPDATE_ACTIVE_PAGE",data:1});
-        this.props.dispatch({type:"SHOW_VIDEO_INTRO"});
+    redirectToHome() {
+        this.props.dispatch({ type: "UPDATE_ACTIVE_PAGE", data: 1 });
+        this.props.dispatch({ type: "SHOW_VIDEO_INTRO" });
         callAPi('products').then(res => {
             this.props.dispatch({ type: "FETCH_CUSTOMER_LIST_PRODUCT", data: res.data.list });
             this.props.dispatch({ type: "UPDATE_ITEMS_COUNT_PER_PAGE", data: res.data.pageSize });
@@ -23,10 +23,39 @@ class NavigationBarCustomer extends Component {
         })
     }
 
-   
-    
+
+
 
     render() {
+
+        let showProfileButton;
+        let showLoginBtn;
+        let showRegister;
+
+        if (this.props.customerNameWellcome != null) {
+            showProfileButton = (
+                <li className="nav-item">
+                    <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/profile"><i className="fas fa-user-alt"></i> <span>Tài khoản-<span style={{fontWeight:900}}>{this.props.customerNameWellcome}</span></span></NavLink>
+                </li>
+            );
+        }
+
+        if (this.props.customerNameWellcome == null) {
+            showLoginBtn = (
+                <li className="nav-item">
+                    <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>
+                </li>
+            );
+        }
+        if (this.props.customerNameWellcome == null) {
+            showRegister = (
+                <li className="nav-item">
+                    <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i className="fas fa-user-plus"></i> Đăng Kí</NavLink>
+                </li>
+            );
+        }
+
+
         return (
             <div>
                 <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
@@ -46,23 +75,21 @@ class NavigationBarCustomer extends Component {
 
 
                         <ul className="nav nav-pills ml-auto">
+
                             <li className="nav-item">
-                                <NavLink onClick={() => this.redirectToHome()}  activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
+                                <NavLink onClick={() => this.redirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/home"><i className="fas fa-home"></i> Trang Chủ</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/order-tracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
+                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/order-tracking"><i className="fas fa-box"></i> Xem đơn hàng</NavLink>
+                            </li>
+                            {showProfileButton}
+                            {showLoginBtn}
+                            {showRegister}
+                            <li className="nav-item">
+                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/login"><i className="fas fa-key"></i> Đăng nhập</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/register"><i className="fas fa-user-plus"></i> Đăng Kí</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink onClick={()=>this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
+                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
                             </li>
                         </ul>
 
@@ -80,6 +107,7 @@ const mapStateToProps = state => ({
     listProductCustomer: state.listProductCustomer,
     rangeBarChange: state.rangeBarChange,
     redirectToHome: state.redirectToHome,
-    CustomerKeyWord : state.CustomerKeyWord
+    CustomerKeyWord: state.CustomerKeyWord,
+    customerNameWellcome: state.customerNameWellcome
 })
 export default connect(mapStateToProps)(NavigationBarCustomer);

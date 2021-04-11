@@ -32,9 +32,7 @@ class SuggestSearch extends Component {
         });
     };
 
-    onClick = e => {
-        console.log("HAHAHHAHA");
-    };
+    
 
     handleSubmit = event => {
         event.preventDefault();
@@ -73,7 +71,11 @@ class SuggestSearch extends Component {
 
 
 
-
+    onClick = e => {
+        this.setState({
+            userInput: ""
+        })
+    };
 
 
     render() {
@@ -102,8 +104,11 @@ class SuggestSearch extends Component {
                                 className = "suggestion-active";
                             }
                             return (
-                                <li className={className} key={product.productID} onClick={onClick}>
-                                    <Link to={`/product-detail/`+this.props.productID}>{product.name}</Link>
+                                <li className={className} key={product.productID}>
+                                    <a target="_blank" 
+                                    id="ItemSuggest"
+                                     onClick={onClick}
+                                    href={process.env.REACT_APP_DOMAIN+`/product-detail/`+product.productID}>{product.name}</a>
                                 </li>
                             );
                         })}

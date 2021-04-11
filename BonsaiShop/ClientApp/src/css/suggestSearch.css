@@ -8,6 +8,7 @@
   
   .suggestions {
     border: 1px solid #999;
+    border-radius: 3px;
     border-top-width: 0;
     list-style: none;
     margin-top: 0;
@@ -20,10 +21,14 @@
   .suggestions li {
     padding: 0.5rem;
   }
+
+  .suggestions li a {
+    text-decoration: none;
+  }
   
   .suggestion-active,
   .suggestions li:hover {
-    background-color: #008f68;
+    background-color: #b4ebe8;
     color: #fae042;
     cursor: pointer;
     font-weight: 700;
@@ -31,4 +36,8 @@
   
   .suggestions li:not(:last-of-type) {
     border-bottom: 1px solid #999;
+  }
+
+  #ItemSuggest{
+
   }

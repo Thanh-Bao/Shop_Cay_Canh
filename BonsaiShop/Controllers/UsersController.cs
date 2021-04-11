@@ -152,17 +152,20 @@ namespace BonsaiShop.Controllers
             {
                 if (role != null)
                 {
-                    var token = Security.GenerateJwtToken(user.phone, role, rememberLogin);
+                    UserDTO u = userDAO.GetUser(user.phone);
+                    var token = Security.GenerateJwtToken(u.name, user.phone, role, rememberLogin);
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadToken(token);
                     var tokenS = jsonToken as JwtSecurityToken;
                     string role_payload = tokenS.Claims.First(claim => claim.Type == "role").Value;
                     string phone_payload = tokenS.Claims.First(claim => claim.Type == "phone").Value;
+                    string name_payload = tokenS.Claims.First(claim => claim.Type == "name").Value;
 
                     var result = new
                     {
                         role = role_payload,
                         phone = phone_payload,
+                        name = name_payload,
                         token = token
                     };
 

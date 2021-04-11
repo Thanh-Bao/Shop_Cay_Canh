@@ -1,4 +1,7 @@
 import { createStore } from 'redux';
+
+let name = localStorage.getItem("customerName");
+
 const initialState = {
     // filter handling
     filterPrice: { min: 300, max: 600 },
@@ -16,7 +19,7 @@ const initialState = {
 
     //Authentication
     adminLogined: false,
-    customerNameWellcome: null
+    customerNameWellcome: name
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
@@ -91,6 +94,11 @@ function AllReducer(state = initialState, action) {
             return {
                 ...state,
                 adminLogined: action.data
+            }
+        case "UPDATE_CUSTOMER_WELCOME":
+            return {
+                ...state,
+                customerNameWellcome: action.data
             }
         default:
             break;
