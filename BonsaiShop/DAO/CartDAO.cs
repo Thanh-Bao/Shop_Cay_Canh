@@ -38,7 +38,8 @@ namespace BonsaiShop.DAO
                     productID = s.product.productId,
                     name = s.product.name,
                     price = s.product.price,
-                    quantity = s.userJoinCart.cart.quantity
+                    quantity = s.userJoinCart.cart.quantity,
+                    thumbnail = s.product.thumbnail
                 })
                 .ToList();
             return list;
