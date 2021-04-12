@@ -101,7 +101,7 @@ namespace BonsaiShop.DAO
                 if (user.password != null)
                     _user.password = user.password;
 
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch
@@ -119,7 +119,7 @@ namespace BonsaiShop.DAO
                     return false;
                 }
                 dbcontext.Users.Add(user);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             } catch
             {

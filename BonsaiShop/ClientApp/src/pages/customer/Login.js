@@ -19,6 +19,9 @@ class Login extends Component {
 
 
     handleInputChange(event) {
+
+        localStorage.removeItem("FOCUS_LOGIN_TO_BUY");
+
         const target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name;
@@ -37,15 +40,16 @@ class Login extends Component {
             password: this.state.password,
         }
         callAPi('Users/login', 'POST', { rememberLogin: this.state.rememberLogin }, body).then(res => {
-            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("token", res.data.token);
             alert("Đăng nhập thành công");
-            if(res.data.name===" "){
-                localStorage.setItem("customerName",res.data.phone);
-                this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.phone});
+            if (res.data.name === " ") {
+                localStorage.setItem("customerName", res.data.phone);
+                this.props.dispatch({ type: "UPDATE_CUSTOMER_WELCOME", data: res.data.phone });
             } else {
-                localStorage.setItem("customerName",res.data.name);
-                this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.name});
+                localStorage.setItem("customerName", res.data.name);
+                this.props.dispatch({ type: "UPDATE_CUSTOMER_WELCOME", data: res.data.name });
             }
+            localStorage.setItem("PHONEUSERLOGINED", res.data.phone);
             this.props.history.push('/home')
         }).catch(
             err => {
@@ -59,6 +63,20 @@ class Login extends Component {
 
     render() {
         let loginFailedMessage;
+        let showFocusLoginToBuy;
+
+        if (localStorage.getItem("FOCUS_LOGIN_TO_BUY")) {
+            showFocusLoginToBuy = (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong><i className="fas fa-exclamation-triangle"></i></strong> Bạn vui lòng đăng nhập để tiếp tục! 
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            );
+        }
+
+
         if (this.state.loginfailed) {
             loginFailedMessage = (
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -78,7 +96,7 @@ class Login extends Component {
                                 <div className="text-center mb-5">
                                     <i style={{ fontSize: 80 }} className="far fa-user"></i>
                                 </div>
-
+                                {showFocusLoginToBuy}
                                 {loginFailedMessage}
 
                                 <div className="form-label-group">

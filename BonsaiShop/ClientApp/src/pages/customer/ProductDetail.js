@@ -6,6 +6,7 @@ import CardProduct from '../../components/CardProduct';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { FacebookProvider, Comments, Like, CustomChat } from 'react-facebook';
+import { connect } from 'react-redux';
 
 
 class ProductDetail extends Component {
@@ -44,14 +45,42 @@ class ProductDetail extends Component {
                 productSuggest: res.data
             })
         })
-
-
-
     }
 
     render() {
         var numeral = require('numeral');
         let id = this.getProductID();
+
+
+        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+
+        var addCart = productID => {
+            if (userPhone == null) {
+                localStorage.setItem("FOCUS_LOGIN_TO_BUY", true);
+                window.location.replace(process.env.REACT_APP_DOMAIN + "login");
+            } else {
+                CallAPI(`Cart/${userPhone}`, 'PUT', { productID: productID }).then(() => {
+                    console.log(`thêm ${productID} thành công`);
+                    CallAPI(`Cart/count/${userPhone}`, 'GET', { productID: productID }).then(
+                        res => {
+                            this.props.dispatch({type:"UPDATE_TOTAL_ITEM_CART", data:res.data});
+                            console.log("Tổng:");
+                            console.log(res.data);
+                        }
+                    ).catch(() => {
+                        alert("Lỗi lấy số lượng giỏ hàng");
+                    })
+                }
+                ).catch(
+                    () => {
+                        localStorage.setItem("FOCUS_LOGIN_TO_BUY", true);
+                        window.location.replace(process.env.REACT_APP_DOMAIN + "login");
+                    }
+                )
+            }
+        }
+
+
 
         let product;
         if (this.state.product != null) {
@@ -76,8 +105,8 @@ class ProductDetail extends Component {
                         <Like href={url} colorScheme="dark" showFaces share />
                     </FacebookProvider>
                     <FacebookProvider appId={process.env.REACT_APP_FACEBOOK_APPID} chatSupport>
-        <CustomChat pageId="101397341588589" minimized={false}/>
-      </FacebookProvider>  
+                        <CustomChat pageId="101397341588589" minimized={false} />
+                    </FacebookProvider>
                     {/* Portfolio Item Row */}
                     <div className="row mt-2">
                         <div className="col-md-6">
@@ -114,7 +143,9 @@ class ProductDetail extends Component {
                             </ul>
 
 
-                            <button type="button" className="btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
+                            <button
+                                onClick={() => { addCart(id) }}
+                                type="button" className="btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
                             <Link to="/cart"><button type="button" className=" ml-4 btn btn-success btn-lg"><i className="fas fa-money-check-alt"></i> <strong>Mua hàng</strong></button></Link>
 
                         </div>
@@ -186,4 +217,6 @@ class ProductDetail extends Component {
     }
 }
 
-export default ProductDetail;
+const mapStateToProps = state => ({
+});
+export default connect(mapStateToProps)(ProductDetail);

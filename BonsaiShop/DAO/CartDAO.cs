@@ -44,12 +44,31 @@ namespace BonsaiShop.DAO
             return list;
         }
 
+        public int GetTotalCart(string phone)
+        {
+            int totalItem = dbcontext.Users.Join(
+                dbcontext.Cart,
+                user => user.userId,
+                cart => cart.userId,
+                (user, cart) => new { user, cart }
+                ).Join(
+                dbcontext.Products,
+                userJoinCart => userJoinCart.cart.productId,
+                product => product.productId,
+                (userJoinCart, product) => new { userJoinCart, product }
+                )
+                .Where(s => s.userJoinCart.user.phone.Equals(phone))
+                .Sum(s => s.userJoinCart.cart.quantity)
+                ;
+            return totalItem;
+        }
 
-        public bool UpdateCart(string phone, int productID)
+
+        public bool  UpdateCart(string phone, int productID)
         {
             try
             {
-                if (CartItemExist(phone, productID))
+                if (!CartItemExist(phone, productID))
                 {
                     Cart cart = new Cart
                     {
@@ -58,23 +77,16 @@ namespace BonsaiShop.DAO
                         quantity = 1
                     };
                     dbcontext.Cart.Add(cart);
-                    dbcontext.SaveChangesAsync();
+                     dbcontext.SaveChanges();
                 }
                 else
                 {
                     Cart cart = dbcontext.Cart.Where(
                         s => s.userId == userDAO.PhoneToID(phone)
                         && s.productId == productID)
-                        .FirstOrDefault();
-                    if (cart.quantity >= 5)
-                    {
-                        return false;
-                    }
-                    else
-                    {
+                        .FirstOrDefault();                         
                         cart.quantity += 1;
-                    }
-                    dbcontext.SaveChangesAsync();
+                     dbcontext.SaveChanges();
                 }
                 return true;
             }
@@ -104,7 +116,7 @@ namespace BonsaiShop.DAO
             {
                 Cart cart = dbcontext.Cart.Find(userDAO.PhoneToID(phone), productID);
                 dbcontext.Cart.Remove(cart);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch
@@ -119,7 +131,7 @@ namespace BonsaiShop.DAO
             {
                 var cart = dbcontext.Cart.Where(s => s.userId == userDAO.PhoneToID(phone));
                 dbcontext.Cart.RemoveRange(cart);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             } catch
             {

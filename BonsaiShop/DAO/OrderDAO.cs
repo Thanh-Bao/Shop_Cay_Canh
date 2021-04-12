@@ -86,7 +86,7 @@ namespace BonsaiShop.DAO
                 }
                 Order order = dbcontext.Orders.Find(id);
                 order.status = status;
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             } catch
             {
@@ -106,7 +106,7 @@ namespace BonsaiShop.DAO
                     totalMoney = totalMoney
                 };
                 dbcontext.Orders.Add(order);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                return  true;
             } catch
             {

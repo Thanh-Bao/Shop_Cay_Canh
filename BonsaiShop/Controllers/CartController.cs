@@ -32,11 +32,26 @@ namespace BonsaiShop.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpGet("count/{phone}")]
+        [MemberAuthorization]
+        public IActionResult GetToalCart(string phone)
+        {
+            try
+            {
+               int  count = cartDAO.GetTotalCart(phone);
+                return Ok(count);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
-       //  api/Cart/0965456545
+        //  api/Cart/0965456545
         [HttpPut("{phone}")]
         [MemberAuthorization]
-        public IActionResult UpdateCart(string phone,[FromBody] int productID)
+        public IActionResult UpdateCart(string phone, int productID)
         {
             try
             {
@@ -47,6 +62,8 @@ namespace BonsaiShop.Controllers
                 return BadRequest();
             }
         }
+
+        //Example : ENPOINT : /api/Cart/0943417917?productID=2
 
         //  api/Cart/0965456545
         [HttpDelete("{phone}")]

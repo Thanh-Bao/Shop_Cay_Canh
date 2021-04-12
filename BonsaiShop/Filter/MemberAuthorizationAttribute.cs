@@ -19,7 +19,7 @@ namespace BonsaiShop.Filter
             {
                 var identity = context.HttpContext.User.Identity as ClaimsIdentity;
                 IList<Claim> claim = identity.Claims.ToList();
-                string phonePayload = claim[0].Value;
+                string phonePayload = claim[1].Value;
                 string role = claim[1].Value;
                 string URL = context.HttpContext.Request.Path;
                 string phoneQuery = URL.Split('/').Last();

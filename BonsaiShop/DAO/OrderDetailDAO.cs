@@ -44,7 +44,7 @@ namespace BonsaiShop.DAO
             try
             {
 
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch

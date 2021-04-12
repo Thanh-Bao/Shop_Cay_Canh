@@ -99,7 +99,7 @@ namespace BonsaiShop.DAO
             try
             {
                 dbcontext.Products.Add(product);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch
@@ -191,7 +191,7 @@ namespace BonsaiShop.DAO
                 _product.description = product.description;
                 _product.height = product.height;
                 _product.origin = product.origin;
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch
@@ -248,7 +248,7 @@ namespace BonsaiShop.DAO
                     return false;
                 }
                 dbcontext.Products.Remove(product);
-                dbcontext.SaveChangesAsync();
+                dbcontext.SaveChanges();
                 return true;
             }
             catch

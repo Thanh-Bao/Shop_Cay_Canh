@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 
+
 let name = localStorage.getItem("customerName");
 let adminLogined = localStorage.getItem("adminLogined");
 
@@ -21,7 +22,10 @@ const initialState = {
 
     //Authentication
     adminLogined: adminLogined,
-    customerNameWellcome: name
+    customerNameWellcome: name,
+
+    //Total Cart
+    totalItemCart: null
 
 }
 function AllReducer(state = initialState, action) {
@@ -102,6 +106,11 @@ function AllReducer(state = initialState, action) {
             return {
                 ...state,
                 customerNameWellcome: action.data
+            }
+        case "UPDATE_TOTAL_ITEM_CART":
+            return {
+                ...state,
+                totalItemCart: action.data
             }
         default:
             break;

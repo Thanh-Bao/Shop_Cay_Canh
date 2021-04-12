@@ -83,7 +83,8 @@ class NavigationBarCustomer extends Component {
                             {showLoginBtn}
                             {showRegister}
                             <li className="nav-item">
-                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i> Giỏ hàng</NavLink>
+                                <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i>
+                                <span className="badge badge-pill badge-danger">{(this.props.totalItemCart!=null?this.props.totalItemCart:"")}</span> Giỏ hàng</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
@@ -108,6 +109,7 @@ const mapStateToProps = state => ({
     rangeBarChange: state.rangeBarChange,
     redirectToHome: state.redirectToHome,
     CustomerKeyWord: state.CustomerKeyWord,
-    customerNameWellcome: state.customerNameWellcome
+    customerNameWellcome: state.customerNameWellcome,
+    totalItemCart : state.totalItemCart
 })
 export default connect(mapStateToProps)(NavigationBarCustomer);
