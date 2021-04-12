@@ -1,6 +1,7 @@
 ﻿using BonsaiShop.DB;
 using BonsaiShop.DTO;
 using BonsaiShop.Model;
+using BonsaiShop.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,7 +137,7 @@ namespace BonsaiShop.DAO
                 .Where(s => s.phone.Equals(phone))
                 .FirstOrDefault();
 
-            if (!password.Equals(templeUser.password))
+            if (!Security.HashPasword(password, phone).Equals(templeUser.password))
             {
                 return null;
             }

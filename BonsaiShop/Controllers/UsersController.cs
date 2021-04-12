@@ -128,6 +128,9 @@ namespace BonsaiShop.Controllers
                     });
                 }
                 user.role = Config.Const.Role.MEMBER;
+                user.name = " ";
+                user.address = " ";
+                user.password = Security.HashPasword(user.password, user.phone);
                 userDAO.CreateUser(user);
                 return CreatedAtAction("GetUser", new { id = user.userId }, user);
             }

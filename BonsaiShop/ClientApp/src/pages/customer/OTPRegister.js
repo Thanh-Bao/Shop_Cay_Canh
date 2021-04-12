@@ -15,15 +15,8 @@ if (!firebase.apps.length) {
 
 class OTPRegister extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userRegisterTemple: localStorage.getItem("userRegister").phone
-        }
-
-    }
-
     componentDidMount() {
+        var user = JSON.parse(localStorage.getItem("userRegister"));
         console.log(this.props.userRegisterTemple);
         const uiConfig = {
             signInOptions: [{
@@ -34,14 +27,16 @@ class OTPRegister extends Component {
                     badge: 'bottomleft'
                 },
                 defaultCountry: 'VN',
-                defaultNationalNumber: localStorage.getItem("userRegister").phone
+                defaultNationalNumber: user.phone
             }],
             callbacks: {
                 signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-                    callAPi('Users/register', 'POST', null, localStorage.getItem("userRegister")).then(res => {
-                        console.log(res.data)
+                    callAPi('Users/register', 'POST', null, user).then(res => {
+                        localStorage.removeItem("userRegister");
+                        alert('Đăng kí tài khoản thành công, mời bạn đăng nhập');
+                    }).catch(res=>{
+                        alert('Xác thực thất bại, lỗi hệ thống');
                     });
-                    alert('Đăng kí tài khoản thành công, mời bạn đăng nhập');
                     return true;
                 }
             },
@@ -58,7 +53,7 @@ class OTPRegister extends Component {
 
                 <div className="container mt-5">
                     <div className="row justify-content-center">
-                        <h3 className="font-weight-bold">Nhập mã OTP được gửi đến SĐT: {localStorage.getItem("userRegister").phone}</h3>
+                        <h3 className="font-weight-bold">Nhập mã OTP được gửi đến SĐT: {JSON.parse(localStorage.getItem("userRegister")).phone}</h3>
                     </div>
                 </div>
                 <div className="container mt-2 mb-5">

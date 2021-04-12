@@ -37,11 +37,15 @@ class Login extends Component {
             password: this.state.password,
         }
         callAPi('Users/login', 'POST', { rememberLogin: this.state.rememberLogin }, body).then(res => {
-            console.log(res.data);
             localStorage.setItem("token",res.data.token);
             alert("Đăng nhập thành công");
-            this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.name});
-            localStorage.setItem("customerName",res.data.name);
+            if(res.data.name===" "){
+                localStorage.setItem("customerName",res.data.phone);
+                this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.phone});
+            } else {
+                localStorage.setItem("customerName",res.data.name);
+                this.props.dispatch({type:"UPDATE_CUSTOMER_WELCOME",data:res.data.name});
+            }
             this.props.history.push('/home')
         }).catch(
             err => {

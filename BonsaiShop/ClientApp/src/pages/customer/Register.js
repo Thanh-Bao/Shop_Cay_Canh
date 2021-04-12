@@ -57,7 +57,7 @@ class Register extends Component {
                         phone: this.state.phone,
                         password: this.state.password
                     }
-                     localStorage.setItem("userRegister",userRegister);
+                     localStorage.setItem("userRegister",JSON.stringify(userRegister));
                      setTimeout(this.props.history.push('/otp-register'), 2000);
                     
                 }
