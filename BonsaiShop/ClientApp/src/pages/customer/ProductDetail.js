@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import CardProduct from '../../components/CardProduct';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { FacebookProvider, Comments, Like, CustomChat } from 'react-facebook';
 
 
 class ProductDetail extends Component {
@@ -44,7 +45,7 @@ class ProductDetail extends Component {
             })
         })
 
-        
+
 
     }
 
@@ -71,8 +72,14 @@ class ProductDetail extends Component {
         if (this.state.product != null) {
             CONTENT = (
                 <div className="mt-4 container">
+                    <FacebookProvider appId={process.env.REACT_APP_FACEBOOK_APPID}>
+                        <Like href={url} colorScheme="dark" showFaces share />
+                    </FacebookProvider>
+                    <FacebookProvider appId={process.env.REACT_APP_FACEBOOK_APPID} chatSupport>
+        <CustomChat pageId="101397341588589" minimized={false}/>
+      </FacebookProvider>  
                     {/* Portfolio Item Row */}
-                    <div className="row">
+                    <div className="row mt-2">
                         <div className="col-md-6">
                             <img className="img-fluid" src={pro.thumbnail} alt="fdf" />
                         </div>
@@ -119,11 +126,12 @@ class ProductDetail extends Component {
 
                     {ReactHtmlParser(pro.description)}
 
-                    <div className="container mb-2">
+                    <div className="container-fluid mb-2">
                         <div className="row">
-                            <div className="col-12">
-                                <div className="fb-comments" data-href={url}
-                                    data-mobile data-numposts="5"></div>
+                            <div className="d-flex justify-content-center col-12">
+                                <FacebookProvider appId={process.env.REACT_APP_FACEBOOK_APPID}>
+                                    <Comments href={url} />
+                                </FacebookProvider>
                             </div>
                         </div>
                     </div>
