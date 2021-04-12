@@ -16,4 +16,5 @@ npm i @fortawesome/fontawesome-free/
  npm i react-firebase-file-uploader/
  npm install react-html-parser/
  npm i string-strip-html/
+ npm i react-facebook/
  
