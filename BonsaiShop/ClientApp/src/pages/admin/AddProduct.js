@@ -109,6 +109,8 @@ class AddProduct extends Component {
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Giá (VNĐ)</label>
                                         <input required
+                                            min={100000}
+                                            max={9999999999}
                                             value={this.state.price}
                                             onChange={this.handleInputChange}
                                             name="price" type="number" id="inputPassword5" className="form-control"
@@ -135,6 +137,8 @@ class AddProduct extends Component {
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Chiều cao (cm)</label>
                                         <input required
+                                            min={10}
+                                            max={200}
                                             value={this.state.height}
                                             onChange={this.handleInputChange}
                                             name="height" type="number" id="inputPassword5" className="form-control"

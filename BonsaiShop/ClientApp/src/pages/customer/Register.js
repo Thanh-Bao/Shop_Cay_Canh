@@ -57,9 +57,9 @@ class Register extends Component {
                         phone: this.state.phone,
                         password: this.state.password
                     }
-                     localStorage.setItem("userRegister",JSON.stringify(userRegister));
-                     setTimeout(this.props.history.push('/otp-register'), 2000);
-                    
+                    localStorage.setItem("userRegister", JSON.stringify(userRegister));
+                    setTimeout(this.props.history.push('/otp-register'), 2000);
+
                 }
             }).catch(
                 err => {
@@ -106,6 +106,8 @@ class Register extends Component {
                                 <div className="form-label-group">
                                     <label >Số điện thoại</label>
                                     <input
+                                        min={0}
+                                        max={9999999999}
                                         name="phone"
                                         onChange={this.handleInputChange}
                                         type="number" className="form-control  boder-style" placeholder="09xxxxxxxx" autoFocus required />

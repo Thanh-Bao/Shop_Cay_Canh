@@ -65,7 +65,7 @@ namespace BonsaiShop.DAO
         }
 
 
-        public bool  UpdateCart(string phone, int productID)
+        public bool  AddCart(string phone, int productID)
         {
             try
             {

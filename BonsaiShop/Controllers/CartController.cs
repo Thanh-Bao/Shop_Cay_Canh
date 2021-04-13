@@ -55,7 +55,7 @@ namespace BonsaiShop.Controllers
         {
             try
             {
-                cartDAO.UpdateCart(phone, productID);
+                cartDAO.AddCart(phone, productID);
                 return NoContent();
             } catch
             {

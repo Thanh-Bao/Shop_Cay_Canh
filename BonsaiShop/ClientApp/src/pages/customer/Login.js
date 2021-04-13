@@ -102,6 +102,8 @@ class Login extends Component {
                                 <div className="form-label-group">
                                     <label htmlFor="inputEmail">Số điện thoại</label>
                                     <input
+                                        min={0}
+                                        max={9999999999}
                                         name="phone"
                                         onChange={this.handleInputChange}
                                         type="number" className="form-control  boder-style" placeholder="09xxxxxxxx" autoFocus required />
