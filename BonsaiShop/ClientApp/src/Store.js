@@ -25,7 +25,7 @@ const initialState = {
     customerNameWellcome: name,
 
     //Total Cart
-    totalItemCart: {count : 0, sum : 0}
+    totalItemCart: {count : localStorage.getItem("TOTAL_ITEM_CART"), sum : localStorage.getItem("SUM_CART")}
 
 }
 function AllReducer(state = initialState, action) {

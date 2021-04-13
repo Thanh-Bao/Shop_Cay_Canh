@@ -36,6 +36,8 @@ class CartItem extends Component {
         CallAPI(`Cart/count/${userPhone}`).then(
             res => {
                 this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", data: res.data });
+                localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
+                localStorage.setItem("SUM_CART",res.data.sum);
             }).catch(() => {
                 alert("Lỗi lấy tổng sản phẩm giỏ hàng");
             })
@@ -52,7 +54,9 @@ class CartItem extends Component {
 
         CallAPI(`Cart/count/${userPhone}`).then(
             res => {
-                this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", data: res.data });
+                this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", data: res.data.count });
+                localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
+                localStorage.setItem("SUM_CART",res.data.sum);
             }).catch(() => {
                 alert("Lỗi lấy tổng sản phẩm giỏ hàng");
             });

@@ -64,6 +64,8 @@ class ProductDetail extends Component {
                     CallAPI(`Cart/count/${userPhone}`, 'GET', { productID: productID }).then(
                         res => {
                             this.props.dispatch({type:"UPDATE_TOTAL_ITEM_CART", data:res.data});
+                            localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
+                            localStorage.setItem("SUM_CART",res.data.sum);
                             console.log("Tổng:");
                             console.log(res.data);
                         }

@@ -6,6 +6,9 @@ import SuggestSearch from '../components/SuggestSearch';
 
 class NavigationBarCustomer extends Component {
 
+    
+
+   
 
     disableRedirectToHome() {
         this.props.dispatch({ type: "DISABLE_REDIRECT_TO_HOME" });

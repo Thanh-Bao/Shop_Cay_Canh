@@ -9,7 +9,8 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItem: []
+      listItem: [],
+      cartinfo : this.props.totalItemCart
     }
   }
 
@@ -72,7 +73,7 @@ class Cart extends Component {
                         <tbody>
                           <tr>
                             <th scope="row">Phí Ship:</th>
-                            <td ><h5 className="font-weight-bold text-danger">{numeral(0).format('0,0')} đ</h5></td>
+                            <td ><h5 className="font-weight-bold text-danger">miễn phí</h5></td>
 
                           </tr>
                           <tr>
