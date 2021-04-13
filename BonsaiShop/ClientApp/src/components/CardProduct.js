@@ -9,9 +9,9 @@ class CardProduct extends Component {
         var numeral = require('numeral');
         var striptags = require('striptags');
 
-        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
 
         var addCart = productID => {
+            let userPhone = localStorage.getItem("PHONEUSERLOGINED");
             if (userPhone == null) {
                 localStorage.setItem("FOCUS_LOGIN_TO_BUY", true);
                 window.location.replace(process.env.REACT_APP_DOMAIN + "login");
@@ -30,8 +30,7 @@ class CardProduct extends Component {
                 }
                 ).catch(
                     () => {
-                        localStorage.setItem("FOCUS_LOGIN_TO_BUY", true);
-                        window.location.replace(process.env.REACT_APP_DOMAIN + "login");
+                        alert("Thêm vào giỏ hàng thất bại");
                     }
                 )
             }

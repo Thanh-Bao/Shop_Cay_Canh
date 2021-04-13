@@ -45,6 +45,25 @@ namespace BonsaiShop.DAO
             return list;
         }
 
+        public int SumCart(string phone)
+        {
+            int sum = dbcontext.Users.Join(
+                 dbcontext.Cart,
+                 user => user.userId,
+                 cart => cart.userId,
+                 (user, cart) => new { user, cart }
+                 ).Join(
+                 dbcontext.Products,
+                 userJoinCart => userJoinCart.cart.productId,
+                 product => product.productId,
+                 (userJoinCart, product) => new { userJoinCart, product }
+                 )
+                 .Where(s => s.userJoinCart.user.phone.Equals(phone))
+                 .Sum(s => s.userJoinCart.cart.quantity * s.product.price )
+                 ;
+            return sum;
+        }
+
         public int GetTotalCart(string phone)
         {
             int totalItem = dbcontext.Users.Join(
@@ -90,6 +109,28 @@ namespace BonsaiShop.DAO
                      dbcontext.SaveChanges();
                 }
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool SubtractCart(string phone, int productID)
+        {
+            try
+            {
+                if (CartItemExist(phone, productID))
+                {
+                    Cart cart = dbcontext.Cart.Where(
+                       s => s.userId == userDAO.PhoneToID(phone)
+                       && s.productId == productID)
+                       .FirstOrDefault();
+                    cart.quantity -= 1;
+                    dbcontext.SaveChanges();
+                    return true;
+                }
+                return false;       
             }
             catch
             {

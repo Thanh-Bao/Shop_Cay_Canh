@@ -84,7 +84,7 @@ class NavigationBarCustomer extends Component {
                             {showRegister}
                             <li className="nav-item">
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/cart"><i className="fas fa-shopping-cart"></i>
-                                <span className="badge badge-pill badge-danger">{(this.props.totalItemCart!=null?this.props.totalItemCart:"")}</span> Giỏ hàng</NavLink>
+                                <span className="badge badge-pill badge-danger">{(this.props.totalItemCart!=null?this.props.totalItemCart.count:"")}</span> Giỏ hàng</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>

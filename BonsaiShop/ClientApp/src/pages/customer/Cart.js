@@ -3,12 +3,13 @@ import CartItem from '../../components/CartItem';
 import CallAPI from '../../callAPI/callAPIMainServer';
 import ImageHolder from '../../components/Loading';
 import '../../css/Cart.css';
+import { connect } from 'react-redux';
 
 class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItem: null
+      listItem: []
     }
   }
 
@@ -16,13 +17,15 @@ class Cart extends Component {
   componentDidMount() {
     let userPhone = localStorage.getItem("PHONEUSERLOGINED");
     CallAPI(`Cart/${userPhone}`).then(res => {
-      console.log(res.data);
       this.setState({
         listItem: res.data
       })
     }).catch(() => {
       console.log("LỖI LẤY DANH SÁCH GIỎ HÀNG");
     })
+
+
+
   }
 
   render() {
@@ -43,7 +46,7 @@ class Cart extends Component {
     }
     return (
       <div>
-        {(this.state.listItem != null) ?
+        {(this.state.listItem.length > 0) ?
           (<div>
             <div className="container-fluid my-5 mx-3">
               <div className="row">
@@ -51,21 +54,6 @@ class Cart extends Component {
                   <table className="table">
 
                     <tbody>
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
-                      {showItems}
                       {showItems}
                     </tbody>
                   </table>
@@ -78,7 +66,7 @@ class Cart extends Component {
                         <thead>
                           <tr>
                             <th scope="col">Tạm tính:</th>
-                            <td ><h5 className="font-weight-bold text-danger">{numeral(10000000000).format('0,0')} đ</h5></td>
+                            <td ><h5 className="font-weight-bold text-danger">{numeral(this.props.totalItemCart.sum).format('0,0')} đ</h5></td>
                           </tr>
                         </thead>
                         <tbody>
@@ -89,7 +77,7 @@ class Cart extends Component {
                           </tr>
                           <tr>
                             <th scope="row">Tổng Tiền:</th>
-                            <td ><h5 className="font-weight-bold text-danger">{numeral(10000000000).format('0,0')} đ</h5></td>
+                            <td ><h5 className="font-weight-bold text-danger">{numeral(this.props.totalItemCart.sum).format('0,0')} đ</h5></td>
 
                           </tr>
 
@@ -113,5 +101,7 @@ class Cart extends Component {
     );
   }
 }
-
-export default Cart;
+const mapStateToProps = state => ({
+  totalItemCart : state.totalItemCart
+});
+export default connect(mapStateToProps)(Cart);

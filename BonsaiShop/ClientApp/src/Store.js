@@ -25,7 +25,7 @@ const initialState = {
     customerNameWellcome: name,
 
     //Total Cart
-    totalItemCart: null
+    totalItemCart: {count : 0, sum : 0}
 
 }
 function AllReducer(state = initialState, action) {

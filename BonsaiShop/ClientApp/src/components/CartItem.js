@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/ItemCart.css';
 import CallAPI from '../callAPI/callAPIMainServer';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class CartItem extends Component {
     constructor(props) {
@@ -38,6 +39,8 @@ class CartItem extends Component {
             }).catch(() => {
                 alert("Lỗi lấy tổng sản phẩm giỏ hàng");
             })
+
+
     }
 
 
@@ -53,6 +56,8 @@ class CartItem extends Component {
             }).catch(() => {
                 alert("Lỗi lấy tổng sản phẩm giỏ hàng");
             });
+
+            window.location.reload();
     }
 
 
