@@ -17,4 +17,5 @@ npm i @fortawesome/fontawesome-free/
  npm install react-html-parser/
  npm i string-strip-html/
  npm i react-facebook/
+ npm i react-qr-code/
  
