@@ -13,9 +13,13 @@
     list-style: none;
     margin-top: 0;
     max-height: 143px;
+    position: absolute;
     overflow-y: auto;
+    background: white;
     padding-left: 0;
-    width: calc(300px + 1rem);
+    top: 38px;
+    left: 41px;
+    width: 87%;
   }
   
   .suggestions li {
@@ -40,4 +44,9 @@
 
   #ItemSuggest{
 
+  }
+
+
+  #form-search-nav{
+    position: relative;
   }

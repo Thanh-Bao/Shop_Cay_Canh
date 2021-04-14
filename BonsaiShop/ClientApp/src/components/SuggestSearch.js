@@ -118,7 +118,7 @@ class SuggestSearch extends Component {
         }
         return (
             <Fragment>
-                <form onSubmit={this.handleSubmit} className="form-inline ml-auto my-2 my-lg-0">
+                <form onSubmit={this.handleSubmit} id="form-search-nav" className="form-inline ml-auto my-2 my-lg-0">
                     <div className="input-group">
                         <span id="nav-icon-search" className="input-group-text" id="basic-addonNavCustomer"><i className="fas fa-search"></i></span>
                         <input
@@ -131,8 +131,8 @@ class SuggestSearch extends Component {
                             aria-label="Username" aria-describedby="basic-addonNavCustomer" />
                     </div>
                     <button id="nav-btn-search" className="btn btn-outline-success my-2 my-sm-0 " type="submit">Tìm</button>
-                </form>
                 {suggestionsListComponent}
+                </form>
             </Fragment>
         );
     }
