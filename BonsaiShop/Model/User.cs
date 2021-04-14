@@ -21,7 +21,7 @@ namespace BonsaiShop.Model
         public string role { set; get; }
 
         public ICollection<Order> orders { get; set; }
-        public ICollection<Cart> carts { get; set; }
+        public ICollection<CartItem> carts { get; set; }
 
     }
 }

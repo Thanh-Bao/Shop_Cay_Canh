@@ -30,7 +30,6 @@ namespace BonsaiShop
             services.AddScoped<UserDAO>();
             services.AddScoped<ProductDAO>();
             services.AddScoped<OrderDAO>();
-            services.AddScoped<OrderDetailDAO>();
             services.AddScoped<CartDAO>();
 
             // CROS

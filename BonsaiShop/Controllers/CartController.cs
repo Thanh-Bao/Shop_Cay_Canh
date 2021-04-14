@@ -18,7 +18,7 @@ namespace BonsaiShop.Controllers
             this.cartDAO = cartDAO;
         }
 
-        // api/Cart/0965456545
+        // api/CartItem/0965456545
         [HttpGet("{phone}")]
         [MemberAuthorization]
         public IActionResult GetCart(string phone)
@@ -57,7 +57,7 @@ namespace BonsaiShop.Controllers
             }
         }
 
-        //  api/Cart/0965456545
+        //  api/CartItem/0965456545
         [HttpPut("{phone}")]
         [MemberAuthorization]
         public IActionResult UpdateCart(string phone, int productID)
@@ -87,9 +87,9 @@ namespace BonsaiShop.Controllers
             }
         }
 
-        //Example : ENPOINT : /api/Cart/0943417917?productID=2
+        //Example : ENPOINT : /api/CartItem/0943417917?productID=2
 
-        //  api/Cart/0965456545
+        //  api/CartItem/0965456545
         [HttpDelete("{phone}")]
         [MemberAuthorization]
         public IActionResult DeleteItemFromCart(string phone, int productID)

@@ -18,7 +18,7 @@ namespace BonsaiShop.Model
 
         public int quantity { get; set; }
 
-        public int totalMoney { get; set; }
+        public int price { get; set; }
 
         [ForeignKey("orderId")]
         public Order order { get; set; }

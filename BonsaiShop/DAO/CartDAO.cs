@@ -45,6 +45,33 @@ namespace BonsaiShop.DAO
             return list;
         }
 
+        public List<ProductDTO> GetCartForCheckOut(string phone)
+        {
+            List<ProductDTO> list = dbcontext.Users.Join(
+                dbcontext.Cart,
+                user => user.userId,
+                cart => cart.userId,
+                (user, cart) => new { user, cart }
+                ).Join(
+                dbcontext.Products,
+                userJoinCart => userJoinCart.cart.productId,
+                product => product.productId,
+                (userJoinCart, product) => new { userJoinCart, product }
+                )
+                .Where(s => s.userJoinCart.user.phone.Equals(phone))
+                .Select(s => new ProductDTO
+                {
+                    productID = s.product.productId,
+                    name = s.product.name,
+                    price = s.product.price,
+                    quantity = s.userJoinCart.cart.quantity,
+                    thumbnail = s.product.thumbnail
+                })
+                .ToList();
+            return list;
+        }
+
+
         public int SumCart(string phone)
         {
             int sum = dbcontext.Users.Join(
@@ -90,7 +117,7 @@ namespace BonsaiShop.DAO
             {
                 if (!CartItemExist(phone, productID))
                 {
-                    Cart cart = new Cart
+                    CartItem cart = new CartItem
                     {
                         userId = userDAO.PhoneToID(phone),
                         productId = productID,
@@ -101,7 +128,7 @@ namespace BonsaiShop.DAO
                 }
                 else
                 {
-                    Cart cart = dbcontext.Cart.Where(
+                    CartItem cart = dbcontext.Cart.Where(
                         s => s.userId == userDAO.PhoneToID(phone)
                         && s.productId == productID)
                         .FirstOrDefault();                         
@@ -122,7 +149,7 @@ namespace BonsaiShop.DAO
             {
                 if (CartItemExist(phone, productID))
                 {
-                    Cart cart = dbcontext.Cart.Where(
+                    CartItem cart = dbcontext.Cart.Where(
                        s => s.userId == userDAO.PhoneToID(phone)
                        && s.productId == productID)
                        .FirstOrDefault();
@@ -156,7 +183,7 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                Cart cart = dbcontext.Cart.Find(userDAO.PhoneToID(phone), productID);
+                CartItem cart = dbcontext.Cart.Find(userDAO.PhoneToID(phone), productID);
                 dbcontext.Cart.Remove(cart);
                 dbcontext.SaveChanges();
                 return true;

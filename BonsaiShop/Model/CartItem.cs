@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BonsaiShop.Model
 {
-    public class Cart
+    public class CartItem
     {
         [Key]
         [Column(Order = 0)]

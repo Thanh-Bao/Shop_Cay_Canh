@@ -10,18 +10,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonsaiShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210409010534_initial")]
-    partial class initial
+    [Migration("20210414171315_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BonsaiShop.Model.Cart", b =>
+            modelBuilder.Entity("BonsaiShop.Model.CartItem", b =>
                 {
                     b.Property<int>("userId")
                         .HasColumnType("int");
@@ -73,10 +73,10 @@ namespace BonsaiShop.Migrations
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<int>("totalMoney")
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("orderId", "productId");
@@ -154,7 +154,7 @@ namespace BonsaiShop.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BonsaiShop.Model.Cart", b =>
+            modelBuilder.Entity("BonsaiShop.Model.CartItem", b =>
                 {
                     b.HasOne("BonsaiShop.Model.Product", "product")
                         .WithMany("carts")

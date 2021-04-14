@@ -9,7 +9,7 @@ namespace BonsaiShop.DB
         public DbSet<Product> Products { set; get; }
         public DbSet<Order> Orders { set; get; }
         public DbSet<OrderDetail> OrderDetails { set; get; }
-        public DbSet<Cart> Cart { set; get; }
+        public DbSet<CartItem> Cart { set; get; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -19,7 +19,7 @@ namespace BonsaiShop.DB
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderDetail>().HasKey(l => new { l.orderId, l.productId });
-            modelBuilder.Entity<Cart>().HasKey(l => new { l.userId, l.productId });
+            modelBuilder.Entity<CartItem>().HasKey(l => new { l.userId, l.productId });
         }
     }
 }

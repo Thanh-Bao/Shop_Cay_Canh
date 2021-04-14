@@ -2,7 +2,7 @@
 
 namespace BonsaiShop.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,7 +97,7 @@ namespace BonsaiShop.Migrations
                     orderId = table.Column<int>(type: "int", nullable: false),
                     productId = table.Column<int>(type: "int", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
-                    totalMoney = table.Column<int>(type: "int", nullable: false)
+                    price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

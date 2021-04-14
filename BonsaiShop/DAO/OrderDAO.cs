@@ -42,7 +42,7 @@ namespace BonsaiShop.DAO
             return list;
         }
 
-        public List<OrderDTO> GetOrdersMember(string phone,int? page)
+        public List<OrderDTO> GetOrdersMember(string phone, int? page)
         {
             int _page = 1;
             if (page != null)
@@ -54,11 +54,11 @@ namespace BonsaiShop.DAO
             List<OrderDTO> list = dbcontext.Orders
                 .Join(
                 dbcontext.Users,
-                order=> order.userId,
-                user=>user.userId,
-                (_order, _user)=> new {_order,_user}
+                order => order.userId,
+                user => user.userId,
+                (_order, _user) => new { _order, _user }
                 )
-                .Where(s=>s._user.userId==userDAO.PhoneToID(phone))
+                .Where(s => s._user.userId == userDAO.PhoneToID(phone))
                 .Select(s => new OrderDTO
                 {
                     orderId = s._order.orderId,
@@ -77,7 +77,7 @@ namespace BonsaiShop.DAO
         {
             try
             {
-                if(status!= Config.Const.OrderStatus.PENDING
+                if (status != Config.Const.OrderStatus.PENDING
                 || status != Config.Const.OrderStatus.SHIPPING
                 || status != Config.Const.OrderStatus.CANCEL
                     )
@@ -88,7 +88,8 @@ namespace BonsaiShop.DAO
                 order.status = status;
                 dbcontext.SaveChanges();
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
@@ -101,18 +102,35 @@ namespace BonsaiShop.DAO
                 Order order = new Order
                 {
                     userId = userID,
-                    timestamp = (Int32) DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                    timestamp = (Int32)DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                     status = Config.Const.OrderStatus.PENDING,
                     totalMoney = totalMoney
                 };
                 dbcontext.Orders.Add(order);
                 dbcontext.SaveChanges();
-               return  true;
-            } catch
+                return true;
+            }
+            catch
             {
                 return false;
             }
         }
+
+
+        public bool AddOrderDetail(int orderID, OrderDetail orderdetail)
+        {
+            try
+            {
+                dbcontext.OrderDetails.Add(orderdetail);
+                dbcontext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
     }
 }
