@@ -39,7 +39,14 @@ namespace BonsaiShop.BO
 
                 foreach (ProductDTO item in cart)
                 {
-                   
+                    var orderDetail = new OrderDetail
+                    {
+                        orderId = orderIDrd,
+                        productId = item.productID,
+                        quantity = item.quantity,
+                        price = item.price
+                    };
+                    orderDAO.AddOrderDetail(orderDetail);
                 }
 
                 return true;

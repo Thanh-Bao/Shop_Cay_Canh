@@ -10,10 +10,9 @@ namespace BonsaiShop.Model
     public class Order
     {
         [Key]
-        public int STT { set; get; }
        public int orderId { set; get; }
 
-        public int userId { set; get; }
+        public  string phone { set; get; }
 
         public int timestamp { set; get; }
        
@@ -23,7 +22,7 @@ namespace BonsaiShop.Model
 
         public string paymentMethod { set; get; }
 
-        [ForeignKey("userId")]
+        [ForeignKey("phone")]
         public User user { set; get; }
 
         public ICollection<OrderDetail> orderDetails { get; set; }

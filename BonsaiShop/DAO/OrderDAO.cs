@@ -33,7 +33,7 @@ namespace BonsaiShop.DAO
                 .Select(s => new OrderDTO
                 {
                     orderId = s.orderId,
-                    phone = userDAO.IdToPhone(s.userId),
+                    phone = s.phone,
                     timestamp = s.timestamp,
                     totalMoney = s.totalMoney,
                     status = s.status,
@@ -56,15 +56,15 @@ namespace BonsaiShop.DAO
             List<OrderDTO> list = dbcontext.Orders
                 .Join(
                 dbcontext.Users,
-                order => order.userId,
-                user => user.userId,
+                order => order.phone,
+                user => user.phone,
                 (_order, _user) => new { _order, _user }
                 )
-                .Where(s => s._user.userId == userDAO.PhoneToID(phone))
+                .Where(s => s._user.phone.Equals(phone))
                 .Select(s => new OrderDTO
                 {
                     orderId = s._order.orderId,
-                    phone = userDAO.IdToPhone(s._user.userId),
+                    phone = phone,
                     timestamp = s._order.timestamp,
                     totalMoney = s._order.totalMoney,
                     status = s._order.status,
@@ -104,7 +104,7 @@ namespace BonsaiShop.DAO
                 Order order = new Order
                 {
                     orderId = orderID,
-                    userId = userDAO.PhoneToID(phone),
+                    phone = phone,
                     timestamp = (Int32)DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                     status = Config.Const.OrderStatus.PENDING,
                     totalMoney = cartDAO.SumCart(phone),
@@ -121,7 +121,7 @@ namespace BonsaiShop.DAO
         }
 
 
-        public bool AddOrderDetail(int orderID, OrderDetail orderdetail)
+        public bool AddOrderDetail(OrderDetail orderdetail)
         {
             try
             {
@@ -133,6 +133,21 @@ namespace BonsaiShop.DAO
             {
                 return false;
             }
+        }
+
+        public void Test()
+        {
+
+            var orderDetail = new OrderDetail
+            {
+                orderId = 1234,
+                productId = 1,
+                quantity = 435453,
+                price = 53455534
+            };
+            dbcontext.OrderDetails.Add(orderDetail);
+            dbcontext.SaveChanges();
+
         }
 
 

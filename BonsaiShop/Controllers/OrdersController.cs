@@ -31,6 +31,15 @@ namespace BonsaiShop.Controllers
              
         }
 
+        [HttpGet]
+        [Route("test")]
+        public IActionResult test()
+        {
+            orderDAO.Test();
+            return Ok();
+        }
+
+
 
     }
 }

@@ -16,7 +16,7 @@ namespace BonsaiShop.Model
         [Column(Order = 1)]
         public int productId { get; set; }
 
-        public int quantity { get; set; }
+        public int? quantity { get; set; }
 
         public int price { get; set; }
 

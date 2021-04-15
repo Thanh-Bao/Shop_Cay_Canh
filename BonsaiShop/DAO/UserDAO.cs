@@ -32,7 +32,7 @@ namespace BonsaiShop.DAO
                 .Where(s => s.role.Equals(role))
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
-                .OrderByDescending(s => s.userId)
+                .OrderByDescending(s => s.timestamp)
                 .Select(s => new UserDTO
                 {
                     phone = s.phone,
@@ -60,7 +60,7 @@ namespace BonsaiShop.DAO
                 )
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
-                .OrderByDescending(s => s.userId)
+                .OrderByDescending(s => s.timestamp)
                 .Select(s => new UserDTO
                 {
                     phone = s.phone,
@@ -144,18 +144,7 @@ namespace BonsaiShop.DAO
             return templeUser.role;
         }
 
-        public int PhoneToID(string phone)
-        {
-            User user = dbcontext.Users.Where(s => s.phone.Equals(phone)).FirstOrDefault();
-            return user.userId;
-        }
-
-        public string IdToPhone(int id)
-        {
-            User user = dbcontext.Users.Find(id);
-            return user.phone;
-        }
-
+        
     }
 }
 

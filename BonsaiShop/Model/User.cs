@@ -11,7 +11,6 @@ namespace BonsaiShop.Model
     {
        
         [Key]
-        public int userId { set; get; }
         [Required(ErrorMessage = "Please enter corect number phone"), MaxLength(13)]
         public string phone { set; get; }
         public string name { set; get; }
@@ -19,6 +18,7 @@ namespace BonsaiShop.Model
         [Required]
         public string password { set; get; }
         public string role { set; get; }
+        public int timestamp { set; get; }
 
         public ICollection<Order> orders { get; set; }
         public ICollection<CartItem> carts { get; set; }

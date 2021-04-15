@@ -8,6 +8,7 @@ using BonsaiShop.DAO;
 using BonsaiShop.Utility;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System;
 
 namespace BonsaiShop.Controllers
 {
@@ -131,8 +132,9 @@ namespace BonsaiShop.Controllers
                 user.name = " ";
                 user.address = " ";
                 user.password = Security.HashPasword(user.password, user.phone);
+                user.timestamp = (Int32)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 userDAO.CreateUser(user);
-                return CreatedAtAction("GetUser", new { id = user.userId }, user);
+                return CreatedAtAction("GetUser", new { id = user.phone }, user);
             }
             catch
             {

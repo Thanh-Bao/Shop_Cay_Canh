@@ -30,30 +30,29 @@ namespace BonsaiShop.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    userId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     phone = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    role = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    timestamp = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.userId);
+                    table.PrimaryKey("PK_Users", x => x.phone);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Cart",
                 columns: table => new
                 {
-                    userId = table.Column<int>(type: "int", nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(13)", nullable: false),
                     productId = table.Column<int>(type: "int", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cart", x => new { x.userId, x.productId });
+                    table.PrimaryKey("PK_Cart", x => new { x.phone, x.productId });
                     table.ForeignKey(
                         name: "FK_Cart_Products_productId",
                         column: x => x.productId,
@@ -61,10 +60,10 @@ namespace BonsaiShop.Migrations
                         principalColumn: "productId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Cart_Users_userId",
-                        column: x => x.userId,
+                        name: "FK_Cart_Users_phone",
+                        column: x => x.phone,
                         principalTable: "Users",
-                        principalColumn: "userId",
+                        principalColumn: "phone",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -72,10 +71,8 @@ namespace BonsaiShop.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    STT = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     orderId = table.Column<int>(type: "int", nullable: false),
-                    userId = table.Column<int>(type: "int", nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(13)", nullable: true),
                     timestamp = table.Column<int>(type: "int", nullable: false),
                     totalMoney = table.Column<int>(type: "int", nullable: false),
                     status = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -83,13 +80,13 @@ namespace BonsaiShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.STT);
+                    table.PrimaryKey("PK_Orders", x => x.orderId);
                     table.ForeignKey(
-                        name: "FK_Orders_Users_userId",
-                        column: x => x.userId,
+                        name: "FK_Orders_Users_phone",
+                        column: x => x.phone,
                         principalTable: "Users",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "phone",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +95,7 @@ namespace BonsaiShop.Migrations
                 {
                     orderId = table.Column<int>(type: "int", nullable: false),
                     productId = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: true),
                     price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -108,7 +105,7 @@ namespace BonsaiShop.Migrations
                         name: "FK_OrderDetails_Orders_orderId",
                         column: x => x.orderId,
                         principalTable: "Orders",
-                        principalColumn: "STT",
+                        principalColumn: "orderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_productId",
@@ -129,9 +126,9 @@ namespace BonsaiShop.Migrations
                 column: "productId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_userId",
+                name: "IX_Orders_phone",
                 table: "Orders",
-                column: "userId");
+                column: "phone");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

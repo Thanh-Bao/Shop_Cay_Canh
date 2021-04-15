@@ -21,8 +21,8 @@ namespace BonsaiShop.Migrations
 
             modelBuilder.Entity("BonsaiShop.Model.CartItem", b =>
                 {
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<int>("productId")
                         .HasColumnType("int");
@@ -30,7 +30,7 @@ namespace BonsaiShop.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("userId", "productId");
+                    b.HasKey("phone", "productId");
 
                     b.HasIndex("productId");
 
@@ -39,16 +39,15 @@ namespace BonsaiShop.Migrations
 
             modelBuilder.Entity("BonsaiShop.Model.Order", b =>
                 {
-                    b.Property<int>("STT")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("orderId")
                         .HasColumnType("int");
+             
 
                     b.Property<string>("paymentMethod")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
@@ -59,12 +58,9 @@ namespace BonsaiShop.Migrations
                     b.Property<int>("totalMoney")
                         .HasColumnType("int");
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
+                    b.HasKey("orderId");
 
-                    b.HasKey("STT");
-
-                    b.HasIndex("userId");
+                    b.HasIndex("phone");
 
                     b.ToTable("Orders");
                 });
@@ -80,7 +76,7 @@ namespace BonsaiShop.Migrations
                     b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<int>("quantity")
+                    b.Property<int?>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("orderId", "productId");
@@ -130,10 +126,9 @@ namespace BonsaiShop.Migrations
 
             modelBuilder.Entity("BonsaiShop.Model.User", b =>
                 {
-                    b.Property<int>("userId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("phone")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
@@ -145,30 +140,28 @@ namespace BonsaiShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("phone")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
                     b.Property<string>("role")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("userId");
+                    b.Property<int>("timestamp")
+                        .HasColumnType("int");
+
+                    b.HasKey("phone");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BonsaiShop.Model.CartItem", b =>
                 {
-                    b.HasOne("BonsaiShop.Model.Product", "product")
+                    b.HasOne("BonsaiShop.Model.User", "user")
                         .WithMany("carts")
-                        .HasForeignKey("productId")
+                        .HasForeignKey("phone")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BonsaiShop.Model.User", "user")
+                    b.HasOne("BonsaiShop.Model.Product", "product")
                         .WithMany("carts")
-                        .HasForeignKey("userId")
+                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -181,9 +174,7 @@ namespace BonsaiShop.Migrations
                 {
                     b.HasOne("BonsaiShop.Model.User", "user")
                         .WithMany("orders")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("phone");
 
                     b.Navigation("user");
                 });

@@ -11,14 +11,14 @@ namespace BonsaiShop.Model
     {
         [Key]
         [Column(Order = 0)]
-        public int userId { get; set; }
+        public string phone { get; set; }
         [Key]
         [Column(Order = 1)]
         public int productId { get; set; }
 
         public int quantity { get; set; }
 
-        [ForeignKey("userId")]
+        [ForeignKey("phone")]
         public User user { get; set; }
         [ForeignKey("productId")]
         public Product product { get; set; }
