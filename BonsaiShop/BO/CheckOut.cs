@@ -26,35 +26,36 @@ namespace BonsaiShop.BO
             this.cartDAO = cartDAO;
         }
 
-        public bool Purchase(string phone)
+        public bool Purchase(int orderId, string phone)
         {
             try
             {
                 List<ProductDTO> cart = cartDAO.GetCart(phone);
-
-                Random rnd = new Random();
-                int orderIDrd = rnd.Next(10000, 999999);
-
-                orderDAO.AddOrder(orderIDrd, phone);
-
+                if (cart.Count() >= 1)
+                {
+                    orderDAO.AddOrder(orderId, phone);
+                }
                 foreach (ProductDTO item in cart)
                 {
                     var orderDetail = new OrderDetail
                     {
-                        orderId = orderIDrd,
+                        orderId = orderId,
                         productId = item.productID,
                         quantity = item.quantity,
                         price = item.price
                     };
                     orderDAO.AddOrderDetail(orderDetail);
+                    cartDAO.DeleteCart(phone);
+                    dbcontext.SaveChanges();
                 }
-
                 return true;
             } catch
             {
                 return false;
             }
         }
+
+       
 
     }
 }

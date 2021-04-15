@@ -10,7 +10,7 @@ class Cart extends Component {
     super(props);
     this.state = {
       listItem: [],
-      cartinfo : this.props.totalItemCart
+      cartinfo: this.props.totalItemCart
     }
   }
 
@@ -28,6 +28,21 @@ class Cart extends Component {
 
 
   }
+
+
+  purchase() {
+    let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+    CallAPI('Orders/accept-purchase', 'POST', { phone: userPhone })
+      .then(res => {
+        localStorage.setItem("LASTED_ORDERID",res.data);
+        localStorage.setItem("LASTEDSUM",this.props.totalItemCart.sum);
+        this.props.history.push('/purchase');
+      })
+      .catch(() => {
+        alert("LỖI THANH TOÁN ! Vui lòng thử lại sau");
+      })
+  }
+
 
   render() {
     var numeral = require('numeral');
@@ -84,7 +99,7 @@ class Cart extends Component {
 
                         </tbody>
                       </table>
-                      <a href="#" className="btn btn-lg btn-primary"><i className="fas fa-money-check-alt"></i> Thanh toán</a>
+                      <button onClick={() => { this.purchase() }} type="button" class="btn btn-primary"><i className="fas fa-money-check-alt"></i>Xác Nhận thanh toán</button>
                     </div>
                   </div>
                 </div>
@@ -103,6 +118,6 @@ class Cart extends Component {
   }
 }
 const mapStateToProps = state => ({
-  totalItemCart : state.totalItemCart
+  totalItemCart: state.totalItemCart
 });
 export default connect(mapStateToProps)(Cart);

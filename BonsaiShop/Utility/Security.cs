@@ -48,7 +48,7 @@ namespace BonsaiShop.Utility
                 issuer: CofigJWT.ISSUER,
                 audience: CofigJWT.AUDIENCE,
                 claims,
-                expires: DateTime.UtcNow.AddMinutes(minute),
+                expires: DateTime.UtcNow.AddMinutes(99999),
                 signingCredentials: credentials
             );
             var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);

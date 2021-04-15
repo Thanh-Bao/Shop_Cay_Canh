@@ -23,8 +23,7 @@ class CardProduct extends Component {
                             this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", data: res.data });
                             localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
                             localStorage.setItem("SUM_CART",res.data.sum);
-                            console.log("Tổng:");
-                            console.log(res);
+                           
                         }
                     ).catch(() => {
                         alert("Lỗi lấy số lượng giỏ hàng");
@@ -32,7 +31,7 @@ class CardProduct extends Component {
                 }
                 ).catch(
                     () => {
-                        alert("Thêm vào giỏ hàng thất bại");
+                        alert("Thêm vào giỏ hàng thất bại, hãy Xóa LOCALSTORAGE & Ctrl+F5 & dùng tab ấn danh");
                     }
                 )
             }

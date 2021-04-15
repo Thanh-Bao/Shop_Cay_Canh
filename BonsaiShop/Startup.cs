@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System;
 
 namespace BonsaiShop
 {
@@ -33,6 +34,13 @@ namespace BonsaiShop
             services.AddScoped<CheckOut>();
             services.AddScoped<OrderDAO>();
             services.AddScoped<CartDAO>();
+
+
+            services.AddHttpClient("MoMo", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("MoMoURI"));
+            });
+
 
             // CROS
             services.AddCors(options => {

@@ -13,6 +13,7 @@ import Register from '../pages/customer/Register';
 import Cart from '../pages/customer/Cart';
 import Contact from '../pages/customer/Contact';
 import Profile from '../pages/customer/Profile';
+import Purchase from '../pages/customer/Purchase';
 // Admin
 import Orders from '../pages/admin/Orders';
 import ProductsList from '../pages/admin/Products';
@@ -66,6 +67,7 @@ class AppRouter extends Component {
                                 <Route exact path="/otp-register" component={OTPRegister} />
                                 <Route exact path="/profile" component={Profile} />
                                 <Route exact path="/cart" component={Cart} />
+                                <Route exact path="/purchase" component={Purchase} />
                                 <Route exact path="/contact" component={Contact} />
                                 <Route exact path="/product-detail/:path?" component={ProductDetail} />
                                 <Route path="*" component={PageNotFound} />

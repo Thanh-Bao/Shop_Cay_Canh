@@ -135,20 +135,7 @@ namespace BonsaiShop.DAO
             }
         }
 
-        public void Test()
-        {
-
-            var orderDetail = new OrderDetail
-            {
-                orderId = 1234,
-                productId = 1,
-                quantity = 435453,
-                price = 53455534
-            };
-            dbcontext.OrderDetails.Add(orderDetail);
-            dbcontext.SaveChanges();
-
-        }
+       
 
 
     }

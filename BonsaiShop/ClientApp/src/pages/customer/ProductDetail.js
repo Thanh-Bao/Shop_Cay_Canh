@@ -60,14 +60,11 @@ class ProductDetail extends Component {
                 window.location.replace(process.env.REACT_APP_DOMAIN + "login");
             } else {
                 CallAPI(`Cart/${userPhone}`, 'PUT', { productID: productID }).then(() => {
-                    console.log(`thêm ${productID} thành công`);
                     CallAPI(`Cart/count/${userPhone}`, 'GET', { productID: productID }).then(
                         res => {
                             this.props.dispatch({type:"UPDATE_TOTAL_ITEM_CART", data:res.data});
                             localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
                             localStorage.setItem("SUM_CART",res.data.sum);
-                            console.log("Tổng:");
-                            console.log(res.data);
                         }
                     ).catch(() => {
                         alert("Lỗi lấy số lượng giỏ hàng");
