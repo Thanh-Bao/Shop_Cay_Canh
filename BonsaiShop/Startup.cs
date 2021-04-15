@@ -1,5 +1,6 @@
 ﻿using BonsaiShop.Config;
 using BonsaiShop.DAO;
+using BonsaiShop.BO;
 using BonsaiShop.DB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace BonsaiShop
             // add for DAO Class
             services.AddScoped<UserDAO>();
             services.AddScoped<ProductDAO>();
+            services.AddScoped<CheckOut>();
             services.AddScoped<OrderDAO>();
             services.AddScoped<CartDAO>();
 

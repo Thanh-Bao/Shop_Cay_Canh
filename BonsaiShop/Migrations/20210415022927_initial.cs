@@ -2,7 +2,7 @@
 
 namespace BonsaiShop.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,16 +72,18 @@ namespace BonsaiShop.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    orderId = table.Column<int>(type: "int", nullable: false)
+                    STT = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    orderId = table.Column<int>(type: "int", nullable: false),
                     userId = table.Column<int>(type: "int", nullable: false),
                     timestamp = table.Column<int>(type: "int", nullable: false),
                     totalMoney = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    paymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.orderId);
+                    table.PrimaryKey("PK_Orders", x => x.STT);
                     table.ForeignKey(
                         name: "FK_Orders_Users_userId",
                         column: x => x.userId,
@@ -106,7 +108,7 @@ namespace BonsaiShop.Migrations
                         name: "FK_OrderDetails_Orders_orderId",
                         column: x => x.orderId,
                         principalTable: "Orders",
-                        principalColumn: "orderId",
+                        principalColumn: "STT",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_productId",

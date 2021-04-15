@@ -11,11 +11,13 @@ namespace BonsaiShop.DAO
     {
         private readonly ApplicationDbContext dbcontext;
         private readonly UserDAO userDAO;
+        private readonly CartDAO cartDAO;
 
-        public OrderDAO(ApplicationDbContext dbcontext, UserDAO userDAO)
+        public OrderDAO(ApplicationDbContext dbcontext, UserDAO userDAO, CartDAO cartDAO)
         {
             this.dbcontext = dbcontext;
             this.userDAO = userDAO;
+            this.cartDAO = cartDAO;
         }
 
         public List<OrderDTO> GetOrders(int? page)
@@ -95,16 +97,18 @@ namespace BonsaiShop.DAO
             }
         }
 
-        public bool AddOrder(int userID, int totalMoney)
+        public bool AddOrder(int orderID, string phone)
         {
             try
             {
                 Order order = new Order
                 {
-                    userId = userID,
+                    orderId = orderID,
+                    userId = userDAO.PhoneToID(phone),
                     timestamp = (Int32)DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                     status = Config.Const.OrderStatus.PENDING,
-                    totalMoney = totalMoney
+                    totalMoney = cartDAO.SumCart(phone),
+                    paymentMethod = Config.Const.PaymentMethod.COD
                 };
                 dbcontext.Orders.Add(order);
                 dbcontext.SaveChanges();

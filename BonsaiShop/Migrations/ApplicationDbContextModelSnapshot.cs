@@ -39,10 +39,16 @@ namespace BonsaiShop.Migrations
 
             modelBuilder.Entity("BonsaiShop.Model.Order", b =>
                 {
-                    b.Property<int>("orderId")
+                    b.Property<int>("STT")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("paymentMethod")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
@@ -56,7 +62,7 @@ namespace BonsaiShop.Migrations
                     b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    b.HasKey("orderId");
+                    b.HasKey("STT");
 
                     b.HasIndex("userId");
 

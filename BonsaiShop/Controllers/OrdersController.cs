@@ -1,4 +1,5 @@
 ﻿using BonsaiShop.DAO;
+using BonsaiShop.BO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,9 +14,23 @@ namespace BonsaiShop.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly OrderDAO orderDAO;
-        public OrdersController(OrderDAO orderDAO)
+        private readonly CheckOut checkout;
+        public OrdersController(OrderDAO orderDAO, CheckOut checkout)
         {
             this.orderDAO = orderDAO;
+            this.checkout = checkout;
         }
+
+        [HttpPost]
+        [Route("accept-purchase")]
+        public IActionResult AcceptPurchase(string phone)
+        {
+            
+                checkout.Purchase(phone);
+                return Ok();
+             
+        }
+
+
     }
 }

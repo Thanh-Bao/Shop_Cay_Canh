@@ -32,10 +32,15 @@ namespace BonsaiShop.BO
             {
                 List<ProductDTO> cart = cartDAO.GetCart(phone);
 
-                /*foreach (CartItem  item in cart)
-                {
+                Random rnd = new Random();
+                int orderIDrd = rnd.Next(10000, 999999);
 
-                }*/
+                orderDAO.AddOrder(orderIDrd, phone);
+
+                foreach (ProductDTO item in cart)
+                {
+                   
+                }
 
                 return true;
             } catch
