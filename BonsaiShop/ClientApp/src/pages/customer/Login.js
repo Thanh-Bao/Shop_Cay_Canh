@@ -62,6 +62,7 @@ class Login extends Component {
 
 
     render() {
+        localStorage.removeItem("userRegister");
         let loginFailedMessage;
         let showFocusLoginToBuy;
 

@@ -135,9 +135,9 @@ class FooterCustomer extends Component {
                             <hr className="clearfix w-100 d-md-none mb-0" />
                             {/*Fourth column*/}
                             <div className="col-md-3 mx-auto shfooter">
-                                <h5 className="my-2 font-weight-bold d-none d-md-block">Get Help</h5>
+                                <h5 className="my-2 font-weight-bold d-none d-md-block"><strong>WILL REMOVE IN PRODUCTION</strong></h5>
                                 <div className="d-md-none title" data-target="#Get-Help" data-toggle="collapse">
-                                    <div className="mt-3 font-weight-bold">Get Help
+                                    <div className="mt-3 font-weight-bold"> <strong>WILL REMOVE IN PRODUCTION</strong>
           <div className="float-right navbar-toggler">
                                             <i className="fas fa-angle-down" />
                                             <i className="fas fa-angle-up" />

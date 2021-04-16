@@ -68,6 +68,8 @@ namespace BonsaiShop.DAO
                     timestamp = s._order.timestamp,
                     totalMoney = s._order.totalMoney,
                     status = s._order.status,
+                    address = s._user.address,
+                    paymentMethod = s._order.paymentMethod
                 })
                 .Skip(Nskip)
                 .Take(Config.Const.PAGE_SIZE)
@@ -134,9 +136,6 @@ namespace BonsaiShop.DAO
                 return false;
             }
         }
-
-       
-
 
     }
 }

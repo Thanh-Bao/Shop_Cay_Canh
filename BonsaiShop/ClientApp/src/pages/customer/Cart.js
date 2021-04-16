@@ -39,7 +39,7 @@ class Cart extends Component {
         this.props.history.push('/purchase');
       })
       .catch(() => {
-        alert("LỖI THANH TOÁN ! Vui lòng thử lại sau");
+        alert("LỖI THANH TOÁN ! Hãy Xóa cache, LOCALSTORAGE, Ctrl+F5 & dùng tab ẩn danh");
       })
   }
 
@@ -99,7 +99,7 @@ class Cart extends Component {
 
                         </tbody>
                       </table>
-                      <button onClick={() => { this.purchase() }} type="button" class="btn btn-primary"><i className="fas fa-money-check-alt"></i>Xác Nhận thanh toán</button>
+                      <button onClick={() => { this.purchase() }} type="button" className="btn btn-primary"><i className="fas fa-money-check-alt"></i> Xác Nhận thanh toán</button>
                     </div>
                   </div>
                 </div>

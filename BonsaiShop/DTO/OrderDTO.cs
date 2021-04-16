@@ -11,5 +11,6 @@ namespace BonsaiShop.DTO
         public int timestamp { set; get; }
         public int totalMoney { set; get; }
         public string status { set; get; }
+        public string paymentMethod { set; get; }
     }
 }
