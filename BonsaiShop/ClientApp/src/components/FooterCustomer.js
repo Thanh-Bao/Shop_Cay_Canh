@@ -145,7 +145,6 @@ class FooterCustomer extends Component {
                                     </div>
                                 </div>
                                 <ul className="list-unstyled collapse" id="Get-Help">
-                                    <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Help Center</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Contact Us</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Privacy Policy</a></li>
                                     <li><a className="link-footer" href="https://www.facebook.com/thanhbao123456/">Terms</a></li>

@@ -4,6 +4,7 @@ import QRCode from "react-qr-code";
 import '../../css/Purchase.css';
 import { connect } from 'react-redux';
 
+
 class Purchase extends Component {
     constructor(props) {
         super(props);

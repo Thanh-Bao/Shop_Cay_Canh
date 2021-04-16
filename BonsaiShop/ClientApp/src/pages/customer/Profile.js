@@ -1,16 +1,61 @@
 import React, { Component } from 'react';
 import QRCode from "react-qr-code";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import CallAPI from '../../callAPI/callAPIMainServer';
+import OrderRecord from '../../components/CustomerOrderRecord';
+import Pagination from "react-js-pagination";
+import unixTimeToDate from '../utility/UnixTimeToDate'
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            listOrder: null,
+            totalItem: 0,
+            pageSize: 0,
+        }
+    }
 
     logOut() {
         localStorage.clear();
         window.location.reload(true);
     }
 
-    render() {
 
+    componentDidMount() {
+        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+        CallAPI(`Orders/${userPhone}`)
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    listOrder: res.data.list,
+                    pageSize: res.data.pageSize,
+                    totalItem: res.data.totalItem
+                })
+            })
+            .catch(() => {
+                alert("Lỗi lấy danh sách đơn hàng");
+            })
+    }
+
+    handlePageChange(pageNumber) {
+        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+        CallAPI(`Orders/${userPhone}`, null, { page: pageNumber })
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    listOrder: res.data.list,
+                    pageSize: res.data.pageSize,
+                    totalItem: res.data.totalItem
+                })
+            })
+            .catch(() => {
+                alert("Lỗi lấy danh sách đơn hàng");
+            })
+    }
+
+    render() {
+ 
         let redirectHome;
 
         if (localStorage.getItem("PHONEUSERLOGINED") === null) {
@@ -19,13 +64,31 @@ class Profile extends Component {
             )
         }
 
+        let showListOrder;
+        if (this.state.listOrder != null) {
+            showListOrder = this.state.listOrder.map(order => {
+                return (
+                    <OrderRecord
+                        key={order.orderId}
+                        date={unixTimeToDate(order.timestamp)}
+                        orderID={order.orderId}
+                        status={order.status}
+                        paymentMethod={order.paymentMethod === "COD" ? "COD" : "Chuyển khoản"}
+                        Address={order.address}
+                        totalMoney={order.totalMoney}
+                        ViewDetail={order.orderId}
+                    />
+                )
+            })
+        }
+
         return (
             <div>
                 {redirectHome}
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 d-flex justify-content-start">
-                            <button onClick={() => { this.logOut() }} type="button" class="btn btn-danger"><i className="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                            <button onClick={() => { this.logOut() }} type="button" className="btn btn-danger"><i className="fas fa-sign-out-alt"></i> Đăng xuất</button>
                         </div>
                     </div>
                 </div>
@@ -48,27 +111,22 @@ class Profile extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                {showListOrder}
                             </tbody>
                         </table>
-
+                        <span></span>
+                        <Pagination
+                            activePage={this.props.activePage}
+                            firstPageText="trang đầu"
+                            lastPageText="trang cuối"
+                            itemClass="page-item"
+                            linkClass="page-link"
+                            itemsCountPerPage={this.state.pageSize}
+                            totalItemsCount={this.state.totalItem}
+                            pageRangeDisplayed={parseInt(process.env.REACT_APP_PAGE_RANGE_DISPLAYED)}
+                            onChange={this.handlePageChange.bind(this)}
+                        />
+                        <span></span>
                     </div>
                 </div>
 

@@ -52,6 +52,7 @@ class Cart extends Component {
       showItems = this.state.listItem.map(product => {
         return (
           <CartItem
+          key={product.productID}
             productID={product.productID}
             thumbnail={product.thumbnail}
             name={product.name}

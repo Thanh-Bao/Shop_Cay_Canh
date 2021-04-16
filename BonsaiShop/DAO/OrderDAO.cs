@@ -20,6 +20,12 @@ namespace BonsaiShop.DAO
             this.cartDAO = cartDAO;
         }
 
+        public int GetTotalCustomerOrders(string phone)
+        {
+            int total = dbcontext.Orders.Where(o => o.phone.Equals(phone)).Select(o => o).Count();
+            return total;
+        }
+
         public List<OrderDTO> GetOrders(int? page)
         {
             int _page = 1;

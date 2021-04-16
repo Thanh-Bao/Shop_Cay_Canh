@@ -69,13 +69,22 @@ namespace BonsaiShop.Controllers
         [HttpGet("{phone}")]
         [Authorize]
         [MemberAuthorization]
-        /*Enpoint: /api/Orders/0943417917?phone=0943417917
-                   /api/Orders/0943417917?phone=0943417917?page=1*/
+        /*Enpoint: /api/Orders/0943417917
+                   /api/Orders/0943417917?page=1*/
         public IActionResult GetCustomerOrders(string phone, int? page)
         {
             try
             {
                 List<OrderDTO> list = orderDAO.GetOrdersMember(phone, page);
+                int total = orderDAO.GetTotalCustomerOrders(phone);
+                var result = new
+                {
+                    totalItem = total,
+                    pageSize = Config.Const.PAGE_SIZE,
+                    list = list
+                };
+                return Ok(result);
+                
                 return Ok(list);
             } catch
             {
