@@ -30,8 +30,8 @@ class Purchase extends Component {
             checkingPurchaseFailure: 2
         })
 
-        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
-        CallAPI(`Orders/check-transfer${userPhone}`, 'POST', { orderID: localStorage.getItem("LASTED_ORDERID") }).then(
+
+        CallAPI('Orders/check-transfer', 'POST', { orderID: localStorage.getItem("LASTED_ORDERID") }).then(
             res => {
                 if (res.data) {
                     alert("Đã xác thực thành công, bạn sẽ nhận được hàng từ 3-5 ngày");
@@ -67,7 +67,7 @@ class Purchase extends Component {
                 </div>
             )
         } else if (this.state.checkingPurchaseFailure == 2) {
-            showMessage = (<div className="mt-5"><h1>Đang kiểm tra ..... </h1> <div class="google-loader">
+            showMessage = (<div className="mt-5"><h1>Đang kiểm tra ..... </h1> <div className="google-loader">
                 <span></span>
                 <span></span>
                 <span></span>
