@@ -66,6 +66,7 @@ namespace BonsaiShop.DAO
                 user => user.phone,
                 (_order, _user) => new { _order, _user }
                 )
+                 .OrderByDescending(combien => combien._order.timestamp)
                 .Where(s => s._user.phone.Equals(phone))
                 .Select(s => new OrderDTO
                 {
@@ -143,5 +144,28 @@ namespace BonsaiShop.DAO
             }
         }
 
+        public List<OrderDetailDTO> GetOrderDetail(int orderID)
+        {
+            List<OrderDetailDTO> listProuctInOrder = dbcontext.OrderDetails
+                .Join(
+                dbcontext.Products,
+                o => o.productId,
+                p => p.productId,
+                (order, product) => new { order, product }
+                )
+                .Where(combien => combien.order.orderId == orderID)
+                .Select(combien => new OrderDetailDTO
+                {
+
+                    thumbnail = combien.product.thumbnail,
+                    productId = combien.product.productId,
+                    productName = combien.product.name,
+                    productPrice = combien.product.price,
+                    quantity = combien.order.quantity,
+                    totalMoney = combien.order.quantity * combien.order.price
+                }).ToList();
+
+            return listProuctInOrder;
+        }
     }
 }

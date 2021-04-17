@@ -109,7 +109,7 @@ class ProductDetail extends Component {
                     {/* Portfolio Item Row */}
                     <div className="row mt-2">
                         <div className="col-md-6">
-                            <img className="img-fluid" src={pro.thumbnail} alt="fdf" />
+                            <img className="img-fluid" src={pro.detailImage} alt="fdf" />
                         </div>
                         <div className="col-md-6">
                             <div className="text-center">

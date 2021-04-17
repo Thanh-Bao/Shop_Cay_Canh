@@ -85,11 +85,20 @@ namespace BonsaiShop.Controllers
                 };
                 return Ok(result);
                 
-                return Ok(list);
+               
             } catch
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        [Route("orderdetail")]
+        [Authorize]
+        // /api/Orders/orderdetail?orderId=5523
+        public IActionResult GetOrderDetail(int orderId)
+        {
+            return Ok(orderDAO.GetOrderDetail(orderId));
         }
 
     }

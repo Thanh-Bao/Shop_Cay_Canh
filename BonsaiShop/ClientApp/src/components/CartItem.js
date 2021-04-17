@@ -70,7 +70,7 @@ class CartItem extends Component {
         return (
             <tr>
                 <td className="row">
-                    <img src={this.props.thumbnail} width={100} alt="fdf" />
+                    <img src={this.props.thumbnail} width={100} height={100} alt="fdf" />
                     <strong className="ml-5 fw-bold">{this.props.name}</strong>
                 </td>
                 <td><span className="ml-5">Đơn giá: <strong className=" text-danger">{numeral(this.props.price).format('0,0')}đ</strong> </span> X </td>

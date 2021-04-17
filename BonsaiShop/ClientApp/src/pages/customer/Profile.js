@@ -26,7 +26,6 @@ class Profile extends Component {
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI(`Orders/${userPhone}`)
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     listOrder: res.data.list,
                     pageSize: res.data.pageSize,
