@@ -64,7 +64,7 @@ class NavigationBarCustomer extends Component {
                 <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
 
                     <NavLink onClick={() => this.redirectToHome()} className="navbar-brand" to="/">
-                        <img src="/favicon.ico" alt="" width={35} height={24} />
+                        <img src="/icon.ico" alt="" width={35} height={24} />
                     </NavLink>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentTopMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,7 @@ class NavigationBarCustomer extends Component {
                                 <NavLink onClick={() => this.disableRedirectToHome()} activeClassName="NavItemActive" className="nav-link NavItem" to="/contact"><i className="fas fa-shopping-cart"></i> Liên hệ</NavLink>
                             </li>
                             <li className="nav-item ml-3">
-                                <a className=" btn-danger nav-link " href=""><i id="shakeDownload" className="fas fa-mobile-alt"></i> Tải App</a>
+                                <a className=" btn-danger nav-link" target="_blank" href="https://play.google.com/store/apps/dev?id=5476593282414428428"><i id="shakeDownload" className="fas fa-mobile-alt"></i> Tải App</a>
                             </li>
                         </ul>
 

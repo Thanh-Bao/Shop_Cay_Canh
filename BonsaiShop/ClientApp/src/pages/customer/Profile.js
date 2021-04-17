@@ -13,6 +13,7 @@ class Profile extends Component {
             listOrder: null,
             totalItem: 0,
             pageSize: 0,
+            activePage: 1
         }
     }
 
@@ -38,6 +39,7 @@ class Profile extends Component {
     }
 
     handlePageChange(pageNumber) {
+        this.setState({ activePage: pageNumber });
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI(`Orders/${userPhone}`, null, { page: pageNumber })
             .then(res => {
@@ -54,7 +56,7 @@ class Profile extends Component {
     }
 
     render() {
- 
+
         let redirectHome;
 
         if (localStorage.getItem("PHONEUSERLOGINED") === null) {
@@ -107,6 +109,7 @@ class Profile extends Component {
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Xem chi tiết</th>
+                                    <th scope="col">hủy đơn hàng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,7 +118,7 @@ class Profile extends Component {
                         </table>
                         <span></span>
                         <Pagination
-                            activePage={this.props.activePage}
+                            activePage={this.state.activePage}
                             firstPageText="trang đầu"
                             lastPageText="trang cuối"
                             itemClass="page-item"
@@ -125,9 +128,9 @@ class Profile extends Component {
                             pageRangeDisplayed={parseInt(process.env.REACT_APP_PAGE_RANGE_DISPLAYED)}
                             onChange={this.handlePageChange.bind(this)}
                         />
-                        <span></span>
                     </div>
                 </div>
+                <p className="mb-5 pb-5"></p>
 
             </div>
         );

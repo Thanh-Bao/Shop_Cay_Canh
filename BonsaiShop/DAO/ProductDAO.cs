@@ -40,7 +40,7 @@ namespace BonsaiShop.DAO
                 _page = (Int32)page;
             }
             //Bỏ N phần tử đầu tiên
-            int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+            int Nskip = (_page - 1) * 9;
             // Ẩn hiện Số lượng mỗi sản phẩm
             if (_forAdmin)
             {

@@ -12,7 +12,7 @@ class CardProduct extends Component {
 
         var addCart = productID => {
             let userPhone = localStorage.getItem("PHONEUSERLOGINED");
-            if (userPhone == null) {
+            if (userPhone === null) {
                 localStorage.setItem("FOCUS_LOGIN_TO_BUY", true);
                 window.location.replace(process.env.REACT_APP_DOMAIN + "login");
             } else {
@@ -31,7 +31,7 @@ class CardProduct extends Component {
                 }
                 ).catch(
                     () => {
-                        alert("Thêm vào giỏ hàng thất bại, hãy Xóa LOCALSTORAGE & Ctrl+F5 & dùng tab ấn danh");
+                        alert("Thêm vào giỏ hàng thất bại, Xóa LOCALSTORAGE & Ctrl+F5 & mở tab ấn danh");
                     }
                 )
             }

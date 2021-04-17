@@ -14,7 +14,6 @@ class CustomerOrderRecord extends Component {
 
     getOrderDetail() {
         CallAPI('Orders/orderdetail', null, { orderId: this.state.orderID }).then(res => {
-            console.log(res.data)
             this.setState({
                 listProduct: res.data
             })
@@ -22,6 +21,23 @@ class CustomerOrderRecord extends Component {
             alert("Lỗi lấy chi tiết đơn hàng")
         })
     }
+
+
+    cancelOrder() {
+        if (window.confirm("Bạn chắc chắn hủy đơn hàng này")) {
+            CallAPI('Orders/cancel-order', 'POST', { orderId: this.state.orderID }).then(res => {
+                if (res.data) {
+                    window.location.reload();
+                } else {
+                    alert("Không thể hủy đơn hàng tại thời điểm này")
+                }
+
+            }).catch(() => {
+                alert("Lỗi hủy đơn hàng")
+            })
+        }
+    }
+
 
     render() {
         var numeral = require('numeral');
@@ -62,7 +78,7 @@ class CustomerOrderRecord extends Component {
                 return (
 
                     <tr>
-                        <th scope="row"><a href={`/product-detail/` + product.productId}><img width={50}  height={50} src={product.thumbnail} /></a></th>
+                        <th scope="row"><a href={`/product-detail/` + product.productId}><img width={50} height={50} src={product.thumbnail} /></a></th>
                         <th ><a href={`/product-detail/` + product.productId}>{product.productName}</a></th>
                         <td>{numeral(product.productPrice).format('0,0')} đ</td>
                         <td>{product.quantity}</td>
@@ -73,7 +89,7 @@ class CustomerOrderRecord extends Component {
             showOrderDetail = (<table className="table">
                 <thead>
                     <tr>
-                        <th colspan="2"  scope="col">Tên</th>
+                        <th colspan="2" scope="col">Tên</th>
                         <th scope="col">Đơn giá</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Tổng tiền</th>
@@ -98,7 +114,7 @@ class CustomerOrderRecord extends Component {
                         {this.props.Address}
                     </span>
                 </td>
-                <td className="text-danger">{numeral(this.props.totalMoney).format('0,0')} đ</td>
+                <td >{numeral(this.props.totalMoney).format('0,0')} đ</td>
                 {/* <td><button type="button" className="btn btn-info"><i className="fas fa-info-circle"></i> {this.props.ViewDetail}</button></td> */}
 
                 <td>
@@ -111,7 +127,7 @@ class CustomerOrderRecord extends Component {
                         {/* Modal */}
                         <div className="modal fade" id={`viewDetailList${this.props.orderID}`} tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">
-                                <div className="modal-content">
+                                <div className="modal-content">st
                                     <div className="modal-header">
                                         <h5 className="modal-title" id="exampleModalLabel">Chi tiết đơn hàng #{this.props.orderID}</h5>
                                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -127,6 +143,14 @@ class CustomerOrderRecord extends Component {
                     </div>
 
 
+                </td>
+
+                <td>
+                    {(this.props.status === 'Cancel') ? <button disabled type="button" className="btn btn-danger" >
+                        <i className="fa fa-trash-alt"></i> Hủy
+                        </button> : <button onClick={() => this.cancelOrder()} type="button" className="btn btn-danger" >
+                        <i className="fa fa-trash-alt"></i> Hủy
+                        </button>}
                 </td>
 
             </tr>

@@ -144,6 +144,43 @@ namespace BonsaiShop.DAO
             }
         }
 
+        public bool ChangePaymentMethodToBanking(int orderID)
+        {
+            try
+            {
+                var order = dbcontext.Orders.Find(orderID);
+                order.paymentMethod = Config.Const.PaymentMethod.Banking;
+                dbcontext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CancelOrder(int orderID)
+        {
+            try
+            {
+                var order = dbcontext.Orders.Find(orderID);
+                if (order.status.Equals(Config.Const.OrderStatus.PENDING))
+                {
+                    order.status = Config.Const.OrderStatus.CANCEL;
+                    dbcontext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public List<OrderDetailDTO> GetOrderDetail(int orderID)
         {
             List<OrderDetailDTO> listProuctInOrder = dbcontext.OrderDetails

@@ -35,7 +35,16 @@ class Purchase extends Component {
         CallAPI('Orders/check-transfer', 'POST', { orderID: localStorage.getItem("LASTED_ORDERID") }).then(
             res => {
                 if (res.data) {
-                    alert("Đã xác thực thành công, bạn sẽ nhận được hàng từ 3-5 ngày");
+
+                    CallAPI('Orders/purchase-successful', 'POST', { orderId: localStorage.getItem("LASTED_ORDERID") })
+                    .then(res=>{
+                        alert("Đã xác thực thành công, bạn sẽ nhận được hàng từ 3-5 ngày");            
+                    }).catch(()=>{
+                        this.setState({
+                            checkingPurchaseFailure: 4
+                        })
+                    })
+
                     localStorage.removeItem("TOTAL_ITEM_CART")
                     this.props.dispatch({type:"UPDATE_TOTAL_ITEM_CART",totalItemCart : {count:0, sum:0}})
                     this.props.history.push('/profile');
@@ -58,24 +67,42 @@ class Purchase extends Component {
 
         let showMessage;
 
-        if (this.state.checkingPurchaseFailure === 3) {
-            showMessage = (
-                <div className="alert alert-danger mt-4" role="alert">
-                    <h3 className="alert-heading">Lỗi xác thực!</h3>
-                    <p>Quý khách chưa chuyển tiền hoặc sai mã đơn hàng</p>
-                    <hr />
-                    <p className="mb-0">Vui lòng kiểm tra lại hoặc chọn hình thức COD</p>
-                </div>
-            )
-        } else if (this.state.checkingPurchaseFailure == 2) {
-            showMessage = (<div className="mt-5"><h1>Đang kiểm tra ..... </h1> <div className="google-loader">
+
+        switch (this.state.checkingPurchaseFailure) {
+            case 2:
+                showMessage = (<div className="mt-5"><h1>Hệ thống đang kiểm tra ..... </h1> <div className="google-loader">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
             </div></div>)
+                break;
+            case 3:
+                showMessage = (
+                    <div className="alert alert-danger mt-4" role="alert">
+                        <h3 className="alert-heading">Lỗi xác thực!</h3>
+                        <p>Quý khách chưa chuyển tiền hoặc sai mã đơn hàng</p>
+                        <hr />
+                        <p className="mb-0">Vui lòng xác nhận lại sau 5 phút, hệ thống đang cập nhật hoặc chọn COD</p>
+                    </div>
+                )
+                break;
+            case 4:
+                showMessage = (
+                    <div className="alert alert-warning mt-4" role="alert">
+                        <h3 className="alert-heading">Lỗi cập nhật phương thức thanh toán</h3>
+                        <p>Hệ thống đã xác nhận chuyển tiền thành công</p>
+                        <hr />
+                        <p className="mb-0">Phương thức thanh toán hiện tại COD</p>
+                    </div>
+                )
+                break;
+        
+            default:
+                break;
         }
 
+        
 
         return (
             <div className="container my-5 justify-content-center text-center">

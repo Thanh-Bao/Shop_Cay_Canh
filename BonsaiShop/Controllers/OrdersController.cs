@@ -101,5 +101,23 @@ namespace BonsaiShop.Controllers
             return Ok(orderDAO.GetOrderDetail(orderId));
         }
 
+        [HttpPost]
+        [Route("purchase-successful")]
+        [Authorize]
+        
+        public IActionResult Confirm(int orderId)
+        {
+            return Ok(orderDAO.ChangePaymentMethodToBanking(orderId));
+        }
+
+        [HttpPost]
+        [Route("cancel-order")]
+        [Authorize]
+
+        public IActionResult CancelOrder(int orderId)
+        {
+            return Ok(orderDAO.CancelOrder(orderId));
+        }
+
     }
 }

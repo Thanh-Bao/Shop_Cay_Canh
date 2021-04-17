@@ -85,7 +85,7 @@ class ProductDetail extends Component {
         if (this.state.product != null) {
             product = <h1>{this.state.product.name}</h1>
         } else {
-            product = <ImgHolder url="/no_result.gif" />
+            product = <ImgHolder url="/loading.gif" />
         }
 
         let pro = this.state.product;
@@ -144,8 +144,8 @@ class ProductDetail extends Component {
 
                             <button
                                 onClick={() => { addCart(id) }}
-                                type="button" className="btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
-                            <Link to="/cart"><button type="button" className=" ml-4 btn btn-success btn-lg"><i className="fas fa-money-check-alt"></i> <strong>Mua hàng</strong></button></Link>
+                                type="button" className="ml-5 btn btn-primary btn-lg"><i className="fas fa-cart-plus"></i> <strong>Thêm vào giỏ hàng</strong> </button>
+                            {/* <Link to="/cart"><button type="button" className=" ml-4 btn btn-success btn-lg"><i className="fa fa-shopping-cart"></i> <strong> Vào giỏ hàng</strong></button></Link> */}
 
                         </div>
                     </div>

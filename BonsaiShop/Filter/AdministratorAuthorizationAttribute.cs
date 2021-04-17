@@ -23,7 +23,7 @@ namespace BonsaiShop.Filter
             {
                 var identity = context.HttpContext.User.Identity as ClaimsIdentity;
                 IList<Claim> claim = identity.Claims.ToList();
-                string role = claim[1].Value;
+                string role = claim[2].Value;
 
                 if (!role.Equals(Config.Const.Role.ADMIN))
                 {

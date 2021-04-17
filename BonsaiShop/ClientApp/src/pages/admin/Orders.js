@@ -4,7 +4,28 @@ class Orders extends Component {
     render() {
         return (
             <div>
-                Orders Orders Orders Orders
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
+               <h1>Đơn hàng đã đặt</h1>
             </div>
         );
     }
