@@ -25,7 +25,7 @@ class AddProduct extends Component {
             price: '',
             quantity: '',
             height: '',
-            origin: "",
+            origin: "Việt Nam",
             thumbnail: null,
             detailImage: null,
             description: ""
@@ -65,6 +65,17 @@ class AddProduct extends Component {
         event.preventDefault();
         callAPi('products/create', 'POST', null, this.state).then(res => {
             alert("Đã thêm thành công");
+            document.getElementById("create-course-form").reset();
+            this.setState({
+                name: "",
+                price: '',
+                quantity: '',
+                height: '',
+                origin: "",
+                thumbnail: null,
+                detailImage: null,
+                description: ""
+            });
         }).catch(err => {
             alert("BẠN KHÔNG CÓ QUYỀN VỚI THAO TÁC NÀY!");
         })
@@ -95,7 +106,7 @@ class AddProduct extends Component {
                         <div className="col-12 text-center">
                             <h1 className="mt-2">Thêm mới 1 sản phẩm</h1>
                         </div>
-                        <form onSubmit={this.handleSubmit} className="col-12">
+                        <form onSubmit={this.handleSubmit} id="create-course-form" className="col-12">
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Tên</label>
                                 <input required

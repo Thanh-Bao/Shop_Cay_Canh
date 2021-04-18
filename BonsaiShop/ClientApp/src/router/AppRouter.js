@@ -22,6 +22,7 @@ import Users from '../pages/admin/Users';
 import Report from '../pages/admin/Reports';
 import Revenue from '../pages/admin/Revenue';
 import AdminLogin from '../pages/admin/AdminLogin';
+import EditProduct from '../pages/admin/EditProduct';
 //Utility
 import PageNotFound from '../pages/utility/PageNotFound';
 import ProtectedRoute from '../router/ProtectedRoute';
@@ -48,6 +49,7 @@ class AppRouter extends Component {
                                 <ProtectedRoute exact path="/admin/orders" component={Orders} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/products" component={ProductsList} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/add-product" component={AddProduct} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/edit-product/:path?" component={EditProduct} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/users" component={Users} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/report" component={Report} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={adminAuthen} />

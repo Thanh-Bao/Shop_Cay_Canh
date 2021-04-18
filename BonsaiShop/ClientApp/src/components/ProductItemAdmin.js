@@ -21,7 +21,7 @@ class ProductItemAdmin extends Component {
                 >
                     {striptags(this.props.description)}
                     </td>
-                <td><Link to={`/edit-product/` + this.props.productID}>  <button type="button" className="btn-cart-product btn btn-warning"><i className="fas fa-edit"></i> Chỉnh sửa</button></Link></td>
+                <td><Link to={`/admin/edit-product/` + this.props.productID}>  <button type="button" className="btn-cart-product btn btn-warning"><i className="fas fa-edit"></i> Chỉnh sửa</button></Link></td>
                 <td><a target="_blank" href={`/product-detail/` + this.props.productID}>  <button type="button" className="btn-cart-product btn btn-outline-primary"><i className="fas fa-eye"></i> Xem full</button></a></td>
             </tr>
         );

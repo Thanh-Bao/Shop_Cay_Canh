@@ -8,21 +8,31 @@ class Products extends Component {
         super(props);
         this.state = {
             activePage: 1,
-            listProduct: null
+            listProduct: null,
+            pageSize: 1,
+            totalItem: 1
         };
     }
 
     handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
         this.setState({ activePage: pageNumber });
+        this.fetchData(pageNumber);
+
+    }
+
+    fetchData(page) {
+        CallAPI('Products/Admin', null, { page: page }).then(res => {
+            this.setState({
+                listProduct: res.data.list,
+                pageSize: res.data.pageSize,
+                totalItem: res.data.totalItem
+
+            })
+        })
     }
 
     componentDidMount() {
-        CallAPI('Products/Admin').then(res => {
-            this.setState({
-                listProduct: res.data
-            })
-        })
+        this.fetchData(1);
     }
 
     render() {
@@ -76,8 +86,8 @@ class Products extends Component {
                             lastPageText="trang cuối"
                             itemClass="page-item"
                             linkClass="page-link"
-                            itemsCountPerPage={10}
-                            totalItemsCount={450}
+                            itemsCountPerPage={this.state.pageSize}
+                            totalItemsCount={this.state.totalItem}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange.bind(this)}
                         />
