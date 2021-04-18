@@ -34,7 +34,7 @@ class Profile extends Component {
                 })
             })
             .catch(() => {
-                alert("Lỗi lấy danh sách đơn hàng");
+                console.log("Lỗi lấy danh sách đơn hàng");
             })
     }
 
