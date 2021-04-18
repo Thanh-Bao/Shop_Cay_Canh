@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Pagination from "react-js-pagination";
 import ProductItem from '../../components/ProductItemAdmin';
+import CallAPI from '../../callAPI/callAPIMainServer';
 
 class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activePage: 15
+            activePage: 1,
+            listProduct: null
         };
     }
 
@@ -15,7 +17,34 @@ class Products extends Component {
         this.setState({ activePage: pageNumber });
     }
 
+    componentDidMount() {
+        CallAPI('Products/Admin').then(res => {
+            this.setState({
+                listProduct: res.data
+            })
+        })
+    }
+
     render() {
+        let showListProduct;
+
+        if (this.state.listProduct != null) {
+            showListProduct = this.state.listProduct.map(product => {
+                return <ProductItem
+                    key={product.productID}
+                    productID={product.productID}
+                    thumbnail={product.thumbnail}
+                    name={product.name}
+                    price={product.price}
+                    quantity={product.quantity}
+                    height={product.height}
+                    origin={product.origin}
+                    description={product.description}
+
+                />
+            })
+        }
+
         return (
             <div>
                 <h1 className="my-4">Danh Sách sản phẩm</h1>
@@ -24,9 +53,9 @@ class Products extends Component {
                         <tr>
                             <th scope="col">Thumbnail</th>
                             <th scope="col">Tên</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Chiều cao</th>
+                            <th scope="col">Giá(đ)</th>
+                            <th scope="col">Số lượng(cây)</th>
+                            <th scope="col">Chiều cao(cm)</th>
                             <th scope="col">Xuất xứ</th>
                             <th scope="col">Mô tả</th>
                             <th scope="col">Chỉnh sửa</th>
@@ -34,12 +63,7 @@ class Products extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <ProductItem/>
-                        <ProductItem/>
-                        <ProductItem/>
-                        <ProductItem/>
-                        <ProductItem/>
-                        <ProductItem/>
+                        {showListProduct}
                     </tbody>
                 </table>
 
