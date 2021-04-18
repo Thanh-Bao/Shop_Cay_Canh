@@ -42,6 +42,7 @@ class AppRouter extends Component {
 
                     <Route exact path="/admin/login" component={AdminLogin} />
 
+
                     <Route exact path="/admin/:path?">
                         <AdminLayout>
                             <Switch>
@@ -49,7 +50,7 @@ class AppRouter extends Component {
                                 <ProtectedRoute exact path="/admin/orders" component={Orders} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/products" component={ProductsList} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/add-product" component={AddProduct} isAuth={adminAuthen} />
-                                <ProtectedRoute exact path="/admin/edit-product/:path?" component={EditProduct} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/edit-product" component={EditProduct} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/users" component={Users} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/report" component={Report} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={adminAuthen} />
@@ -57,6 +58,9 @@ class AppRouter extends Component {
                             </Switch>
                         </AdminLayout>
                     </Route>
+
+
+
 
                     <Route>
                         <CustomerLayout>

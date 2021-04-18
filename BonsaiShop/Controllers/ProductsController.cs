@@ -67,6 +67,21 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        [HttpGet("admin/{id}")]
+        [AdministratorAuthorization]
+        public IActionResult GetPrductDetailAdmin(int id)
+        {
+            try
+            {
+                var pro = productDAO.GetProduct(id);
+                return Ok(pro);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
 
 
 
