@@ -135,6 +135,7 @@ class Purchase extends Component {
                     checkingPurchaseFailure: 3
                 })
             })
+        } else {
             alert("Hãy nhập đầy đủ thông tin")
         }
     }
