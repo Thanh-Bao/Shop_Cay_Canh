@@ -79,8 +79,8 @@ namespace BonsaiShop.Controllers
         // PUT: api/Users/0943417917
         // body yêu cầu tối thiểu 2 trường SDT và password
         [HttpPut("{phone}")]
-        [Authorize]
-        [MemberAuthorization]
+       // [Authorize]
+       // [MemberAuthorization]
         public IActionResult PutUser(string phone, [FromBody] UserDTO user)
         {
             try

@@ -36,6 +36,12 @@ namespace BonsaiShop
             services.AddScoped<CartDAO>();
 
 
+            services.AddHttpClient("GiaoHangNhanhProduction", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("GiaoHangNhanhProductionURI"));
+                config.DefaultRequestHeaders.Add("Token", Configuration.GetValue<string>("GiaoHangNhanhProductionToken"));
+            });
+
             services.AddHttpClient("MoMo", config =>
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("MoMoURI"));

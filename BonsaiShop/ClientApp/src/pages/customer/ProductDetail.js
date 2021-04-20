@@ -85,7 +85,7 @@ class ProductDetail extends Component {
         if (this.state.product != null) {
             product = <h1>{this.state.product.name}</h1>
         } else {
-            product = <ImgHolder url="/loading.gif" />
+            product = <ImgHolder url="/no_result.gif" />
         }
 
         let pro = this.state.product;
@@ -173,7 +173,7 @@ class ProductDetail extends Component {
                 </div>
             )
         } else {
-            CONTENT = <ImgHolder url="/no_result.gif" />
+            CONTENT = <ImgHolder url="/loading.gif" />
         }
 
 
