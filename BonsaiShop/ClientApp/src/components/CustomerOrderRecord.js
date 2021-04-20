@@ -89,7 +89,7 @@ class CustomerOrderRecord extends Component {
             showOrderDetail = (<table className="table">
                 <thead>
                     <tr>
-                        <th colspan="2" scope="col">Tên</th>
+                        <th colSpan="2" scope="col">Tên</th>
                         <th scope="col">Đơn giá</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Tổng tiền</th>

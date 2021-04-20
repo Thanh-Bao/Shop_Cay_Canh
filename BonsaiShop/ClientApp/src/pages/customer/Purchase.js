@@ -16,13 +16,20 @@ class Purchase extends Component {
             province: "",
             district: "",
             ward: "",
-            street: ""
+            street: "",
+            listProvinces: "",
+            listDistricts: "",
+            listWards: ""
         }
         this.ChangeHandle = this.ChangeHandle.bind(this);
     }
 
     componentDidMount() {
-
+        CallAPI("Address/provinces").then(res => {
+            this.setState({
+                listProvinces: res.data.data
+            })
+        })
     }
 
     checkEmpty() {
@@ -54,7 +61,7 @@ class Purchase extends Component {
 
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         let body = {
-            address: province + " " + district + " " + ward + " " + street,
+            address: province + ", " + district + ", " + ward + ", " + street +", ",
             name: name
         }
         CallAPI(`Users/${userPhone}`, 'PUT', null, body)
@@ -115,12 +122,26 @@ class Purchase extends Component {
 
     ChangeHandle(event) {
         const target = event.target;
-        let value = target.value;
+        let value = (target.name === 'province' || target.name === "district" || target.name === 'ward') ? event.nativeEvent.target[event.nativeEvent.target.selectedIndex].text : target.value;
         const name = target.name;
 
         this.setState({
             [name]: value
         });
+
+        if (name === "province") {
+            CallAPI("Address/districts", null, { province_id: target.value }).then(res => {
+                this.setState({
+                    listDistricts: res.data.data
+                })
+            })
+        } else if (name === "district") {
+            CallAPI("Address/wards", null, { district_id: target.value }).then(res => {
+                this.setState({
+                    listWards: res.data.data
+                })
+            })
+        }
     }
 
 
@@ -164,7 +185,27 @@ class Purchase extends Component {
                 break;
         }
 
+        let provinces;
+        let districts;
+        let wards;
 
+        if (this.state.listProvinces !== "") {
+            provinces = this.state.listProvinces.map(province => {
+                return <option key={province.ProvinceID} value={province.ProvinceID}>{province.ProvinceName}</option>
+            })
+        }
+
+        if (this.state.listDistricts !== "") {
+            districts = this.state.listDistricts.map(district => {
+                return <option key={district.DistrictID} value={district.DistrictID}>{district.DistrictName}</option>
+            })
+        }
+
+        if (this.state.listWards !== "") {
+            wards = this.state.listWards.map(ward => {
+                return <option key={ward.WardCode} value={ward.WardCode}>{ward.WardName}</option>
+            })
+        }
 
         return (
 
@@ -183,31 +224,22 @@ class Purchase extends Component {
                         <div className="col-3">
                             <label htmlFor="SelectProvince">Chọn tỉnh/TP</label>
                             <select onChange={this.ChangeHandle} name="province" className="form-control" id="SelectProvince">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option defaultValue>Chọn tỉnh/TP</option>
+                                {provinces}
                             </select>
                         </div>
                         <div className="col-3">
                             <label htmlFor="SelectDistrict">Chọn quận/huyện</label>
                             <select onChange={this.ChangeHandle} name="district" className="form-control" id="SelectDistrict">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option defaultValue>Chọn quận/huyện</option>
+                                {districts}
                             </select>
                         </div>
                         <div className="col-3">
                             <label htmlFor="SelectWard">Chọn xã/phường</label>
                             <select onChange={this.ChangeHandle} name="ward" className="form-control" id="SelectWard">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option defaultValue>Chọn xã/phường</option>
+                                {wards}
                             </select>
                         </div>
                         <div className="col-3">
