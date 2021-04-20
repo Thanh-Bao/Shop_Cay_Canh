@@ -25,9 +25,15 @@ class Purchase extends Component {
     }
 
     componentDidMount() {
+        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI("Address/provinces").then(res => {
             this.setState({
                 listProvinces: res.data.data
+            })
+        });
+        CallAPI(`Users/${userPhone}`).then(res => {
+            this.setState({
+                customerName: res.data.name
             })
         })
     }
@@ -76,8 +82,9 @@ class Purchase extends Component {
             address: province + ", " + district + ", " + ward + ", " + street + ", ",
             name: name
         }
-        CallAPI(`Users/${userPhone}`, 'PUT', null, body)
-
+        CallAPI(`Users/${userPhone}`, 'PUT', null, body).then(() => {
+            this.acceptPurchase();
+        })
     }
 
 
@@ -87,8 +94,7 @@ class Purchase extends Component {
             alert("Đơn hàng của bạn đã tạo thành công!")
             localStorage.removeItem("TOTAL_ITEM_CART")
             this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", totalItemCart: { count: 0, sum: 0 } })
-            this.acceptPurchase();
-            this.props.history.push('/profile');
+            this.props.history.push('/');
         } else {
             alert("Hãy nhập đầy đủ thông tin")
         }
@@ -116,7 +122,7 @@ class Purchase extends Component {
 
                         localStorage.removeItem("TOTAL_ITEM_CART")
                         this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", totalItemCart: { count: 0, sum: 0 } })
-                        this.props.history.push('/profile');
+                        this.props.history.push('/');
                     } else {
                         this.setState({
                             checkingPurchaseFailure: 3
@@ -129,8 +135,6 @@ class Purchase extends Component {
                     checkingPurchaseFailure: 3
                 })
             })
-            this.acceptPurchase();
-        } else {
             alert("Hãy nhập đầy đủ thông tin")
         }
     }
@@ -231,7 +235,7 @@ class Purchase extends Component {
                     <div className="row justify-content-center text-center">
                         <div className="col-6">
                             <label htmlFor="SelectProvince">Nhập họ tên</label>
-                            <input name="customerName" onChange={this.ChangeHandle} type="text" className="form-control" placeholder="nhập họ tên" />
+                            <input value={this.state.customerName} name="customerName" onChange={this.ChangeHandle} type="text" className="form-control" placeholder="nhập họ tên" />
                         </div>
                     </div>
 
