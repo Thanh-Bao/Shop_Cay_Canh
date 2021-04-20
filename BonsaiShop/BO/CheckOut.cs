@@ -49,13 +49,51 @@ namespace BonsaiShop.BO
                     dbcontext.SaveChanges();
                 }
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
         }
 
-       
+        public bool ChangeStatusOrder(int id, string status)
+        {
+            try
+            {
+                if (status != Config.Const.OrderStatus.PENDING
+                || status != Config.Const.OrderStatus.SHIPPING
+                || status != Config.Const.OrderStatus.CANCEL
+                    )
+                {
+                    return false;
+                }
+                Order order = dbcontext.Orders.Find(id);
+                order.status = status;
+                dbcontext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool ChangePaymentMethodToBanking(int orderID)
+        {
+            try
+            {
+                var order = dbcontext.Orders.Find(orderID);
+                order.paymentMethod = Config.Const.PaymentMethod.Banking;
+                dbcontext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
 
     }
 }

@@ -41,7 +41,9 @@ namespace BonsaiShop.Migrations
                 {
                     b.Property<int>("orderId")
                         .HasColumnType("int");
-             
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("paymentMethod")
                         .HasColumnType("nvarchar(max)");

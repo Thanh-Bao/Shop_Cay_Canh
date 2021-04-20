@@ -73,6 +73,7 @@ namespace BonsaiShop.Migrations
                 {
                     orderId = table.Column<int>(type: "int", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(13)", nullable: true),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     timestamp = table.Column<int>(type: "int", nullable: false),
                     totalMoney = table.Column<int>(type: "int", nullable: false),
                     status = table.Column<string>(type: "nvarchar(max)", nullable: true),

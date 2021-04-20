@@ -107,7 +107,7 @@ namespace BonsaiShop.Controllers
         
         public IActionResult Confirm(int orderId)
         {
-            return Ok(orderDAO.ChangePaymentMethodToBanking(orderId));
+            return Ok(checkout.ChangePaymentMethodToBanking(orderId));
         }
 
         [HttpPost]

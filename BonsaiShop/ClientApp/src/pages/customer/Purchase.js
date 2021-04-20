@@ -32,6 +32,18 @@ class Purchase extends Component {
         })
     }
 
+    acceptPurchase() {
+        let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+        CallAPI('Orders/accept-purchase', 'POST', { phone: userPhone })
+            .then(res => {
+                localStorage.setItem("LASTED_ORDERID", res.data);
+                localStorage.setItem("LASTEDSUM", this.props.totalItemCart.sum);
+            })
+            .catch(() => {
+                alert("LỖI THANH TOÁN ! Hãy Xóa cache, LOCALSTORAGE, Ctrl+F5 & dùng tab ẩn danh");
+            })
+    }
+
     checkEmpty() {
         let province = this.state.province;
         let district = this.state.district;
@@ -61,7 +73,7 @@ class Purchase extends Component {
 
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         let body = {
-            address: province + ", " + district + ", " + ward + ", " + street +", ",
+            address: province + ", " + district + ", " + ward + ", " + street + ", ",
             name: name
         }
         CallAPI(`Users/${userPhone}`, 'PUT', null, body)
@@ -75,6 +87,7 @@ class Purchase extends Component {
             alert("Đơn hàng của bạn đã tạo thành công!")
             localStorage.removeItem("TOTAL_ITEM_CART")
             this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", totalItemCart: { count: 0, sum: 0 } })
+            this.acceptPurchase();
             this.props.history.push('/profile');
         } else {
             alert("Hãy nhập đầy đủ thông tin")
@@ -87,7 +100,7 @@ class Purchase extends Component {
             console.log("tỉnh: " + this.state.province + " quận: " + this.state.district + " huyện: " + this.state.ward + " đường: " + this.state.street)
             this.setState({
                 checkingPurchaseFailure: 2
-            })
+            });
             CallAPI('Orders/check-transfer', 'POST', { orderID: localStorage.getItem("LASTED_ORDERID") }).then(
                 res => {
                     if (res.data) {
@@ -110,11 +123,13 @@ class Purchase extends Component {
                         })
                     }
                 }
+
             ).catch(err => {
                 this.setState({
                     checkingPurchaseFailure: 3
                 })
             })
+            this.acceptPurchase();
         } else {
             alert("Hãy nhập đầy đủ thông tin")
         }
@@ -274,6 +289,7 @@ class Purchase extends Component {
 }
 
 const mapStateToProps = state => ({
-    adminLogined: state.adminLogined
+    adminLogined: state.adminLogined,
+    totalItemCart: state.totalItemCart
 });
 export default connect(mapStateToProps)(Purchase);

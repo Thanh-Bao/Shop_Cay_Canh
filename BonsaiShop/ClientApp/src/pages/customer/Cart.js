@@ -31,16 +31,7 @@ class Cart extends Component {
 
 
   purchase() {
-    let userPhone = localStorage.getItem("PHONEUSERLOGINED");
-    CallAPI('Orders/accept-purchase', 'POST', { phone: userPhone })
-      .then(res => {
-        localStorage.setItem("LASTED_ORDERID",res.data);
-        localStorage.setItem("LASTEDSUM",this.props.totalItemCart.sum);
-        this.props.history.push('/purchase');
-      })
-      .catch(() => {
-        alert("LỖI THANH TOÁN ! Hãy Xóa cache, LOCALSTORAGE, Ctrl+F5 & dùng tab ẩn danh");
-      })
+    this.props.history.push('/purchase');
   }
 
 
@@ -52,7 +43,7 @@ class Cart extends Component {
       showItems = this.state.listItem.map(product => {
         return (
           <CartItem
-          key={product.productID}
+            key={product.productID}
             productID={product.productID}
             thumbnail={product.thumbnail}
             name={product.name}

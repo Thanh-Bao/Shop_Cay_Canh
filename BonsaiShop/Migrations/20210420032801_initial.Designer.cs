@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonsaiShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210415080335_initial")]
+    [Migration("20210420032801_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,9 @@ namespace BonsaiShop.Migrations
                 {
                     b.Property<int>("orderId")
                         .HasColumnType("int");
-                       
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("paymentMethod")
                         .HasColumnType("nvarchar(max)");

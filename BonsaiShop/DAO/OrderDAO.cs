@@ -75,7 +75,7 @@ namespace BonsaiShop.DAO
                     timestamp = s._order.timestamp,
                     totalMoney = s._order.totalMoney,
                     status = s._order.status,
-                    address = s._user.address,
+                    address = s._order.address,
                     paymentMethod = s._order.paymentMethod
                 })
                 .Skip(Nskip)
@@ -84,27 +84,7 @@ namespace BonsaiShop.DAO
             return list;
         }
 
-        public bool ChangeStatusOrder(int id, string status)
-        {
-            try
-            {
-                if (status != Config.Const.OrderStatus.PENDING
-                || status != Config.Const.OrderStatus.SHIPPING
-                || status != Config.Const.OrderStatus.CANCEL
-                    )
-                {
-                    return false;
-                }
-                Order order = dbcontext.Orders.Find(id);
-                order.status = status;
-                dbcontext.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+       
 
         public bool AddOrder(int orderID, string phone)
         {
@@ -117,6 +97,7 @@ namespace BonsaiShop.DAO
                     timestamp = (Int32)DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                     status = Config.Const.OrderStatus.PENDING,
                     totalMoney = cartDAO.SumCart(phone),
+                    address = userDAO.GetUser(phone).address,
                     paymentMethod = Config.Const.PaymentMethod.COD
                 };
                 dbcontext.Orders.Add(order);
@@ -144,20 +125,7 @@ namespace BonsaiShop.DAO
             }
         }
 
-        public bool ChangePaymentMethodToBanking(int orderID)
-        {
-            try
-            {
-                var order = dbcontext.Orders.Find(orderID);
-                order.paymentMethod = Config.Const.PaymentMethod.Banking;
-                dbcontext.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        
 
         public bool CancelOrder(int orderID)
         {
