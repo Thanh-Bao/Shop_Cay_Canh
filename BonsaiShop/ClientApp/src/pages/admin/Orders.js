@@ -36,7 +36,6 @@ class Orders extends Component {
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI(`Orders/all`, null, { page: pageNumber })
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     listOrder: res.data.list,
                     pageSize: res.data.pageSize,

@@ -19,12 +19,18 @@ namespace BonsaiShop.DAO
             this.dbcontext = context;
         }
 
+        public int totalCustomer()
+        {
+            int total = dbcontext.Users.Where(u => u.role.Equals(Config.Const.Role.MEMBER)).Count();
+            return total;
+        }
+
         public List<UserDTO> GetUsers(string role, int? page)
         {
             int _page = 1;
             if (page != null)
             {
-                _page =(Int32) page;
+                _page = (Int32)page;
             }
             //Bỏ N phần tử đầu tiên
             int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
@@ -37,7 +43,8 @@ namespace BonsaiShop.DAO
                 {
                     phone = s.phone,
                     name = s.name,
-                    address = s.address
+                    address = s.address,
+                    timestamp = s.timestamp
                 })
                 .ToList();
             return list;
@@ -87,13 +94,13 @@ namespace BonsaiShop.DAO
             return dbcontext.Users.Any(e => e.phone == phone);
         }
 
-        public bool UpdateUser(string phone,UserDTO user)
+        public bool UpdateUser(string phone, UserDTO user)
         {
             try
             {
-               User _user = dbcontext.Users.Where(
-                    s => s.phone.Equals(phone))
-                    .FirstOrDefault();
+                User _user = dbcontext.Users.Where(
+                     s => s.phone.Equals(phone))
+                     .FirstOrDefault();
                 if (user.name != null)
                     _user.name = user.name;
                 if (user.address != null)
@@ -121,7 +128,8 @@ namespace BonsaiShop.DAO
                 dbcontext.Users.Add(user);
                 dbcontext.SaveChanges();
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
@@ -144,7 +152,7 @@ namespace BonsaiShop.DAO
             return templeUser.role;
         }
 
-        
+
     }
 }
 

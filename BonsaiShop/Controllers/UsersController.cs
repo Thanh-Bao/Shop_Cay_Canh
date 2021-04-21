@@ -31,7 +31,14 @@ namespace BonsaiShop.Controllers
             try
             {
                 var list = userDAO.GetUsers(role, page);
-                return Ok(list);
+                var data = new
+                {
+                    list = list,
+                    pageSize = 10,
+                    totalItem = userDAO.totalCustomer()
+                };
+
+                return Ok(data);
             }
             catch
             {
@@ -79,8 +86,8 @@ namespace BonsaiShop.Controllers
         // PUT: api/Users/0943417917
         // body yêu cầu tối thiểu 2 trường SDT và password
         [HttpPut("{phone}")]
-       // [Authorize]
-       // [MemberAuthorization]
+        // [Authorize]
+        // [MemberAuthorization]
         public IActionResult PutUser(string phone, [FromBody] UserDTO user)
         {
             try
@@ -157,11 +164,12 @@ namespace BonsaiShop.Controllers
                 if (userDAO.UserExists(user.phone))
                 {
                     return Ok(true);
-                } else
+                }
+                else
                 {
                     return Ok(false);
                 }
-               
+
             }
             catch
             {
