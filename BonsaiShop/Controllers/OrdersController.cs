@@ -93,6 +93,31 @@ namespace BonsaiShop.Controllers
         }
 
         [HttpGet]
+        [Route("all")]
+        [AdministratorAuthorization]
+        public IActionResult AdminGetCustomerOrders(int? page)
+        {
+            try
+            {
+                List<OrderDTO> list = orderDAO.AdminGetOrdersMember(page);
+                int total = orderDAO.AdminGetTotalCustomerOrders();
+                var result = new
+                {
+                    totalItem = total,
+                    pageSize = Config.Const.PAGE_SIZE,
+                    list = list
+                };
+                return Ok(result);
+
+
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
         [Route("orderdetail")]
         [Authorize]
         // /api/Orders/orderdetail?orderId=5523

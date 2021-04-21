@@ -26,6 +26,12 @@ namespace BonsaiShop.DAO
             return total;
         }
 
+        public int AdminGetTotalCustomerOrders()
+        {
+            int total = dbcontext.Orders.Select(o => o).Count();
+            return total;
+        }
+
         public List<OrderDTO> GetOrders(int? page)
         {
             int _page = 1;
@@ -84,7 +90,41 @@ namespace BonsaiShop.DAO
             return list;
         }
 
-       
+        public List<OrderDTO> AdminGetOrdersMember( int? page)
+        {
+            int _page = 1;
+            if (page != null)
+            {
+                _page = (Int32)page;
+            }
+            //Bỏ N phần tử đầu tiên
+            int Nskip = (_page - 1) * Config.Const.PAGE_SIZE;
+            List<OrderDTO> list = dbcontext.Orders
+                .Join(
+                dbcontext.Users,
+                order => order.phone,
+                user => user.phone,
+                (_order, _user) => new { _order, _user }
+                )
+                 .OrderByDescending(combien => combien._order.timestamp)
+                .Select(s => new OrderDTO
+                {
+                    orderId = s._order.orderId,
+                    phone = s._user.phone,
+                    name = s._user.name,
+                    timestamp = s._order.timestamp,
+                    totalMoney = s._order.totalMoney,
+                    status = s._order.status,
+                    address = s._order.address,
+                    paymentMethod = s._order.paymentMethod
+                })
+                .Skip(Nskip)
+                .Take(Config.Const.PAGE_SIZE)
+                .ToList();
+            return list;
+        }
+
+
 
         public bool AddOrder(int orderID, string phone)
         {

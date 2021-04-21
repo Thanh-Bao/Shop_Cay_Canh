@@ -57,7 +57,7 @@ namespace BonsaiShop.Controllers
         }
 
 
-        // GET: api/Users/5
+        // GET: api/Users/0943432343
 
         [HttpGet("{phone}")]
         [Authorize]
@@ -222,5 +222,4 @@ namespace BonsaiShop.Controllers
         }*/
     }
 
-    
 }
