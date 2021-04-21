@@ -16,6 +16,7 @@ import Profile from '../pages/customer/Profile';
 import Purchase from '../pages/customer/Purchase';
 // Admin
 import Orders from '../pages/admin/Orders';
+import TransactionHistory from '../pages/admin/TransactionHistory';
 import ProductsList from '../pages/admin/Products';
 import AddProduct from '../pages/admin/AddProduct';
 import Users from '../pages/admin/Users';
@@ -54,6 +55,7 @@ class AppRouter extends Component {
                                 <ProtectedRoute exact path="/admin/users" component={Users} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/report" component={Report} isAuth={adminAuthen} />
                                 <ProtectedRoute exact path="/admin/revenue" component={Revenue} isAuth={adminAuthen} />
+                                <ProtectedRoute exact path="/admin/transaction-history" component={TransactionHistory} isAuth={adminAuthen} />
                                 <Route path="*" component={PageNotFound} />
                             </Switch>
                         </AdminLayout>

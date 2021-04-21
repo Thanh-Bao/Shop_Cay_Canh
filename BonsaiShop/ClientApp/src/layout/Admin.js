@@ -26,6 +26,7 @@ class Admin extends Component {
                             <NavLink to="/admin/users" className="list-group-item list-group-item-action"><i className="fas fa-user-circle"></i> <span className="font-weight-bold">Tài khoản</span></NavLink>
                             <NavLink to="/admin/report" className="list-group-item list-group-item-action"><i className="fas fa-envelope-open-text"></i> <span className="font-weight-bold">Phản hồi</span></NavLink>
                             <NavLink to="/admin/revenue" className="list-group-item list-group-item-action"><i className="fas fa-hand-holding-usd"></i> <span className="font-weight-bold">Chi tiết doanh thu</span></NavLink>
+                            <NavLink to="/admin/transaction-history" className="list-group-item list-group-item-action"><i className="fas fa-comment-dollar"></i> <span className="font-weight-bold">Dòng tiền</span></NavLink>
                         </div>
                     </div>
                     {/* /#sidebar-wrapper */}
@@ -33,7 +34,7 @@ class Admin extends Component {
                     <div id="page-content-wrapper">
 
                         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                            <button className="btn btn-primary" id="menu-toggle">Menu</button>
+                            <button className="btn btn-primary" id="menu-toggle"><i className="fas fa-bars"></i> Menu</button>
                             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon" />
                             </button>
