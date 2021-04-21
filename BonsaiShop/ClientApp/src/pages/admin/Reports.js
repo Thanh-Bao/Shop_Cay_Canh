@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Loading from '../../components/Loading';
 
 class Reports extends Component {
     constructor(props) {
@@ -40,20 +41,22 @@ class Reports extends Component {
 
         return (
             <div className="my-5">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Thời gian</th>
-                            <th scope="col">Số điện thoại</th>
-                            <th scope="col">Họ tên</th>
-                            <th scope="col">Nội dung</th>
-                            <th scope="col">Đã xử lý?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {records}
-                    </tbody>
-                </table>
+                {(this.state.listReport!=null)?
+                (<table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Thời gian</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Nội dung</th>
+                        <th scope="col">Đã xử lý?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {records}
+                </tbody>
+            </table>): (<Loading url='/loading.gif'/>)
+                }
             </div>
         );
     }

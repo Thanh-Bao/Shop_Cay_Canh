@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CallAPI from '../../callAPI/callAPIMainServer';
+import Loading from '../../components/Loading';
 
 class TransactionHistory extends Component {
 
@@ -16,6 +17,9 @@ class TransactionHistory extends Component {
     }
 
     loadData = () => {
+        this.setState({
+            list: null
+        })
         CallAPI("Momo").then(res => {
             function unixTimeToDate(timeStamp) {
                 const milliseconds = timeStamp * 1000 // 1575909015000
@@ -32,12 +36,11 @@ class TransactionHistory extends Component {
             }
             arr.reverse();
 
-            for(var i=0; i < arr.length; i++) {
-                if(arr[i].partner === 'null')
-                {
-                   arr.splice(i,1);
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].partner === 'null') {
+                    arr.splice(i, 1);
                 }
-             }
+            }
 
             this.setState({
                 list: arr
@@ -45,7 +48,7 @@ class TransactionHistory extends Component {
         })
     }
 
-    
+
 
 
     render() {
@@ -66,29 +69,30 @@ class TransactionHistory extends Component {
         return (
             <div>
 
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-end ">
-                        <button onClick={() => { this.loadData() }} type="button" className="btn btn-primary my-2"><i className="fas fa-sync-alt"></i> Cập nhật lại danh sách</button>
+                {(this.state.list != null) ?
+                    (<div className="container">
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-end ">
+                                <button onClick={() => { this.loadData() }} type="button" className="btn btn-primary my-2"><i className="fas fa-sync-alt"></i> Cập nhật lại danh sách</button>
+                            </div>
                         </div>
-                    </div>
-                    <table className="table">
+                        <table className="table">
 
-                        <thead>
-                            <tr>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Số điện thoại</th>
-                                <th scope="col">Số tiền</th>
-                                <th scope="col">Lời nhắn</th>
-                                <th scope="col">Hình thức</th>
-                                <th scope="col">Thời gian</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {listMoMo}
-                        </tbody>
-                    </table>
-                </div>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tên</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col">Số tiền</th>
+                                    <th scope="col">Lời nhắn</th>
+                                    <th scope="col">Hình thức</th>
+                                    <th scope="col">Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listMoMo}
+                            </tbody>
+                        </table>
+                    </div>) : (<Loading url="loading.gif" />)}
             </div>
         );
     }
