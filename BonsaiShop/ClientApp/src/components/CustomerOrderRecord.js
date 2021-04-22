@@ -53,7 +53,7 @@ class CustomerOrderRecord extends Component {
                     <span className="badge badge-pill badge-primary">đang vận chuyển</span>
                 );
                 break;
-            case "finish":
+            case "Finish":
                 orderStatusLbl = (
                     <span className="badge badge-pill badge-success">Đã nhận hàng</span>
                 );

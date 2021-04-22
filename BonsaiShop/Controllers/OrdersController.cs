@@ -92,6 +92,25 @@ namespace BonsaiShop.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("status")]
+        [Authorize]
+        [AdministratorAuthorization]
+        public IActionResult ChangeOrderStatus(string status, int orderID)
+        {
+            try
+            {
+                var result = orderDAO.ChangeOrderStatus(status, orderID);
+                return Ok(result);
+
+
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet]
         [Route("all")]
         [AdministratorAuthorization]

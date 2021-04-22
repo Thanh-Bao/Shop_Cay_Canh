@@ -98,6 +98,7 @@ class Orders extends Component {
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Xem chi tiết</th>
+                                    <th scope="col">Đổi trạng thái</th>
                                     <th scope="col">hủy đơn hàng</th>
                                 </tr>
                             </thead>

@@ -90,7 +90,7 @@ namespace BonsaiShop.DAO
             return list;
         }
 
-        public List<OrderDTO> AdminGetOrdersMember( int? page)
+        public List<OrderDTO> AdminGetOrdersMember(int? page)
         {
             int _page = 1;
             if (page != null)
@@ -165,7 +165,7 @@ namespace BonsaiShop.DAO
             }
         }
 
-        
+
 
         public bool CancelOrder(int orderID)
         {
@@ -212,5 +212,21 @@ namespace BonsaiShop.DAO
 
             return listProuctInOrder;
         }
+
+        public bool ChangeOrderStatus(string status, int orderID)
+        {
+            try
+            {
+                var order = dbcontext.Orders.Find(orderID);
+                order.status = status;
+                dbcontext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

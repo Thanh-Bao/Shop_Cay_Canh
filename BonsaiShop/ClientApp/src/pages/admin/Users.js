@@ -62,7 +62,9 @@ class Users extends Component {
                     </tr>
                 )
             })
-        }
+         } else {
+             records = <Loading url="loading.gif"/>
+         }
 
         return (
             <div>

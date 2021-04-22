@@ -17,7 +17,7 @@ namespace BonsaiShop.Config
         {
             public const string PENDING = "Pending";
             public const string SHIPPING = "Shipping";
-            public const string FINISH = "finish";
+            public const string FINISH = "Finish";
             public const string CANCEL = "Cancel";
         }
 
