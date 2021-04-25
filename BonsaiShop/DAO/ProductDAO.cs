@@ -153,6 +153,8 @@ namespace BonsaiShop.DAO
                  name = s.name,
                  price = s.price,
                  quantity = null,
+                 thumbnail = s.thumbnail,
+                 detailImage = s.detailImage,
                  description = s.description,
                  height = s.height,
                  origin = s.origin
