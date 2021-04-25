@@ -51,7 +51,7 @@ class Orders extends Component {
 
         let redirectHome;
 
-        if (localStorage.getItem("PHONEUSERLOGINED") === null) {
+        if (localStorage.getItem("adminLogined") === null) {
             redirectHome = (
                 <Redirect to='/' />
             )
@@ -79,7 +79,7 @@ class Orders extends Component {
 
         return (
             <div>
-                {redirectHome}
+                {/* {redirectHome} */}
 
                 <div className="container-fluid">
                     <div className='row justify-content-center text-center'>
