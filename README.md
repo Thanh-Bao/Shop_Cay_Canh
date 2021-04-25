@@ -18,4 +18,5 @@ npm i @fortawesome/fontawesome-free/
  npm i string-strip-html/
  npm i react-facebook/
  npm i react-qr-code/
+ npm install he/
  
