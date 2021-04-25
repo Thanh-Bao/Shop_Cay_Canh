@@ -165,7 +165,7 @@ class AddProduct extends Component {
                                             value={this.state.origin}
                                             onChange={this.handleInputChange}
                                             name="origin" id="inputState" className="form-control">
-                                            <option value={"Việt Nam"}>Việt Nam</option>
+                                            <option defaultValue value={"Việt Nam"}>Việt Nam</option>
                                             <option value={"Thái Lan"}>Thái Lan</option>
                                             <option value={"Đài Loan"}>Đài Loan</option>
                                             <option value={"Hoa Kỳ"}>Hoa Kỳ</option>

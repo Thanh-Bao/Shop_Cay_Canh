@@ -3,6 +3,7 @@ import TextTruncate from 'react-text-truncate';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import callAPi from '../callAPI/callAPIMainServer';
 import { connect } from 'react-redux';
+import { decode } from 'he';
 
 class CardProduct extends Component {
     render() {
@@ -62,7 +63,7 @@ class CardProduct extends Component {
                         element="p"
                         truncateText=" …"
                         containerClassName=" d-inline card-text text-card-description"
-                        text={striptags(this.props.description)}
+                        text={decode(striptags(this.props.description))}
                     />
 
                     <div className="d-flex mt-2 justify-content-between">
