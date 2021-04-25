@@ -64,7 +64,7 @@ class NavigationBarCustomer extends Component {
                 <nav id="CustomerNavigationBar" className="navbar fixed-top navbar-expand-lg navbar-light">
 
                     <NavLink onClick={() => this.redirectToHome()} className="navbar-brand" to="/">
-                        <img src="/icon.ico" alt="" width={35} height={24} />
+                        <img src="/logo.ico" alt="" width={35} height={24} />
                     </NavLink>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentTopMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
