@@ -75,7 +75,7 @@ class AdminLogin extends Component {
             <div>
                 <div className="container-fluid mt-5 mt-5">
                     <div className="row no-gutter d-flex justify-content-center my-5 pb-5">
-                        <div className="col-4">
+                        <div className="col-lg-4 col-sm-12">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="text-center mb-5">
                                     <i style={{ fontSize: 80 }} className="fas fa-user-shield"></i>
