@@ -7,6 +7,7 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { FacebookProvider, Comments, Like, CustomChat } from 'react-facebook';
 import { connect } from 'react-redux';
+import '../../css/Productdetail.css';
 
 
 class ProductDetail extends Component {
@@ -62,9 +63,9 @@ class ProductDetail extends Component {
                 CallAPI(`Cart/${userPhone}`, 'PUT', { productID: productID }).then(() => {
                     CallAPI(`Cart/count/${userPhone}`, 'GET', { productID: productID }).then(
                         res => {
-                            this.props.dispatch({type:"UPDATE_TOTAL_ITEM_CART", data:res.data});
-                            localStorage.setItem("TOTAL_ITEM_CART",res.data.count);
-                            localStorage.setItem("SUM_CART",res.data.sum);
+                            this.props.dispatch({ type: "UPDATE_TOTAL_ITEM_CART", data: res.data });
+                            localStorage.setItem("TOTAL_ITEM_CART", res.data.count);
+                            localStorage.setItem("SUM_CART", res.data.sum);
                         }
                     ).catch(() => {
                         alert("Lỗi lấy số lượng giỏ hàng");
@@ -99,7 +100,7 @@ class ProductDetail extends Component {
         let CONTENT;
         if (this.state.product != null) {
             CONTENT = (
-                <div className="mt-4 container">
+                <div className="mt-4 container overflow-hidden">
                     <FacebookProvider appId={process.env.REACT_APP_FACEBOOK_APPID}>
                         <Like href={url} colorScheme="dark" showFaces share />
                     </FacebookProvider>
@@ -153,8 +154,9 @@ class ProductDetail extends Component {
 
 
                     <h3 className="my-4">Mô tả chi tiết:</h3>
-
-                    {ReactHtmlParser(pro.description)}
+                    <div id="product-content-detail">
+                        {ReactHtmlParser(pro.description)}
+                    </div>
 
                     <div className="container-fluid mb-2">
                         <div className="row">
