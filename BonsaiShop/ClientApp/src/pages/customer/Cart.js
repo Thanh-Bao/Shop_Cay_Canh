@@ -31,7 +31,17 @@ class Cart extends Component {
 
 
   purchase() {
-    this.props.history.push('/purchase');
+    let userPhone = localStorage.getItem("PHONEUSERLOGINED");
+    CallAPI('Orders/accept-purchase', 'POST', { phone: userPhone })
+      .then(res => {
+        localStorage.setItem("LASTED_ORDERID", res.data);
+        localStorage.setItem("LASTEDSUM", this.props.totalItemCart.sum);
+        this.props.history.push('/purchase');
+      })
+      .catch(() => {
+        alert("LỖI THANH TOÁN ! Hãy Xóa cache, LOCALSTORAGE, Ctrl+F5 & dùng tab ẩn danh");
+      })
+    window.location.replace(process.env.REACT_APP_DOMAIN + "purchase");
   }
 
 

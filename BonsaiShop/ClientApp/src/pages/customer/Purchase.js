@@ -9,8 +9,8 @@ class Purchase extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderID: localStorage.getItem("LASTED_ORDERID") == null ? 0 : localStorage.getItem("LASTED_ORDERID"),
-            sum: localStorage.getItem("LASTEDSUM") == null ? 0 : localStorage.getItem("LASTEDSUM"),
+            orderID: 0,
+            sum: 0,
             checkingPurchaseFailure: 1,
             customerName: "",
             province: "",
@@ -25,6 +25,9 @@ class Purchase extends Component {
     }
 
     componentDidMount() {
+        console.log("xxx")
+        console.log(localStorage.getItem("LASTED_ORDERID"))
+        console.log(localStorage.getItem("LASTEDSUM"))
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI("Address/provinces").then(res => {
             this.setState({
@@ -33,6 +36,8 @@ class Purchase extends Component {
         });
         CallAPI(`Users/${userPhone}`).then(res => {
             this.setState({
+                orderID: localStorage.getItem("LASTED_ORDERID") == null ? 0 : localStorage.getItem("LASTED_ORDERID"),
+                sum: localStorage.getItem("LASTEDSUM") == null ? 0 : localStorage.getItem("LASTEDSUM"),
                 customerName: res.data.name
             })
         })
