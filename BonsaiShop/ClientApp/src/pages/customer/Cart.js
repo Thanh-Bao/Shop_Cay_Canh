@@ -41,7 +41,7 @@ class Cart extends Component {
       .catch(() => {
         alert("LỖI THANH TOÁN ! Hãy Xóa cache, LOCALSTORAGE, Ctrl+F5 & dùng tab ẩn danh");
       })
-    window.location.replace(process.env.REACT_APP_DOMAIN + "purchase");
+    // window.location.replace(process.env.REACT_APP_DOMAIN + "purchase");
   }
 
 
