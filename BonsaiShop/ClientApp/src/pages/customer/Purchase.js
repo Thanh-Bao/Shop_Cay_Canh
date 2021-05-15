@@ -47,7 +47,9 @@ class Purchase extends Component {
         let userPhone = localStorage.getItem("PHONEUSERLOGINED");
         CallAPI('Orders/accept-purchase', 'POST', { phone: userPhone })
             .then(res => {
-                localStorage.setItem("LASTED_ORDERID", res.data);
+                if(localStorage.getItem("LASTED_ORDERID")===null){
+                    localStorage.setItem("LASTED_ORDERID", res.data);
+                }
                 localStorage.setItem("LASTEDSUM", this.props.totalItemCart.sum);
             })
             .catch(() => {
