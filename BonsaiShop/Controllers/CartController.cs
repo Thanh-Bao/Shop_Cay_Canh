@@ -132,6 +132,7 @@ Add the following content to the file %plesk\vhosts%\example.com\httpdocs\web.co
 < remove name = "WebDAVModule" />
  </ modules >
  < handlers >
+<remove name="OPTIONSVerbHandler"/>
  < remove name = "WebDAV" />
   </ handlers >
 

@@ -28,13 +28,15 @@ namespace BonsaiShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors();
+
             // add for DAO Class
             services.AddScoped<UserDAO>();
             services.AddScoped<ProductDAO>();
             services.AddScoped<CheckOut>();
             services.AddScoped<OrderDAO>();
             services.AddScoped<CartDAO>();
-
 
             services.AddHttpClient("GiaoHangNhanhProduction", config =>
             {
@@ -47,12 +49,7 @@ namespace BonsaiShop
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("MoMoURI"));
             });
 
-
-            // CROS
-            services.AddCors(options => {
-                options.AddPolicy("CrosPolicy", builder => builder.AllowAnyOrigin()
-                 .AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
-            });
+            
             services.AddControllers();
 
             // For Entity Framework  
@@ -90,6 +87,14 @@ namespace BonsaiShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+            .AllowCredentials()); // allow credentials
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -125,6 +130,10 @@ namespace BonsaiShop
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+
+          
+
         }
     }
 }
